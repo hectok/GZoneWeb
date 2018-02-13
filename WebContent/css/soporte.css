@@ -1,0 +1,60 @@
+#soporte{
+	height:100%;
+}
+
+#ancho {
+	width:100%;
+	background-color: #ededed;
+}
+#cuadro_fondo{
+  text-align: center;
+  width: 100%;
+  min-height: 400px;
+  color:white;
+}
+
+#cuadro_fondo img {
+  position: relative;
+  right: 27.7%;
+  top:5px;
+}
+
+#cuadro_fondo h1 {
+  font-size: 50px;
+  font-weight: lighter;
+  margin-top: 100px;
+}
+
+#pulsador{
+  padding-bottom: 40px;
+}
+
+#soporte .container-fluid {
+    width: 80%;
+    padding: 60px 1px;
+    background-color: #ededed;
+    text-align: center;
+
+ }
+
+#soporte .container-fluid .row .col-sm-4 a {
+  text-decoration: none;
+  color:rgb(51, 51, 51);
+}
+
+#soporte .container-fluid .row .col-sm-4 a:hover {
+  text-decoration: none;
+  color:rgb(51, 51, 51);
+}
+
+#pulsador img {
+  text-align: center;
+  padding-left: 200px;
+}
+
+ @media screen and (max-width: 768px) {
+   .col-sm-4 {
+     text-align: center;
+     margin: 25px 0;
+   }
+ }

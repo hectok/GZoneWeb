@@ -1,0 +1,169 @@
+#busqueda{
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+#busqueda .mb20 {
+  margin-bottom: 20px;
+}
+
+#busqueda hgroup {
+  padding-left: 15px;
+  border-bottom: 1px solid #ccc;
+}
+
+#busqueda hgroup h1 {
+  font: 500 normal 1.625em "Roboto",Arial,Verdana,sans-serif;
+  color: white;
+  margin-top: 0;
+  line-height: 1.15;
+}
+
+#busqueda hgroup h2.lead {
+  font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif;
+  color: white;
+  margin: 0;
+  padding-bottom: 10px;
+}
+
+#busqueda hgroup .text-danger {
+  color: rgba(192, 134, 242, 1);
+}
+
+
+.search-result .thumbnail {
+  border-radius: 0 !important; }
+
+.search-result:first-child {
+  margin-top: 0 !important; }
+
+.search-result {
+  margin-top: 20px; }
+
+.search-result .col-md-2 {
+  border-right: 1px dotted #ccc;
+  min-height: 140px; }
+
+.search-result ul {
+  padding-left: 0 !important;
+  list-style: none;
+}
+
+.search-result ul li {
+  font: 400 normal .85em "Roboto",Arial,Verdana,sans-serif;
+  line-height: 30px;
+  color: white;
+}
+
+.search-result ul li i {
+  padding-right: 5px;
+}
+
+.search-result .col-md-7 {
+  position: relative;
+}
+
+.search-result h3 {
+  font: 500 normal 1.375em "Roboto",Arial,Verdana,sans-serif;
+  margin-top: 0 !important;
+  margin-bottom: 10px !important;
+}
+
+.search-result h3 > a, .search-result i {
+  color: rgba(192, 134, 242, 1) !important;
+}
+
+.search-result p {
+  font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif;
+  color: white;
+}
+
+.search-result span.plus {
+  position: absolute; right: 0; top: 126px;
+}
+
+.search-result span.plus a {
+  color: white; padding: 5px 5px 3px 5px;
+}
+
+.search-result span.plus a:hover {
+  color: white;
+}
+
+.search-result span.plus a i {
+color: white; !important;
+}
+
+.search-result span.border {
+  display: block; width: 97%;
+  margin: 0 15px;
+  border-bottom: 1px dotted #ccc;
+}
+
+#adv-search {
+    padding: 10px 0 30px 0;
+    float: left;
+}
+
+#busqueda .dropdown.dropdown-lg .dropdown-menu {
+    margin-top: -1px;
+    padding: 6px 20px;
+}
+#busqueda .input-group-btn .btn-group {
+    display: flex !important;
+}
+#busqueda .btn-group .btn {
+    border-radius: 0;
+    margin-left: -1px;
+}
+#busqueda .btn-group .btn:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+#busqueda .btn-group .form-horizontal .btn[type="submit"] {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+#busqueda .form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+#busqueda .form-group .form-control:last-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+@media screen and (min-width: 768px) {
+    #adv-search {
+        width: 500px;
+        margin: 0 auto;
+    }
+   #busqueda .dropdown.dropdown-lg {
+        position: static !important;
+    }
+    #busqueda.dropdown.dropdown-lg .dropdown-menu {
+        min-width: 500px;
+    }
+}
+
+.busqueda-arriba{
+  display: flex;
+  flex-direction: row;
+}
+
+.busqueda-arriba .categoria{
+  padding-right: 200px;
+}
+
+.busqueda-arriba .jugadores{
+}
+
+.busqueda-abajo{
+  display: flex;
+  flex-direction: row;
+}
+
+.busqueda-abajo .so{
+  width:60%;
+  padding-right: 100px;
+
+}

@@ -1,0 +1,105 @@
+html, body
+{
+    height: 100%;
+    color: black;
+    /* font-family: 'Barlow', sans-serif; */
+    /* font-family: 'Roboto Condensed', sans-serif; */
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+}
+#piePagina {
+    background-color: rgba(41, 41, 41, 1);
+    color: white;
+}
+
+#piePagina .row {
+    margin-bottom: 60px;
+}
+
+#piePagina .info{
+    text-align: justify;
+    color: #afb0b1;
+}
+
+#piePagina ul {
+    list-style-type: none;
+    padding-left: 0;
+    line-height: 1.7;
+}
+
+#piePagina h5 {
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+#piePagina .logo{
+    margin-top: 10px;
+}
+
+#piePagina .second-bar .logo a{
+    color:white;
+    font-size: 28px;
+    float: left;
+    font-weight: bold;
+    line-height: 68px;
+    margin: 0;
+    padding: 0;
+}
+
+#piePagina a {
+    color: #d2d1d1;
+    text-decoration: none;
+}
+
+#piePagina a:hover,
+#piePagina a:focus {
+    text-decoration: none;
+    color: white;
+}
+
+#piePagina .second-bar {
+    text-align: center;
+    background-color: #202124;
+    text-align: center;
+}
+
+#piePagina .second-bar a {
+    font-size: 22px;
+    color: #9fa3a9;
+    padding: 10px;
+    transition: 0.2s;
+    line-height: 68px;
+}
+
+#piePagina .second-bar a:hover {
+    text-decoration: none;
+}
+
+#piePagina .social-icons {
+    float:right;
+}
+
+
+#piePagina .facebook:hover {
+    color: #0077e2;
+}
+
+#piePagina .google:hover {
+    color: #ef1a1a;
+}
+
+#piePagina .twitter:hover {
+    color: #00aced;
+}
+
+@media screen and (max-width: 767px) {
+    #piePagina {
+        text-align: center;
+    }
+
+    #piePagina .info{
+        text-align: center;
+    }
+}
