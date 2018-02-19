@@ -18,8 +18,9 @@ body {
   z-index: 9999999 !important;
 }
 
-#barra_principal.navbar-default .navbar-brand {
-  color: rgba(255, 255, 255, 1);
+.navbar-default .navbar-brand {
+  color: rgba(255, 255, 255, 1) !important;
+  background-color: rgba(248, 248, 248, 0) !important;
 }
 
 #barra_principal.navbar-default {
@@ -34,7 +35,7 @@ body {
 
 #barra_principal.navbar-default .navbar-nav>li>a {
   color: rgba(195, 189, 189, 1);
-  background-color: rgba(248, 248, 248, 0);
+  background-color: rgba(248, 248, 248, 0) !important;
 }
 #barra_principal.navbar-default .navbar-nav>li>a:hover,
 #barra_principal.navbar-default .navbar-nav>li>a:focus {
