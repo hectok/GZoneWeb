@@ -1,4 +1,4 @@
-package com.gzone.web.model;
+package com.gzone.ecommerce.web.model;
 
 public class ShoppingCart {
 
