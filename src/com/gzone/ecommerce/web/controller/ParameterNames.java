@@ -1,4 +1,4 @@
-package com.sacra.ecommerce.web.controller;
+package com.gzone.ecommerce.web.controller;
 
 public interface ParameterNames {
 	

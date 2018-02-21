@@ -18,8 +18,10 @@ public class SignOutServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession(true).setAttribute("user", null);
-		response.sendRedirect("/GZoneWeb/index.jsp");
+		String target = null;
+		target = ViewsPaths.INDEX;
+		request.getSession(true).setAttribute(ParameterNames.USER, null);
+		response.sendRedirect(target);
 	}
 
 	

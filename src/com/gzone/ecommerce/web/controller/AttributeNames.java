@@ -1,4 +1,4 @@
-package com.gzone.controller.web.controller;
+package com.gzone.ecommerce.web.controller;
 
 public interface AttributeNames {
 	
