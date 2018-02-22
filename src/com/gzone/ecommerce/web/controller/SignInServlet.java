@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.gzone.ecommerce.dao.impl.ProductoDAOImpl;
 import com.gzone.ecommerce.model.Usuario;
-import com.gzone.ecommerce.service.UsuarioCriteria;
 import com.gzone.ecommerce.service.UsuarioService;
 import com.gzone.ecommerce.service.impl.UsuarioServiceImpl;
 import com.gzone.ecommerce.util.PasswordEncryptionUtil;
@@ -31,7 +31,7 @@ import com.gzone.ecommerce.web.util.SessionManager;
 public class SignInServlet extends HttpServlet {    
 
 	private static Logger logger = LogManager.getLogger(SignInServlet.class.getName());
-	
+
 	private UsuarioService userService = null;
 	
     public SignInServlet() {
@@ -44,25 +44,19 @@ public class SignInServlet extends HttpServlet {
 		String userName = request.getParameter(ParameterNames.USER);
 		String password = request.getParameter(ParameterNames.PASSWORD);
 					
-		UsuarioCriteria busqueda = new UsuarioCriteria();
-
 		String target = null;
 		boolean redirect = false;
 		try {
-			
-			busqueda.setUsuario(userName);
-			List<Usuario> user = userService.findByCriteria(busqueda, 1, 1);
-			
-			logger.error("Error", user);
+			Usuario user = userService.findByNombre(userName);	
 			if (user==null) {
 				request.setAttribute(AttributeNames.ERROR, AttributeNames.USER_NOT_FOUND_ERROR);
-				target = ViewsPaths.SIGN_IN;
+				target = ViewsPaths.INDEX;
 			} else {				
-				if (!PasswordEncryptionUtil.checkPassword(password,user.get(0).getContrasena())) {
-					request.setAttribute(AttributeNames.ERROR, "Contraseña incorrecta");			
-					target = ViewsPaths.SIGN_IN;
+				if (!PasswordEncryptionUtil.checkPassword(password,user.getContrasena())) {
+					request.setAttribute(AttributeNames.ERROR, AttributeNames.WRONG_PASSWORD_ERROR);			
+					target = ViewsPaths.INDEX;
 				} else {
-					SessionManager.set(request, SessionAttributeNames.USER, user.get(0));
+					SessionManager.set(request, SessionAttributeNames.USER, user);
 					target = ViewsPaths.INDEX;
 					redirect = true;
 				}
@@ -74,8 +68,8 @@ public class SignInServlet extends HttpServlet {
 			}
 			
 		} catch (Exception e) {
+			logger.error(e);
 			e.printStackTrace();
-			// TODO Pendiente de explicar
 		}
 		
 	}

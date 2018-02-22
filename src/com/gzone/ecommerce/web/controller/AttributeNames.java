@@ -8,8 +8,9 @@ public interface AttributeNames {
 	// Codigos de error
 	public static final String GENERIC_ERROR = "generic.error";
 	public static final String MISSING_PARAMETER_ERROR = "missing.error";
-	public static final String USER_NOT_FOUND_ERROR = "user.not.found.error";
-	
+	public static final String USER_NOT_FOUND_ERROR = "El usuario no existe";
+	public static final String WRONG_PASSWORD_ERROR = "Contraseña incorrecta";
+
 	
 	
 }

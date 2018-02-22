@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@page session="false"%>  
+
 <%@page import="com.gzone.ecommerce.model.*, com.gzone.ecommerce.web.model.*, com.gzone.ecommerce.web.util.*, com.gzone.ecommerce.web.controller.*" %>
 
 <html lang="es">
@@ -29,14 +31,7 @@
 
 </head>
 <body>
-
-<%
-	String error = (String) request.getAttribute("error");
-	if (error!=null) {
-		%><%=error%><%
-	}
-%>
-
+	<%	Usuario user = (Usuario) SessionManager.get(request, SessionAttributeNames.USER); %>
 	<div class="maximo">
 		<nav id="barra_principal" class="navbar navbar-default navbar-fixed-top">
 			<div class="container-fluid">
@@ -69,9 +64,9 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Idioma <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="#">Inglés</a></li>
-							</ul></li>
+							</ul>
+						</li>
 							<%							
-								Usuario user = (Usuario) SessionManager.get(request, SessionAttributeNames.USER);
 								if (user!=null) {
 									%>
 									<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%=user.getUsuario()%><span class="caret"></span> </a>
@@ -100,16 +95,14 @@
 																src="/GZoneWeb/images/banner/muestra.png" alt="Muestra juegos"></img>
 														</div>
 														<div class="muestra">
-															<p>GZone es un servicio de venta y distribución de
-																videojuegos para que puedas descargarlos y disfrutarlos
-																libremente.</p>
+															<p>GZone es un servicio de venta y distribución de videojuegos para que puedas descargarlos y disfrutarlos libremente.</p>
 														</div>
 													</div>
 												</div>
 											</li>
 										</ul>
 									</li>
-									<%
+							<%
 								}
 							%>
 						
@@ -144,14 +137,20 @@
 					</div>
 
 					<!-- Body -->
-					<div class="modal-body">
+					<div class="modal-body">					
 						<form action="/GZoneWeb/SignInServlet" method="post">
 							<div class="form-group">
-								<label for="usuario">Nombre de usuario:</label> <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Introduce tu usuario">
+								<label for="usuario">Nombre de usuario:</label> <input type="text" class="form-control" name="user" placeholder="Introduce tu usuario">
 							</div>
 							<div class="form-group">
 								<label for="pwd">Contraseña:</label> <input type="password" class="form-control" id="pwd" name="password" placeholder="Introduce tu contraseña">
 							</div>
+							<%
+								String error = (String) request.getAttribute("error");
+								if (error!=null) {
+									%><%=error%><%
+								}
+							%>	
 							<div class="checkbox">
 								<label><input type="checkbox"> Recuerdame</label>
 							</div>
