@@ -15,6 +15,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.gzone.ecommerce.exceptions.DataException;
+import com.gzone.ecommerce.exceptions.DuplicateInstanceException;
+import com.gzone.ecommerce.exceptions.MailException;
 import com.gzone.ecommerce.model.Usuario;
 import com.gzone.ecommerce.service.UsuarioService;
 import com.gzone.ecommerce.service.impl.UsuarioServiceImpl;
@@ -73,11 +75,18 @@ public class CreateServlet extends HttpServlet {
 				request.getRequestDispatcher(target).forward(request, response);
 			}
 			
-		} catch (Exception e) {
+		} catch (DuplicateInstanceException e) {
 			logger.error(e);
-			e.printStackTrace();
+			request.setAttribute(AttributeNames.ERROR, AttributeNames.DUPLICATED_USER);
+			request.getRequestDispatcher(target).forward(request,response);
 		}
-		
+		catch (DataException o)
+		{
+			logger.error(o);
+
+		} catch (MailException e) {
+			logger.error(e);
+		}
 	}
 
 

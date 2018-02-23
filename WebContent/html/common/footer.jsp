@@ -34,9 +34,9 @@
            <div class="container">
                 <h2 class="logo"><a href="/GZoneWeb/html/index.jsp"><img src="/GZoneWeb/images/logo.png" alt="Logo GZone" width=40px></a></h2>
                 <div class="social-icons">
-                    <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-                    <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-                    <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
+                    <a href="https://twitter.com/GZoneWebApp" target="_blank" class="twitter"><i class="fa fa-twitter"></i></a>
+                    <a href="#" class="facebook" target="_blank"><i class="fa fa-facebook"></i></a>
+                    <a href="https://plus.google.com/u/0/114559509461059024383" target="_blank" class="google"><i class="fa fa-google-plus"></i></a>
                 </div>
             </div>
         </div>
