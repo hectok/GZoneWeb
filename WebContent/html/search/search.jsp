@@ -96,7 +96,7 @@
 				%>
 				<article class="search-result row">
 		  			<div class="col-xs-12 col-sm-12 col-md-3">
-		  				<a href="/GZoneWeb/html/product/product.jsp" title=<%=producto.getNombre()%> class="thumbnail"><img src="/GZoneWeb/CMS/producto_<%=producto.getIdProducto()%>/preview<%=producto.getIdProducto()%>.jpg" alt="<%=producto.getNombre()%>"></a>
+		  				<a href="/GZoneWeb/html/product/product.jsp?id=<%=producto.getIdProducto()%>" title=<%=producto.getNombre()%> class="thumbnail"><img src="/GZoneWeb/CMS/producto_<%=producto.getIdProducto()%>/preview<%=producto.getIdProducto()%>.jpg" alt="<%=producto.getNombre()%>"></a>
 		  			</div>
 		  			<div class="col-xs-12 col-sm-12 col-md-2">
 		  				<ul class="meta-search">
@@ -106,7 +106,7 @@
 		  				</ul>
 		  			</div>
 		  			<div class="col-xs-12 col-sm-12 col-md-7 excerpet">
-		  				<h3><a href="articulo.html" title=""><%=producto.getNombre()%></a></h3>
+		  				<h3><a href="/GZoneWeb/html/product/product.jsp?id=<%=producto.getIdProducto()%>" title=""><%=producto.getNombre()%></a></h3>
 		  				<p><%=producto.getDetalles_corto()%></p>
 		  			</div>
 		  			<span class="clearfix borda"></span>
