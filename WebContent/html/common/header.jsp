@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@page session="false"%>  
+<%@page session="false"%>
 
-<%@page import="com.gzone.ecommerce.model.*, com.gzone.ecommerce.web.model.*, com.gzone.ecommerce.web.util.*, com.gzone.ecommerce.web.controller.*" %>
+<%@page import="com.gzone.ecommerce.model.*, com.gzone.ecommerce.web.model.*, com.gzone.ecommerce.web.util.*, com.gzone.ecommerce.web.controller.*,java.util.List " %>
 
 <html lang="es">
 <head>
@@ -16,14 +16,14 @@
 	<link rel="stylesheet" href="/GZoneWeb/css/busqueda.css">
 	<link rel="stylesheet" href="/GZoneWeb/css/soporte.css">
 	<link rel="stylesheet" href="/GZoneWeb/css/perfil.css">
-	
+
 	<!-- Estilos comunes -->
 	<link rel="stylesheet" href="/GZoneWeb/css/bootstrap/bootstrap.min.css">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
-	
+
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="/GZoneWeb/js/jquery/jquery-2.1.4.js"></script>
 	<script src="/GZoneWeb/js/bootstrap/bootstrap.min.js"></script>
@@ -66,7 +66,7 @@
 								<li><a href="#">Inglés</a></li>
 							</ul>
 						</li>
-							<%							
+							<%
 								if (user!=null) {
 									%>
 									<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%=user.getUsuario()%><span class="caret"></span> </a>
@@ -87,7 +87,7 @@
 												<div class="row">
 													<div class="col-md-12">
 														<div class="elegir">
-															<a href="#" class="btn iniciar" data-toggle="modal"	data-target="#iniciar"><i class="fa fa-sign-in "></i>Iniciar sesion</a> 
+															<a href="#" class="btn iniciar" data-toggle="modal"	data-target="#iniciar"><i class="fa fa-sign-in "></i>Iniciar sesion</a>
 															<a href="#" class="btn registro" data-toggle="modal" data-target="#registro"><i	class="fa fa-user-plus  "></i> Registrarse</a>
 														</div>
 														<div class="muestra">
@@ -105,19 +105,24 @@
 							<%
 								}
 							%>
-						
+
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<a href="#" >			
-								<button class="cart" id="cart">
+							<form id="busquedaBanner" action="/GZoneWeb/SearchServlet" method="post">
+								<input type="search" placeholder="Buscar" NAME="product">
+								<input type="Submit" value="Submit" style="display:none;" />							
+							</form>
+						</li>
+						<li>
+							<a href="#" >
+								<button class="cart" id="carrito">
 									<i class="cart__icon fa fa-shopping-cart"></i>
 									<span class="text-hidden">Shopping cart</span>
 									<span class="cart__count">0</span>
 								</button>
 							</a>
 						</li>
-						<li><a href="/GZoneWeb/html/search/search.jsp"><span class="fa fa-search"></span> Buscar</a></li>
 					</ul>
 				</div>
 			</div>
@@ -131,13 +136,12 @@
 
 					<!--Header -->
 					<div class="modal-header">
-						<a href=""><img src="/GZoneWeb/images/logo.png" alt="Logo GZone"
-							width=40px></a>
+						<a href=""><img src="/GZoneWeb/images/logo.png" alt="Logo GZone" width=40px></a>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 
 					<!-- Body -->
-					<div class="modal-body">					
+					<div class="modal-body">
 						<form action="/GZoneWeb/SignInServlet" method="post">
 							<div class="form-group">
 								<label for="usuario">Nombre de usuario:</label> <input type="text" class="form-control" name="user" placeholder="Introduce tu usuario">
@@ -150,7 +154,7 @@
 								if (error!=null) {
 									%><%=error%><%
 								}
-							%>	
+							%>
 							<div class="checkbox">
 								<label><input type="checkbox"> Recuerdame</label>
 							</div>
@@ -158,7 +162,7 @@
 								<button type="submit" value="Submit" class="btn registro">Iniciar sesion</button>
 							</div>
 						</form>
-					</div>		
+					</div>
 				</div>
 			</div>
 		</div>
@@ -177,28 +181,28 @@
 
 					<!-- Body -->
 					<div class="modal-body">
-						<form action="/action_page.php">
+						<form action="/GZoneWeb/CreateServlet">
 							<div class="form-group">
-								<label for="user">Usuario:</label> <input type="user"
-									class="form-control" id="user"
-									placeholder="Introduce tu nuevo nombre de usuario">
+								<label for="user">Usuario:</label> <input type="user" class="form-control" id="user" name="user" placeholder="Introduce tu nuevo nombre de usuario">
 							</div>
 							<div class="form-group">
-								<label for="email">Correo electrónico:</label> <input
-									type="email" class="form-control" id="email"
-									placeholder="Introduce tu correo">
+								<label for="email">Correo electrónico:</label> <input type="email" class="form-control" id="email" name="email" placeholder="Introduce tu correo">
 							</div>
 							<div class="form-group">
-								<label for="pwd">Contraseña:</label> <input type="password"
-									class="form-control" id="pwd"
-									placeholder="Introduce tu contraseña">
+								<label for="pwd">Contraseña:</label> <input type="password" class="form-control" id="pwd" name="password" placeholder="Introduce tu contraseña">
 							</div>
-
+							<%
+								String errorCreating = (String) request.getAttribute("error");
+								if (errorCreating!=null) {
+									%><%=error%><%
+								}
+							%>
+							<div class="modal-footer">
+								<button type="submit" value="Subtmit" class="btn registro">Registrarse</button>
+							</div>
 						</form>
 					</div>
-					<div class="modal-footer">
-						<button type="submit" class="btn registro">Registrarse</button>
-					</div>
+
 				</div>
 			</div>
 		</div>
@@ -213,24 +217,24 @@
 					</div>
 				</div>
 				<!--end shopping-cart-header -->
-	
+
 				<ul class="shopping-cart-items">
 					<li class="clearfix"><img src="/GZoneWeb/images/borderlands.jpg"
 						alt="borderlands 2" width="120" height="60" /> <span
 						class="item-name">Borderlands 2</span> <span class="item-price">29.99€</span>
 						<span class="item-quantity">Quantity: 01</span></li>
-	
+
 					<li class="clearfix"><img src="/GZoneWeb/images/Darksouls.jpg"
 						alt="Darksouls 3" width="120" height="60" /> <span
 						class="item-name">Darksouls 3</span> <span class="item-price">19.99€</span>
 						<span class="item-quantity">Quantity: 01</span></li>
-	
+
 					<li class="clearfix"><img src="/GZoneWeb/images/dont starve.jpg"
 						alt="Dont starve" width="120" height="60" /> <span
 						class="item-name">Dont starve</span> <span class="item-price">39.99€</span>
 						<span class="item-quantity">Quantity: 01</span></li>
 				</ul>
-	
+
 				<a href="/GZoneWeb/html/shopping/shopping.jsp" class="button">Checkout</a>
 			</div>
 		<!--end shopping-cart -->

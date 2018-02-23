@@ -90,7 +90,7 @@ body {
   margin:0;
   padding: 0;
   overflow:hidden;
-  background-color:rgba(255,255,255,.8);
+  background-color:rgba(255,255,255,1);
 }
 #cuadro-login .help-block{
   font-size:12px
@@ -219,8 +219,7 @@ body {
 }
 
 #carrito nav {
-  padding: 20px 0 40px 0;
-  background: #F8F8F8;
+  padding: 30px 0 40px 0;
   font-size: 16px;
 }
 #carrito .navbar-left {
@@ -261,9 +260,10 @@ body {
 }
 
 #carrito .shopping-cart {
+display: none; 
   top: 60px;
-  right:470px;
-  float: right;
+  right:360px;
+  float: left;
   background: white;
   width: 320px;
   position: relative;
@@ -347,4 +347,74 @@ body {
   content: "";
   display: table;
   clear: both;
+}
+
+
+#busquedaBanner input {
+	outline: none;
+}
+#busquedaBanner input[type=search] {
+	-webkit-appearance: textfield;
+	-webkit-box-sizing: content-box;
+	font-family: inherit;
+	font-size: 100%;
+}
+#busquedaBanner input::-webkit-search-decoration,
+#busquedaBanner input::-webkit-search-cancel-button {
+	display: none;
+}
+
+
+#busquedaBanner input[type=search] {
+	background: rgba(180, 180, 180, 0.1) url("../images/banner/lupa3.png") no-repeat 9px center;
+  	background-size: 12px 12px;
+	border: solid 1px #ccc;
+	padding: 9px 12px 9px 32px;
+	width: 55px;
+
+	-webkit-border-radius: 10em;
+	-moz-border-radius: 10em;
+	border-radius: 10em;
+
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	transition: all .5s;
+	
+}
+#busquedaBanner input[type=search]:focus {
+	width: 110px !important;
+	background-color: rgba(255, 255, 255,0.5);
+	border-color: #985FB2;
+
+	-webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+	-moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+	box-shadow: 0 0 5px rgba(109,207,246,.5);
+}
+
+/* busquedaBanner */
+#busquedaBanner input[type=search] {
+  	margin-top: 10px;
+  	margin-right: 20px !important;
+  	height: 12px !important;
+	width: 12px !important;
+	padding-left: 5px;
+	color: transparent;
+	cursor: pointer;
+}
+
+#busquedaBanner input[type=search]:hover {
+	background-color: #rgba(180, 180, 180, 0.9);
+}
+#busquedaBanner input[type=search]:focus {
+	width: 130px;
+	padding-left: 32px;
+	color: white;
+	background-color: rgba(180, 180, 180, 0.2);
+	cursor: auto;
+}
+#busquedaBanner input:-moz-placeholder {
+	color: transparent;
+}
+#busquedaBanner input::-webkit-input-placeholder {
+	color: transparent;
 }
