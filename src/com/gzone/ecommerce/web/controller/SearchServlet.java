@@ -4,7 +4,7 @@
 package com.gzone.ecommerce.web.controller;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -39,18 +39,19 @@ public class SearchServlet extends HttpServlet{
 			String type = request.getParameter(SessionAttributeNames.SEARCH);				
 			String target = null;
 			String idioma = "ES";
+			
 			ProductoCriteria criteria = null;
+			List<Categoria> categorias = null;
+			
 			
 			if (type.equals("simple")) {
 				criteria  = new ProductoCriteria() ;
 				criteria.setNombre(search);
 			}
 			else {
-//				criteria  = new ProductoCriteria() ;
-//				String[] categoria = request.getParameterValues(SessionAttributeNames.CATEGORY);
-//				List<Categoria> list =  Arrays.asList(categoria); 
-//				
-//				criteria.setCategorias(categoria); 
+				criteria  = new ProductoCriteria() ;
+				categorias = new ArrayList<Categoria>();
+								
 			}
 			
 			try {

@@ -78,11 +78,15 @@ public class CreateServlet extends HttpServlet {
 		} catch (DuplicateInstanceException e) {
 			logger.error(e);
 			request.setAttribute(AttributeNames.ERROR, AttributeNames.DUPLICATED_USER);
+			target = ViewsPaths.INDEX;
 			request.getRequestDispatcher(target).forward(request,response);
 		}
 		catch (DataException o)
 		{
 			logger.error(o);
+			request.setAttribute(AttributeNames.ERROR, AttributeNames.DUPLICATED_USER);
+			target = ViewsPaths.INDEX;
+			request.getRequestDispatcher(target).forward(request,response);
 
 		} catch (MailException e) {
 			logger.error(e);
