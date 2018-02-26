@@ -26,6 +26,7 @@
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="/GZoneWeb/js/jquery/jquery-2.1.4.js"></script>
+	<script src="/GZoneWeb/js/product/background.js"></script>
 	<script src="/GZoneWeb/js/bootstrap/bootstrap.min.js"></script>
 	<script src="/GZoneWeb/js/index/modernizr.js"></script>
 
@@ -111,7 +112,7 @@
 						<li>
 							<form id="busquedaBanner" action="/GZoneWeb/SearchServlet" method="post">
 								<input type="search" placeholder="Buscar" NAME="product">
-								<input type="Submit" value="Submit" style="display:none;" />							
+								<input type="submit" name="submit" value="simple" style="display:none;" />							
 							</form>
 						</li>
 						<li>

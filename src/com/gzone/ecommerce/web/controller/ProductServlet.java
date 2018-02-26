@@ -23,44 +23,31 @@ import com.gzone.ecommerce.service.impl.ProductoServiceImpl;
  * @author hector.ledo.doval
  *
  */
-@WebServlet("/SearchServlet")
-public class SearchServlet extends HttpServlet{
+@WebServlet("/ProductServlet")
+public class ProductServlet extends HttpServlet{
 	
 	private ProductoService productoService = null;
 	
-	 public SearchServlet () {
+	 public ProductServlet () {
 	        super();
 	        productoService = new ProductoServiceImpl();
 
 	    }
 	 
 	 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			String search = request.getParameter(SessionAttributeNames.PRODUCT);	
-			String type = request.getParameter(SessionAttributeNames.SEARCH);				
+			Long search = Long.parseLong(request.getParameter(SessionAttributeNames.PRODUCT)) ;	
 			String target = null;
 			String idioma = "ES";
-			ProductoCriteria criteria = null;
 			
-			if (type.equals("simple")) {
-				criteria  = new ProductoCriteria() ;
-				criteria.setNombre(search);
-			}
-			else {
-//				criteria  = new ProductoCriteria() ;
-//				String[] categoria = request.getParameterValues(SessionAttributeNames.CATEGORY);
-//				List<Categoria> list =  Arrays.asList(categoria); 
-//				
-//				criteria.setCategorias(categoria); 
-			}
-			
+			Producto productoDetail = new Producto();
 			try {
-				List<Producto> productos = productoService.findByCriteria(criteria, 1, 10, idioma);	
-				if (productos==null ) {
+				productoDetail = productoService.findById(search, idioma);	
+				if (productoDetail==null ) {
 					request.setAttribute(AttributeNames.ERROR, AttributeNames.NOT_FOUND);
-					target = ViewsPaths.SEARCH;
+					target = ViewsPaths.INDEX;
 				} else {	
-					target = ViewsPaths.SEARCH;
-					request.setAttribute(SessionAttributeNames.PRODUCT, productos);
+					target = ViewsPaths.PRODUCT_DETAIL;
+					request.setAttribute(SessionAttributeNames.PRODUCT, productoDetail);
 				}
 					request.getRequestDispatcher(target).forward(request, response);
 			} catch (Exception e) {
