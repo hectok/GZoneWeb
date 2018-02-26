@@ -1,6 +1,9 @@
 <%@include file="/html/common/header.jsp"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
+<%
+	Usuario usuario = (Usuario) request.getAttribute(SessionAttributeNames.PROFILE);
+%>
 <div id="perfil">
     <div id="centrar">
       <!-- Opciones del panel -->
@@ -79,11 +82,15 @@
                 <fieldset>
                   <!-- Formulario -->
                   <legend>Tu panel de usuario</legend>
-                  <!-- Avatar del usuario-->
+                  <!-- Perfil del usuario-->
+                  <!-- Nombre-->
                   <div class="form-group">
-                    <label class="col-md-4 control-label">Tu avatar</label>
+                    <label class="col-md-4 control-label">Tu usuario</label>
                     <div class="col-md-4 inputGroupContainer">
-                      <input type="file" class="form-control-file" id="avatar">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input  name="first_name" placeholder="Tu nombre..." class="form-control"  type="text">
+                      </div>
                     </div>
                   </div>
 

@@ -73,7 +73,7 @@
 									<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%=user.getUsuario()%><span class="caret"></span> </a>
 										<ul class="dropdown-menu" role="menu">
 											<li><a href="#">Mi biblioteca</a></li>
-											<li><a href="#">Mi perfil</a></li>
+											<li><a href="/GZoneWeb/UserServlet?profile=<%=user.getIdUsuario()%>">Mi perfil</a></li>
 											<li class="divider"></li>
 											<li class="dropdown-header">Otros</li>
 											<li><a href="/GZoneWeb/SignOutServlet">Cerrar sesión</a></li>
