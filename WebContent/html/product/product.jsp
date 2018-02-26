@@ -30,29 +30,27 @@
 	            <li data-target="#galProducto" data-slide-to="2"></li>
 	            <li data-target="#galProducto" data-slide-to="3"></li>
 	            <li data-target="#galProducto" data-slide-to="4"></li>
-	            <li data-target="#galProducto" data-slide-to="5"></li>
 	          </ol>
 	
 	          <!-- Wrapper for slides -->
 	          <div class="carousel-inner" role="listbox">
+	          
 	            <div class="item active">
-	              <img src="/GZoneWeb/images/articulo/witcher1.jpg" alt="The witcher">
+	              <img src="/GZoneWeb/CMS/producto_<%=producto.getIdProducto()%>/slide<%=producto.getIdProducto()%>_1.jpg" alt="<%=producto.getNombre()%>">
 	            </div>
 	            <div class="item">
-	              <img src="/GZoneWeb/images/articulo/witcher2.jpg" alt="The witcher">
+					<img src="/GZoneWeb/CMS/producto_<%=producto.getIdProducto()%>/slide<%=producto.getIdProducto()%>_2.jpg" alt="<%=producto.getNombre()%>">	            
+				</div>
+	            <div class="item">
+	              <img src="/GZoneWeb/CMS/producto_<%=producto.getIdProducto()%>/slide<%=producto.getIdProducto()%>_3.jpg" alt="<%=producto.getNombre()%>">
 	            </div>
 	            <div class="item">
-	              <img src="/GZoneWeb/images/articulo/witcher3.jpg" alt="The witcher">
+	              <img src="/GZoneWeb/CMS/producto_<%=producto.getIdProducto()%>/slide<%=producto.getIdProducto()%>_4.jpg" alt="<%=producto.getNombre()%>">
 	            </div>
 	            <div class="item">
-	              <img src="/GZoneWeb/images/articulo/witcher4.jpg" alt="The witcher">
+	              <img src="/GZoneWeb/CMS/producto_<%=producto.getIdProducto()%>/slide<%=producto.getIdProducto()%>_5.jpg" alt="<%=producto.getNombre()%>">
 	            </div>
-	            <div class="item">
-	              <img src="/GZoneWeb/images/articulo/witcher5.jpg" alt="The witcher">
-	            </div>
-	            <div class="item">
-	              <img src="/GZoneWeb/images/articulo/witcher6.jpg" alt="The witcher">
-	            </div>
+
 	            <!-- Left and right controls -->
 	            <a class="right carousel-control" href="#galProducto" role="button" data-slide="next">
 	              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
