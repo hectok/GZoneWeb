@@ -18,6 +18,8 @@ import com.gzone.ecommerce.model.Producto;
 import com.gzone.ecommerce.service.ProductoCriteria;
 import com.gzone.ecommerce.service.ProductoService;
 import com.gzone.ecommerce.service.impl.ProductoServiceImpl;
+import com.gzone.ecommerce.web.util.ArrayUtils;
+import com.mysql.fabric.xmlrpc.base.Param;
 
 /**
  * @author hector.ledo.doval
@@ -36,24 +38,48 @@ public class SearchServlet extends HttpServlet{
 	 
 	 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			String search = request.getParameter(SessionAttributeNames.PRODUCT);	
-			String type = request.getParameter(SessionAttributeNames.SEARCH);				
+			String type = request.getParameter(ParameterNames.SEARCH);	
+			String [] categorias = request.getParameterValues(SessionAttributeNames.CATEGORY);
+			String [] jugadores = request.getParameterValues(SessionAttributeNames.PLAYERS);
+			String anio = request.getParameter(SessionAttributeNames.YEAR);
+			String [] idiomad = request.getParameterValues(SessionAttributeNames.LANGUAGE);
 			String target = null;
-			String idioma = "ES";
+			String idioma = SessionAttributeNames.ES;
 			
 			ProductoCriteria criteria = null;
-			List<Categoria> categorias = null;
+			ArrayUtils arrayUtil = null;
 			
 			
-			if (type.equals("simple")) {
+			if (type.equals(ParameterNames.SIMPLE)) {
 				criteria  = new ProductoCriteria() ;
 				criteria.setNombre(search);
 			}
 			else {
-				criteria  = new ProductoCriteria() ;
-				categorias = new ArrayList<Categoria>();
-								
-			}
-			
+				if (type.equals(ParameterNames.DETAILED))
+				{
+					criteria= new ProductoCriteria() ;
+					arrayUtil = new ArrayUtils();
+
+					criteria.setNombre(search);
+
+					if (categorias!=null)
+					{	
+						criteria.setCategorias(arrayUtil.arrayToCategoria(categorias));
+					}
+					if (jugadores!=null)
+					{
+						criteria.setNjugadores(arrayUtil.arrayToNJugadores(jugadores));
+					}
+					if (anio!=null)
+					{
+						criteria.setAnio(Integer.valueOf(anio));
+					}
+					if (idiomad!=null)
+					{
+						criteria.setIdioma(arrayUtil.arrayToIdioma(idiomad));
+					}
+				}
+			}		
 			try {
 				List<Producto> productos = productoService.findByCriteria(criteria, 1, 10, idioma);	
 				if (productos==null ) {

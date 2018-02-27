@@ -30,6 +30,7 @@ public class SessionManager {
 			
 			ShoppingCart c = new ShoppingCart(); 
 			session.setAttribute(SessionAttributeNames.SHOPPING_CART, c);
+			session.setAttribute(SessionAttributeNames.LANGUAGE, SessionAttributeNames.ES);
 		}
 		return session;
 	}	
