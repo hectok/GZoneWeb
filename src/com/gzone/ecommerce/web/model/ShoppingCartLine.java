@@ -6,13 +6,7 @@ public class ShoppingCartLine {
 	
 	private Producto product = null;
 	private int units = 0;
-	
-	/**
-	 * Aqui si tiene sentido un constructor asi.
-	 * @param product
-	 * @param units
-	 * @return
-	 */
+
 	public ShoppingCartLine(Producto product, int units ) {
 		setProduct(product);
 		setUnits(units);

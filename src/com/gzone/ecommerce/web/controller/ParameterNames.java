@@ -10,5 +10,8 @@ public interface ParameterNames {
 	
 	public static final String SIMPLE = "simple";
 	public static final String DETAILED = "detailed";
+	
+	public static final String CHOOSE = "Choose...";
+
 
 }

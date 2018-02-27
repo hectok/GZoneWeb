@@ -89,7 +89,7 @@
                     <div class="col-md-4 inputGroupContainer">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input  name="first_name" placeholder="Tu nombre..." class="form-control"  type="text">
+                        <input class="form-control" type="text" placeholder=<%=usuario.getUsuario()%> disabled>
                       </div>
                     </div>
                   </div>
@@ -100,7 +100,7 @@
                     <div class="col-md-4 inputGroupContainer">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input  name="first_name" placeholder="Tu nombre..." class="form-control"  type="text">
+                        <input  name="first_name" placeholder=<%=usuario.getNombre()%> class="form-control"  type="text">
                       </div>
                     </div>
                   </div>
@@ -111,7 +111,7 @@
                     <div class="col-md-4 inputGroupContainer">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input name="last_name" placeholder="Tus apellidos..." class="form-control"  type="text">
+                        <input name="last_name" placeholder=<%=usuario.getApellido()%> class="form-control"  type="text">
                       </div>
                     </div>
                   </div>
@@ -221,7 +221,7 @@
                     <div class="col-md-4 inputGroupContainer">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                        <textarea class="form-control" name="comment" placeholder="Introduce una descricipción sobre ti..."></textarea>
+                        <textarea class="form-control" name="comment" placeholder=<%=usuario.getDescripcion()%>></textarea>
                       </div>
                     </div>
                   </div>

@@ -35,25 +35,14 @@ public class SaleServlet extends HttpServlet{
 	    }
 	 
 	 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			String search = request.getParameter(SessionAttributeNames.PRODUCT);	
-			String type = request.getParameter(SessionAttributeNames.SEARCH);				
+			
 			String target = null;
-			String idioma = "ES";
+			String idioma = SessionAttributeNames.ES;
 			ProductoCriteria criteria = null;
-			
-			if (type.equals("simple")) {
-				criteria  = new ProductoCriteria() ;
-				criteria.setNombre(search);
-			}
-			else {
-//				criteria  = new ProductoCriteria() ;
-//				String[] categoria = request.getParameterValues(SessionAttributeNames.CATEGORY);
-//				List<Categoria> list =  Arrays.asList(categoria); 
-//				
-//				criteria.setCategorias(categoria); 
-			}
-			
+	
 			try {
+				criteria  = new ProductoCriteria() ;
+				criteria.setOferta(null);
 				List<Producto> productos = productoService.findByCriteria(criteria, 1, 10, idioma);	
 				if (productos==null ) {
 					request.setAttribute(AttributeNames.ERROR, AttributeNames.NOT_FOUND);

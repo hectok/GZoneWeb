@@ -37,14 +37,16 @@ public class SearchServlet extends HttpServlet{
 	    }
 	 
 	 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			String target = null;
+			String idioma = SessionAttributeNames.ES;
+		 
 			String search = request.getParameter(SessionAttributeNames.PRODUCT);	
 			String type = request.getParameter(ParameterNames.SEARCH);	
 			String [] categorias = request.getParameterValues(SessionAttributeNames.CATEGORY);
 			String [] jugadores = request.getParameterValues(SessionAttributeNames.PLAYERS);
 			String anio = request.getParameter(SessionAttributeNames.YEAR);
 			String [] idiomad = request.getParameterValues(SessionAttributeNames.LANGUAGE);
-			String target = null;
-			String idioma = SessionAttributeNames.ES;
+
 			
 			ProductoCriteria criteria = null;
 			ArrayUtils arrayUtil = null;

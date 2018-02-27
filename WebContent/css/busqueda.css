@@ -96,13 +96,15 @@ color: white; !important;
   display: block; width: 97%;
   margin: 10px 15px;
   border-bottom: 1px dotted #ccc;
-
-
 }
 
 #todo{
 	padding-top:50px;
 	min-height: 1000px;
+}
+
+#todo h3{
+	color:white !important;
 }
 
 #panel{
