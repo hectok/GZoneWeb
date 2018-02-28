@@ -16,8 +16,8 @@ jQuery(document).ready(function(){
 		items.each(function(){
 			var actual = $(this),
 				selectOptions = actual.find('[data-type="select"]'),
-				addToCartBtn = actual.find('.añadir'),
-				touchSettings = actual.next('.barraBlanca-trigger');
+				addToCartBtn = actual.find('.anadir'),
+				touchSettings = actual.next('.barraBlanca');
 
 			//detect click on ul.size/ul.color list elements
 			selectOptions.on('click', function(event) {

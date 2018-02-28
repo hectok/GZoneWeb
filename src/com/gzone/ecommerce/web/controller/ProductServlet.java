@@ -44,7 +44,7 @@ public class ProductServlet extends HttpServlet{
 				productoDetail = productoService.findById(search, idioma);	
 				if (productoDetail==null ) {
 					request.setAttribute(AttributeNames.ERROR, AttributeNames.NOT_FOUND);
-					target = ViewsPaths.INDEX;
+					target = ViewsPaths.INDEX_SERVLET;
 				} else {	
 					target = ViewsPaths.PRODUCT_DETAIL;
 					request.setAttribute(SessionAttributeNames.PRODUCT, productoDetail);

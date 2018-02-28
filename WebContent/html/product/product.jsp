@@ -65,9 +65,9 @@
 	      </div>
 	      <div class="descripcion">
 	        <input type="checkbox" class="read-more-state" id="post-1" />
-	        <p class="read-more-wrap"> <%=producto.getDetalles_largo().substring(0, 100)%>
+	        <p class="read-more-wrap"> <%=producto.getDetalles_largo().substring(0, 200)%>
 	          <span class="read-more-target">
-	           <%=producto.getDetalles_largo().substring(100) %>
+	           <%=producto.getDetalles_largo().substring(200) %>
 	        </p>    
 	            <label for="post-1" class="read-more-trigger"></label>
 	          </div>

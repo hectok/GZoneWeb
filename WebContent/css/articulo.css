@@ -94,7 +94,7 @@ a {
 }
 
 a:hover {
-	color: #5C5EDC;
+	color: white !important;
 }
 
 img, svg {

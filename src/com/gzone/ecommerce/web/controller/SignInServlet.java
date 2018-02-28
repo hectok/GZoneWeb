@@ -18,6 +18,7 @@ import com.gzone.ecommerce.model.Usuario;
 import com.gzone.ecommerce.service.UsuarioService;
 import com.gzone.ecommerce.service.impl.UsuarioServiceImpl;
 import com.gzone.ecommerce.util.PasswordEncryptionUtil;
+import com.gzone.ecommerce.web.util.CookieManager;
 import com.gzone.ecommerce.web.util.SessionManager;
 
 /**
@@ -41,22 +42,25 @@ public class SignInServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userName = request.getParameter(ParameterNames.USER);
 		String password = request.getParameter(ParameterNames.PASSWORD);
-					
+		String remember = request.getParameter(ParameterNames.CHECKED);			
 		String target = null;
 		boolean redirect = false;
 		try {
 			Usuario user = userService.findByNombre(userName);	
 			if (user==null) {
 				request.setAttribute(AttributeNames.ERROR, AttributeNames.USER_NOT_FOUND_ERROR);
-				target = ViewsPaths.INDEX;
+				target = ViewsPaths.INDEX_SERVLET;
 			} else {				
 				if (!PasswordEncryptionUtil.checkPassword(password,user.getContrasena())) {
 					request.setAttribute(AttributeNames.ERROR, AttributeNames.WRONG_PASSWORD_ERROR);			
-					target = ViewsPaths.INDEX;
+					target = ViewsPaths.INDEX_SERVLET;
 				} else {
 					SessionManager.set(request, SessionAttributeNames.USER, user);
-					target = ViewsPaths.INDEX;
+					target = ViewsPaths.INDEX_SERVLET;
 					redirect = true;
+					if (remember=="ON") {
+						CookieManager.addCookie(response, ParameterNames.LOGIN, user.getUsuario(), "/", "<1";
+					}
 				}
 			}
 			if (redirect) {

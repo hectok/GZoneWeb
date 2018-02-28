@@ -15,4 +15,7 @@ public interface ParameterNames {
 
 	public static final String ALL = " ";
 
+	public static final String LOGIN = "login";
+	public static final String CHECKED = "checked";
+
 }

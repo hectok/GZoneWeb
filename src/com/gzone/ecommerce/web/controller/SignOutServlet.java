@@ -19,7 +19,7 @@ public class SignOutServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String target = null;
-		target = ViewsPaths.INDEX;
+		target = ViewsPaths.INDEX_SERVLET;
 		request.getSession(true).setAttribute(ParameterNames.USER, null);
 		response.sendRedirect(target);
 	}

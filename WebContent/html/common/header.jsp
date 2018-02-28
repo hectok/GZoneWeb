@@ -29,7 +29,7 @@
 	<script src="/GZoneWeb/js/product/background.js"></script>
 	<script src="/GZoneWeb/js/bootstrap/bootstrap.min.js"></script>
 	<script src="/GZoneWeb/js/index/modernizr.js"></script>
-
+	
 </head>
 <body>
 	<%	Usuario user = (Usuario) SessionManager.get(request, SessionAttributeNames.USER); %>
@@ -43,7 +43,7 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="/GZoneWeb/html/index.jsp"><img src="/GZoneWeb/images/logo.png" alt="Logo GZone" width=40px></a>
+					<a class="navbar-brand" href="/GZoneWeb/IndexServlet"><img src="/GZoneWeb/images/logo.png" alt="Logo GZone" width=40px></a>
 				</div>
 				<div id="navbar1" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
@@ -157,7 +157,7 @@
 								}
 							%>
 							<div class="checkbox">
-								<label><input type="checkbox"> Recuerdame</label>
+								<label><input type="checkbox" name="checked" value="ON"> Recuerdame</label>
 							</div>
 							<div class="modal-footer">
 								<button type="submit" value="Submit" class="btn registro">Iniciar sesion</button>
