@@ -7,6 +7,10 @@ public interface SessionAttributeNames {
 	public static final String SHOPPING_CART = "shopping-cart";
 	public static final String PRODUCT = "product";
 		
+	public static final String SALE = "sales";
+	public static final String EXPLORE = "explore";
+
+
 	public static final String CATEGORY = "categoria";
 	public static final String PLAYERS = "jugadores";
 	public static final String YEAR = "anio";

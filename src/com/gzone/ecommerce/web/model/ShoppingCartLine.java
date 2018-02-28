@@ -5,11 +5,11 @@ import com.gzone.ecommerce.model.Producto;
 public class ShoppingCartLine {
 	
 	private Producto product = null;
-	private int units = 0;
+    private Integer cantidad = 1;
+    private double precioTotal;
+	
+	public ShoppingCartLine() {
 
-	public ShoppingCartLine(Producto product, int units ) {
-		setProduct(product);
-		setUnits(units);
 	}
 
 	public Producto getProduct() {
@@ -20,12 +20,21 @@ public class ShoppingCartLine {
 		this.product = product;
 	}
 
-	public int getUnits() {
-		return units;
+	public double getPrecioTotal() {
+		return precioTotal;
 	}
 
-	public void setUnits(int units) {
-		this.units = units;
+	public void setPrecioTotal(double precioTotal) {
+		this.precioTotal = precioTotal;
 	}
+
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
+	}
+
 	
 }

@@ -1,5 +1,11 @@
 <%@include file="/html/common/header.jsp"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
+
+<%
+	List<Producto> ofertas= (List <Producto>) request.getAttribute(SessionAttributeNames.SALE);
+	List<Producto> explorar= (List <Producto>) request.getAttribute(SessionAttributeNames.EXPLORE);
+
+%>
 	<header class="bp-header">
 		<h1>En Oferta</h1>
 		<hr>
@@ -7,279 +13,43 @@
 	
 	<div id="agrupar">
 		<ul class="ofertas">
+		<%
+		if (ofertas!=null || ofertas.isEmpty()){
+			for (Producto oferta: ofertas) {
+				%>
 			<li>
 				<div class="producto">
 					<ul class="bordes">
-						<li><img src="/GZoneWeb/images/borderlands.jpg" alt="Borderlands 2"></li>
+						<li><img src="/GZoneWeb/CMS/producto_<%=oferta.getIdProducto()%>/preview<%=oferta.getIdProducto()%>.jpg" alt="<%=oferta.getNombre()%>"></li>
 					</ul>
-
-				<div class="barraBlanca">
-					<div class="informacion_articulo">
-						<b><a href="/GZoneWeb/html/product/product.jsp">Borderlands 2</a></b>
-						<em>29.99€</em>
+	
+					<div class="barraBlanca">
+						<div class="informacion_articulo">
+							<b><a href="/GZoneWeb/ProductServlet?product=<%=oferta.getIdProducto()%>"><%=oferta.getNombre()%></a></b>
+							<em><%=oferta.getPrecio()%>€</em>
+						</div>
+	
+						<button class="anadir">
+							<em>anadir</em>
+							<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
+								<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
+							</svg>
+						</button>
 					</div>
-
-					<button class="anadir">
-						<em>anadir</em>
-						<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
-							<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
-						</svg>
-					</button>
 				</div>
-			</div>
-		</li>
-		<li>
-			<div class="producto">
-				<ul class="bordes">
-					<li><img src="/GZoneWeb/images/fallout.jpg" alt="Fallout 4"></li>
-				</ul>
-
-			<div class="barraBlanca">
-				<div class="informacion_articulo">
-					<b><a href="#0">Fallout 4</a></b>
-					<em>59.99€</em>
-				</div>
-
-				<button class="anadir">
-					<em>anadir</em>
-					<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
-						<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
-					</svg>
-				</button>
-			</div>
-		</div>
-	</li>
-
-	<li>
-		<div class="producto">
-			<ul class="bordes">
-				<li><img src="/GZoneWeb/images/bioshock.jpg" alt="Bioshosk infinite"></li>
-			</ul>
-
-		<div class="barraBlanca">
-			<div class="informacion_articulo">
-				<b><a href="#0">Bioshock infinite</a></b>
-				<em>29.99€</em>
-			</div>
-
-			<button class="anadir">
-				<em>anadir</em>
-				<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
-					<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
-				</svg>
-			</button>
-		</div>
+			</li>
+			<%
+			}
+			}
+			else
+			{
+				%>
+				<li>No se han encontrado Ofertas</li>
+		<%
+			}
+		%>
+		</ul> <!-- ofertas -->
 	</div>
-</li>
-<li>
-	<div class="producto">
-		<ul class="bordes">
-			<li><img src="/GZoneWeb/images/gta5.jpg" alt="GTA5"></li>
-		</ul>
-
-
-	<div class="barraBlanca">
-		<div class="informacion_articulo">
-			<b><a href="#0">Grand Thief Auto 5</a></b>
-			<em>39.99€</em>
-		</div>
-
-		<button class="anadir">
-			<em>anadir</em>
-			<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
-				<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
-			</svg>
-		</button>
-	</div>
-</div>
-</li><li>
-	<div class="producto">
-		<ul class="bordes">
-			<li><img src="/GZoneWeb/images/resident.jpg" alt="Resident Evil"></li>
-		</ul>
-
-
-	<div class="barraBlanca">
-		<div class="informacion_articulo">
-			<b><a href="#0">Grand Thief Auto 5</a></b>
-			<em>39.99€</em>
-		</div>
-
-		<button class="anadir">
-			<em>anadir</em>
-			<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
-				<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
-			</svg>
-		</button>
-	</div>
-</div>
-</li>
-<li>
-	<div class="producto">
-		<ul class="bordes">
-			<li><img src="/GZoneWeb/images/thewitcher.jpg" alt="thewitcher"></li>
-		</ul>
-	</a>
-
-	<div class="barraBlanca">
-		<div class="informacion_articulo">
-			<b><a href="#0">The witcher 3</a></b>
-			<em>39.99€</em>
-		</div>
-
-		<button class="anadir">
-			<em>anadir</em>
-			<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
-				<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
-			</svg>
-		</button>
-	</div>
-</div>
-</li>
-<li>
-	<div class="producto">
-		<ul class="bordes">
-			<li><img src="/GZoneWeb/images/dyinglight.jpg" alt="Dying light"></li>
-		</ul>
-	</a>
-
-	<div class="barraBlanca">
-		<div class="informacion_articulo">
-			<b><a href="#0">Dying light</a></b>
-			<em>39.99€</em>
-		</div>
-
-		<button class="anadir">
-			<em>anadir</em>
-			<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
-				<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
-			</svg>
-		</button>
-	</div>
-</div>
-</li>
-<li>
-	<div class="producto">
-		<a href="#0">
-			<ul class="bordes">
-				<li ><img src="/GZoneWeb/images/cuphead.jpg" alt="Cuphead"></li>
-			</ul>
-		</a>
-
-		<div class="barraBlanca">
-			<div class="informacion_articulo">
-				<b><a href="#0">Cuphead</a></b>
-				<em>14.99€</em>
-			</div>
-
-			<button class="anadir">
-				<em>anadir</em>
-				<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
-					<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
-				</svg>
-			</button>
-		</div>
-	</div>
-</li>
-
-<li>
-	<div class="producto">
-		<a href="#0">
-			<ul class="bordes">
-				<li class="selected"><img src="/GZoneWeb/images/Darksouls.jpg" alt="Preview image"></li>
-			</ul>
-		</a>
-
-		<div class="barraBlanca">
-			<div class="informacion_articulo">
-				<b><a href="#0">Dark Souls</a></b>
-				<em>59.99€</em>
-			</div> <!-- informacion_articulo -->
-
-			<button class="anadir">
-				<em>anadir</em>
-				<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
-					<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
-				</svg>
-			</button>
-		</div> <!-- .barraBlanca -->
-	</div> <!-- .producto -->
-</li>
-
-<li>
-	<div class="producto">
-		<a href="#0">
-			<ul class="bordes">
-				<li class="selected"><img src="/GZoneWeb/images/dontstarve.jpg" alt="Preview image"></li>
-			</ul>
-		</a>
-
-		<div class="barraBlanca">
-			<div class="informacion_articulo">
-				<b><a href="#0">Dont Starve</a></b>
-				<em>15.00€</em>
-			</div> <!-- informacion_articulo -->
-
-			<button class="anadir">
-				<em>anadir</em>
-				<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
-					<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
-				</svg>
-			</button>
-		</div> <!-- .barraBlanca -->
-	</div> <!-- .producto -->
-</li>
-
-<li>
-	<div class="producto">
-		<a href="#0">
-			<ul class="bordes">
-				<li class="selected"><img src="/GZoneWeb/images/alien.jpg" alt="Preview image"></li>
-			</ul>
-		</a>
-
-		<div class="barraBlanca">
-			<div class="informacion_articulo">
-				<b><a href="#0">Alien Isolation</a></b>
-				<em>9.99€</em>
-			</div> <!-- informacion_articulo -->
-
-			<button class="anadir">
-				<em>anadir</em>
-				<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
-					<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
-				</svg>
-			</button>
-		</div> <!-- .barraBlanca -->
-	</div> <!-- .producto -->
-</li>
-
-<li>
-	<div class="producto">
-		<a href="#0">
-			<ul class="bordes">
-				<li class="selected"><img src="/GZoneWeb/images/batman.jpg" alt="Preview image"></li>
-			</ul>
-		</a>
-
-		<div class="barraBlanca">
-			<div class="informacion_articulo">
-				<b><a href="#0">Batman: Arkham Assylum</a></b>
-				<em>14.99€</em>
-			</div> <!-- informacion_articulo -->
-
-			<button class="anadir">
-				<em>anadir Cart</em>
-				<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
-					<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
-				</svg>
-			</button>
-		</div> <!-- .barraBlanca -->
-	</div> <!-- .producto -->
-</li>
-</ul> <!-- ofertas -->
-</div>
-<!-- DEBERIA ACABAR AQUI -->
 
 <!-- Main view -->
 <div class="view">

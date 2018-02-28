@@ -23,12 +23,12 @@ import com.gzone.ecommerce.service.impl.ProductoServiceImpl;
  * @author hector.ledo.doval
  *
  */
-@WebServlet("/SalesServlet")
-public class SaleServlet extends HttpServlet{
+@WebServlet("/IndexServlet")
+public class IndexServlet extends HttpServlet{
 	
 	private ProductoService productoService = null;
 	
-	 public SaleServlet () {
+	 public IndexServlet () {
 	        super();
 	        productoService = new ProductoServiceImpl();
 
@@ -38,18 +38,28 @@ public class SaleServlet extends HttpServlet{
 			
 			String target = null;
 			String idioma = SessionAttributeNames.ES;
-			ProductoCriteria criteria = null;
-	
+			ProductoCriteria ofertas = null;
+			ProductoCriteria todos = null;
+
 			try {
-				criteria  = new ProductoCriteria() ;
-				criteria.setOferta(null);
-				List<Producto> productos = productoService.findByCriteria(criteria, 1, 10, idioma);	
-				if (productos==null ) {
+				//Ofertas
+				ofertas  = new ProductoCriteria() ;
+				ofertas.setOferta(true);
+				//Todas
+				todos  = new ProductoCriteria() ;
+				todos.setNombre(ParameterNames.ALL);
+				
+				List<Producto> oferta = productoService.findByCriteria(ofertas, 1, 12, idioma);	
+				List<Producto> explore = productoService.findByCriteria(todos, 1, 27, idioma);	
+
+				if (oferta==null || explore==null) {
 					request.setAttribute(AttributeNames.ERROR, AttributeNames.NOT_FOUND);
-					target = ViewsPaths.SEARCH;
+					target = ViewsPaths.INDEX;
 				} else {	
-					target = ViewsPaths.SEARCH;
-					request.setAttribute(SessionAttributeNames.PRODUCT, productos);
+					target = ViewsPaths.INDEX;
+					request.setAttribute(SessionAttributeNames.SALE, oferta);
+					request.setAttribute(SessionAttributeNames.EXPLORE, explore);
+
 				}
 					request.getRequestDispatcher(target).forward(request, response);
 			} catch (Exception e) {

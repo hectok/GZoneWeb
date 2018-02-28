@@ -13,5 +13,6 @@ public interface ParameterNames {
 	
 	public static final String CHOOSE = "Choose...";
 
+	public static final String ALL = " ";
 
 }
