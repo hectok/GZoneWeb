@@ -4,7 +4,6 @@
 package com.gzone.ecommerce.web.controller;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,11 +12,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.gzone.ecommerce.model.Categoria;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.gzone.ecommerce.model.Producto;
 import com.gzone.ecommerce.service.ProductoCriteria;
 import com.gzone.ecommerce.service.ProductoService;
 import com.gzone.ecommerce.service.impl.ProductoServiceImpl;
+
 
 /**
  * @author hector.ledo.doval
@@ -26,6 +28,8 @@ import com.gzone.ecommerce.service.impl.ProductoServiceImpl;
 @WebServlet("/IndexServlet")
 public class IndexServlet extends HttpServlet{
 	
+	private static Logger logger = LogManager.getLogger(SignInServlet.class.getName());
+
 	private ProductoService productoService = null;
 	
 	 public IndexServlet () {
@@ -39,19 +43,18 @@ public class IndexServlet extends HttpServlet{
 			String target = null;
 			String idioma = SessionAttributeNames.ES;
 			ProductoCriteria ofertas = null;
-			ProductoCriteria todos = null;
-
+			
 			try {
 				//Ofertas
 				ofertas  = new ProductoCriteria() ;
 				ofertas.setOferta(true);
 				//Todas
-				todos  = new ProductoCriteria() ;
-				todos.setNombre(ParameterNames.ALL);
 				
 				List<Producto> oferta = productoService.findByCriteria(ofertas, 1, 12, idioma);	
-				List<Producto> explore = productoService.findByCriteria(todos, 1, 27, idioma);	
+				List<Producto> explore = productoService.findAll(1, 39, idioma);	
+				System.out.println("Hola " + explore.get(1).getCategorias().get(0).getCategoria());
 
+				
 				if (oferta==null || explore==null) {
 					request.setAttribute(AttributeNames.ERROR, AttributeNames.NOT_FOUND);
 					target = ViewsPaths.INDEX;
@@ -63,7 +66,7 @@ public class IndexServlet extends HttpServlet{
 				}
 					request.getRequestDispatcher(target).forward(request, response);
 			} catch (Exception e) {
-				e.printStackTrace();
+				logger.error(e);
 			}
 			
 		}

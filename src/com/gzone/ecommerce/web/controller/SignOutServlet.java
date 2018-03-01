@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.gzone.ecommerce.web.util.CookieManager;
+
 @WebServlet("/SignOutServlet")
 public class SignOutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -22,6 +24,7 @@ public class SignOutServlet extends HttpServlet {
 		target = ViewsPaths.INDEX_SERVLET;
 		request.getSession(true).setAttribute(ParameterNames.USER, null);
 		response.sendRedirect(target);
+		CookieManager.removeCookie(response, ParameterNames.LOGIN, "/");
 	}
 
 	

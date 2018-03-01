@@ -42,7 +42,7 @@ public class SignInServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userName = request.getParameter(ParameterNames.USER);
 		String password = request.getParameter(ParameterNames.PASSWORD);
-		String remember = request.getParameter(ParameterNames.CHECKED);			
+		String remember = request.getParameter(ParameterNames.CHECKED);	
 		String target = null;
 		boolean redirect = false;
 		try {
@@ -58,8 +58,13 @@ public class SignInServlet extends HttpServlet {
 					SessionManager.set(request, SessionAttributeNames.USER, user);
 					target = ViewsPaths.INDEX_SERVLET;
 					redirect = true;
-					if (remember=="ON") {
-						CookieManager.addCookie(response, ParameterNames.LOGIN, user.getUsuario(), "/", "<1";
+					try {
+						if (remember.equals("ON")) {
+	
+							CookieManager.addCookie(response, ParameterNames.LOGIN, user.getUsuario(), "/",7*60*60);
+						}
+					}catch(NullPointerException unchecked) {
+						logger.error("Unchecked");
 					}
 				}
 			}

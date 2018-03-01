@@ -8,6 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>GZone.com - Your gaming zone</title>
+	<link rel="icon" href="/GZoneWeb/images/logo.png">
 	<link rel="stylesheet" href="/GZoneWeb/css/banner.css">
 	<link rel="stylesheet" href="/GZoneWeb/css/index.css">
 	<link rel="stylesheet" href="/GZoneWeb/css/footer.css">
@@ -117,7 +118,7 @@
 						</li>
 						<li>
 							<a href="#" >
-								<button class="cart" id="carrito">
+								<button class="cart cd-cart" id="carrito">
 									<i class="cart__icon fa fa-shopping-cart"></i>
 									<span class="text-hidden">Shopping cart</span>
 									<span class="cart__count">0</span>
@@ -209,7 +210,7 @@
 		</div>
 		<!--Modal carrito -->
 		<div id="carrito" >
-			<div class="shopping-cart">
+			<div class="shopping-cart cd-cart-container empty">
 				<div class="shopping-cart-header">
 					<i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>
 					<div class="shopping-cart-total">

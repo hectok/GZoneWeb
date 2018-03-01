@@ -42,6 +42,11 @@
         </div>
     </footer>
     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>
+	if( !window.jQuery ) document.write('<script src="js/jquery-3.0.0.min.js"><\/script>');
+</script>
+	<script src="/GZoneWeb/js/index/cart.js"></script> <!-- Resource jQuery -->
     <script src="/GZoneWeb/js/banner/banner.js"></script>
 	<script src="/GZoneWeb/js/index/isotope.pkgd.min.js"></script>
 	<script src="/GZoneWeb/js/index/flickity.pkgd.min.js"></script>
