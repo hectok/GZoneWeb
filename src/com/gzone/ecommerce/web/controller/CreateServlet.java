@@ -61,12 +61,12 @@ public class CreateServlet extends HttpServlet {
 			Usuario user = userService.create(creation);
 			if (user==null) {
 				request.setAttribute(AttributeNames.ERROR, AttributeNames.DUPLICATED_USER);
-				target = ViewsPaths.INDEX;
+				target = ViewsPaths.INDEX_SERVLET;
 			} else {	
 				mailService.sendMail(Email.SUBJECT, Email.BODY, email);
 
 				SessionManager.set(request, SessionAttributeNames.USER, user);
-				target = ViewsPaths.INDEX;
+				target = ViewsPaths.INDEX_SERVLET;
 				redirect = true;			
 			}
 			if (redirect) {
@@ -78,14 +78,14 @@ public class CreateServlet extends HttpServlet {
 		} catch (DuplicateInstanceException e) {
 			logger.error(e);
 			request.setAttribute(AttributeNames.ERROR, AttributeNames.DUPLICATED_USER);
-			target = ViewsPaths.INDEX;
+			target = ViewsPaths.INDEX_SERVLET;
 			request.getRequestDispatcher(target).forward(request,response);
 		}
 		catch (DataException o)
 		{
 			logger.error(o);
 			request.setAttribute(AttributeNames.ERROR, AttributeNames.DUPLICATED_USER);
-			target = ViewsPaths.INDEX;
+			target = ViewsPaths.INDEX_SERVLET;
 			request.getRequestDispatcher(target).forward(request,response);
 
 		} catch (MailException e) {
