@@ -64,15 +64,17 @@ body {
 	color: #CECECE;
 }
 
-a {
+.informacion_articulo a {
+	width:100%;
+	padding-right:2px;
+	float:left;
 	text-decoration: none;
 	color: #f0f0f0;
 	outline: none;
 }
+.informacion_articulo em {
+	float:left;}
 
-a:hover {
-	
-}
 
 img, svg {
   max-width: 100%;

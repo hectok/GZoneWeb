@@ -51,9 +51,7 @@ public class IndexServlet extends HttpServlet{
 				//Todas
 				
 				List<Producto> oferta = productoService.findByCriteria(ofertas, 1, 12, idioma);	
-				List<Producto> explore = productoService.findAll(1, 39, idioma);	
-				System.out.println("Hola " + explore.get(1).getCategorias().get(0).getCategoria());
-
+				List<Producto> explore = productoService.findAll(1, 40, idioma);	
 				
 				if (oferta==null || explore==null) {
 					request.setAttribute(AttributeNames.ERROR, AttributeNames.NOT_FOUND);

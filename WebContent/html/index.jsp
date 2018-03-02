@@ -25,12 +25,12 @@
 	
 					<div class="barraBlanca">
 						<div class="informacion_articulo">
-							<b><a href="/GZoneWeb/ProductServlet?product=<%=oferta.getIdProducto()%>"><%=oferta.getNombre()%></a></b>
-							<em><%=oferta.getPrecio()%>€</em>
+							<b><a href="/GZoneWeb/ProductServlet?product=<%=oferta.getIdProducto()%>"><%=oferta.getNombre()%> </a></b>
+							<em> <%=oferta.getPrecio()%>€</em>
 						</div>
 	
 						<button class="anadir ">
-							<em>anadir</em>
+							<em>Añadir</em>
 							<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
 								<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
 							</svg>
@@ -82,7 +82,7 @@
 		if (explorar!=null || explorar.isEmpty()){
 			String big = null;
 			for (int i=0; i<explorar.size();i++) {
-				if ((i % 8== 0))
+				if ((i % 8 == 0))
 				{
 					big="grid__item--size-a";
 				}
@@ -105,7 +105,7 @@
 					</div> <!-- informacion_articulo -->
 
 					<button class=" anadir action action--button action--buy">
-						<em>anadir Cart</em>
+						<em>Añadir</em>
 						<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
 							<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
 						</svg>

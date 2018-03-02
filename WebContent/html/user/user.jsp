@@ -3,6 +3,8 @@
 
 <%
 	Usuario usuario = (Usuario) request.getAttribute(SessionAttributeNames.PROFILE);
+ 	List<Producto> biblioteca = (List<Producto>) request.getAttribute(SessionAttributeNames.LIBRARY);
+ 
 %>
 <div id="perfil">
     <div id="centrar">
@@ -26,54 +28,33 @@
         <div class="tab-content">
           <div class="tab-pane well fade active in " id="biblioteca">
             <legend>Tu panel de usuario</legend>
-            <p>Número de juegos : </p>
+            <p>Número de juegos : <%=biblioteca.size()%></p>
             <div class="juegos">
-              <div class="container">
-                <div class="card">
-                  <figure class="front">
-                    <img src="/GZoneWeb/images/thewitcher.jpg" alt="front">
-                    <div class="caption">
-                      <h2>The <span>Witcher</span></h2>
-                      <p>Ver detalles</p>
-                      <a href="#">View more</a>
-                    </div>
-                  </figure>
-
-                  <figure class="back">
-                     <img src="/GZoneWeb/images/thewitcher.jpg" alt="front">
-                      <div class="caption">
-                        <p><a href="#0">Borderlands 2</a></p>
-                      </div>
-                  </figure>
-                </div>
-              </div>  <div class="container">
-                  <div class="card">
-                    <figure class="front">
-                      <img src="/GZoneWeb/images/alien.jpg" alt="front">
-                      <div class="caption">
-                        <h2>The <span>Witcher</span></h2>
-                        <p>Ver detalles</p>
-                        <a href="#">View more</a>
-                      </div>
-                    </figure>
-
-                    <figure class="back">
-                       <img src="/GZoneWeb/images/alien.jpg" alt="front">
-                        <div class="caption">
-                          <dl>
-                            <dt>Phone</dt>
-                            <dd><a>Descargar</a></dd>
-                            <dt>Email</dt>
-                            <dd>johndoe@gmail.com</dd>
-                            <dt>Web</dt>
-                            <dd>www.johndoe.com</dd>
-                          </dl>
-                        </div>
-                    </figure>
-                  </div>
-                </div>
-            </div>
-
+             <%
+				if (biblioteca!=null & biblioteca.size()>0){
+					for (Producto ticket: biblioteca) {
+						%>
+				<div class="col-md-4">
+				    <figure class="juego navy col-md-4">
+				      <img src="/GZoneWeb/CMS/producto_<%=ticket.getIdProducto()%>/preview<%=ticket.getIdProducto()%>.jpg" alt="<%=ticket.getNombre()%>" />
+				      <figcaption>
+				        <a href="/GZoneWeb/IndexServlet">Descargar</a>
+				        <a href="/GZoneWeb/ProductServlet?product=<%=ticket.getIdProducto()%>" title=<%=ticket.getNombre()%>>Ver producto</a>
+				      </figcaption>
+				    </figure>
+				</div>
+				
+ 			<%
+				}
+					}
+					else
+					{
+			%>
+				<h3>Aún no tienes ningún juego en tu biblioteca!</h3>
+			<%
+				}
+			%>
+			</div> 
           </div>
           <!--Panel de ajustes del usuario -->
           <div class="tab-pane fade" id="ajustes">

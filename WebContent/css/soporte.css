@@ -1,5 +1,5 @@
 #soporte{
-	height:100%;
+margin-bottom: 30px ;
 }
 
 #ancho {
@@ -44,7 +44,7 @@
 
 #soporte .container-fluid .row .col-sm-4 a:hover {
   text-decoration: none;
-  color:rgb(51, 51, 51);
+  color:rgb(51, 51, 51) !important;
 }
 
 #pulsador img {
@@ -52,9 +52,3 @@
   padding-left: 200px;
 }
 
- @media screen and (max-width: 768px) {
-   .col-sm-4 {
-     text-align: center;
-     margin: 25px 0;
-   }
- }

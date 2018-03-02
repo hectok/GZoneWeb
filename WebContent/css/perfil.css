@@ -13,7 +13,7 @@
   background-color: rgba(41, 41, 41, 0.91);
   box-shadow: 0 0 40px rgba(0,0,0,.4);
   border-style: none !important;
-  padding:10px 10px 0px 10px;
+  padding:10px 10px 0px 10px !important;
 }
 
 .barra > li {
@@ -52,26 +52,19 @@
 #biblioteca   {
   margin: auto;
   width: 97%;
-  background: #757F9A;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #D7DDE8, #757F9A);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #D7DDE8, #757F9A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background-image: linear-gradient(to bottom, #898989, #696675, #4c4560, #30264c, #150637);
   border-style: none;
 }
 
-#cartera   {
-  margin: auto;
-  width: 97%;
-  background: #757F9A;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #D7DDE8, #757F9A);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #D7DDE8, #757F9A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  border-style: none;
+
+#ajustes{
+  margin-top: -30px !important;
 }
 
 #ajustes > .container >.well {
   width: 97%;
-  background: #757F9A;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #D7DDE8, #757F9A);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #D7DDE8, #757F9A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background-image: linear-gradient(to bottom, #898989, #696675, #4c4560, #30264c, #150637);
+  color: white !important;
   border-style: none;
   
 }
@@ -86,236 +79,75 @@
   background-image: -o-linear-gradient(top, #985FB2, #713B8D);
   background-image: linear-gradient(to bottom, #985FB2, #713B8D);
 }
-#cartera .well{
-  width: 90%;
-}
-#cartera .table-responsive{
-  width: 90%;
-}
+
 #biblioteca .juegos{
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  min-height: 500px;
 }
 #biblioteca .juegos .container{
   padding: 0;
   margin: 10px 10px 20px 10px;
 }
 
-#biblioteca .container, figure{
-  width:300px;
-  height: 200px;
-}
-
-.card{
-  position: relative;
-  transition: 0.6s;
-  transform-style: preserve-3d;
-}
-
-figure{
-  background: #2e5d5a;
+#biblioteca figure.juego {
   color: #fff;
-  backface-visibility: hidden;
+  float: left;
   overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  text-align: center;
-  cursor: pointer;
-  transition: 0.6s;
-  transform-style: preserve-3d;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+  background-color: #1a1a1a;
+  color: #ffffff;
+  text-align: left;
+  margin: 10px;
+  width: 100%;
+  border-radius: 0px;
 }
-
-figure.front{
-  transform: rotateY(0deg);
-  z-index: 2;
+#biblioteca figure.juego * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
 }
-
-figure.back,
-.card.flipped{
-  transform: rotateY(180deg);
-}
-
-figure img{
-  position: relative;
-  display: block;
-  min-height: 100%;
+#biblioteca figure.juego img {
+  max-width: 100%;
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+  vertical-align: top;
   opacity: 0.7;
-  width: 100%;
 }
-
-figure .caption {
+#biblioteca figure.juego figcaption {
   position: absolute;
+  padding: 40px 25px;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+}
+
+#biblioteca figure.juego a {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid #ffffff;
+  text-decoration: none;
+  color: #ffffff;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  padding: 2em;
-  backface-visibility: hidden;
-}
-
-.front .caption{
-  font-size: 1.25em;
-}
-
-.front .caption:before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(rgba(72,76,97,0) 0%, rgba(72,76,97,0.8) 75%);
-  content: '';
+  font-size: 0.8em;
+  -webkit-transform: translateY(50%);
+  transform: translateY(50%);
   opacity: 0;
-  transform: translate3d(0,50%,0);
-  transition: opacity 0.35s, transform 0.35s;
+}
+#biblioteca figure.juego a:hover {
+  background-color: rgba(0, 0, 0, 1);
 }
 
-.front:hover .caption:before{
-  opacity: 1;
-  transform: translate3d(0,0,0);
-}
-
-.front h2{
-  word-spacing: -0.15em;
-  font-weight: 300;
-  font-size: 1.6em;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  color: #272833;
-  transition: transform 0.35s, color 0.35s;
-  transform: translate3d(0,-50%,0);
-}
-
-.front h2 span {
-  font-weight: bold;
-}
-
-.front h2:after{
-  position: absolute;
-  bottom: -10px;
-  left: 70px;
-  right: 70px;
-  height: 2px;
-  background: #fff;
-  content: '';
-  transform: translate3d(-130%,0,0);
-}
-
-.front:hover h2 {
-  color: #fff;
-  -webkit-transform: translate3d(0,-50%,0) translate3d(0,-40px,0);
-  transform: translate3d(0,-50%,0) translate3d(0,-40px,0);
-}
-
-.front:hover h2:after {
-  transform: translate3d(0,0,0);
-}
-
-.front p {
-  letter-spacing: 1px;
-  font-size: 68.5%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding: 2em;
-  width: 100%;
-  opacity: 0;
-  transform: translate3d(0,10px,0);
-  transition: opacity 0.35s, transform 0.35s;
-}
-
-.back .caption:before,
-.back .caption:after{
-  position: absolute;
-  top: 30px;
-  right: 30px;
-  bottom: 30px;
-  left: 30px;
-  content: '';
-  opacity: 0;
-  transition: opacity 0.45s, transform 0.45s;
-  transition-delay: 1s;
-}
-
-.back .caption:before{
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid #fff;
-  transform: scale(0,1);
-}
-
-.back .caption:after{
-  border-right: 1px solid #fff;
-  border-left: 1px solid #fff;
-  transform: scale(1,0);
-}
-
-.card.flipped .back .caption:before,
-.card.flipped .back .caption:after {
-  opacity: .9;
+#biblioteca figure.juego:hover img,
+#biblioteca figure.juego.hover img {
+  opacity: 0.1;
+  -webkit-transform: scale(1);
   transform: scale(1);
 }
-
-.back dl{
-  font-family:'Lato', Arial, sans-serif;
-  font-weight:300;
-  bottom:40px;
-  left:40px;
-  position: absolute;
-  opacity: 0;
-  transition: opacity .35s, transform .35s;
-  transition-delay: .85s;
-  transform: translate3d(-40px,0,0);
-}
-
-.card.flipped .back dl {
+#biblioteca figure.juego:hover a,
+#biblioteca figure.juego.hover a {
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
   opacity: 1;
-  transform: translate3d(0,0,0);
-}
-
-dl dt{
-  float: left;
-  width: 60px;
-  overflow: hidden;
-  clear: left;
-  text-align: right;
-  font-weight:700;
-}
-
-dl dd{
-  margin-left: 80px;
-  text-align:left;
-}
-
-dl dd:before,
-dl dd:after{
-  display: table;
-  content: " ";
-}
-
-dl dd:after{
-  clear: both;
-}
-
-.front:hover p {
-  opacity: 1;
-  transform: translate3d(0,0,0);
-}
-
-figure a{
-  z-index: 1000;
-  text-indent: 200%;
-  white-space: nowrap;
-  font-size: 0;
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
 }

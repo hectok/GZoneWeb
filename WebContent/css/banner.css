@@ -2,7 +2,8 @@
 body {
   background-image: url("../images/fondo.jpg");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: auto;
+  background-color:#2c0852 !important;
   height: 100%;
   color: black;
   font-family: 'Barlow', sans-serif;

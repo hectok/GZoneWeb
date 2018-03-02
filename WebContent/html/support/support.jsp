@@ -69,5 +69,5 @@
 	      </div>
 	    </div>
   </div>
-	</div>
+</div>
 <%@include file="/html/common/footer.jsp"%>

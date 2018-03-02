@@ -6,6 +6,8 @@ public interface SessionAttributeNames {
 
 	public static final String SHOPPING_CART = "shopping-cart";
 	public static final String PRODUCT = "product";
+	public static final String LIBRARY = "library";
+
 		
 	public static final String SALE = "sales";
 	public static final String EXPLORE = "explore";
@@ -17,4 +19,6 @@ public interface SessionAttributeNames {
 	public static final String LANGUAGE = "idioma";
 
 	public static final String ES = "ES";
+	
+	
 }

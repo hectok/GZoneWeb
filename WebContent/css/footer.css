@@ -38,7 +38,9 @@ html, body
     margin-top: 10px;
     background-color: rgba(248, 248, 248, 0) !important;
 }
-
+#piePagina a:focus{
+    background-color: rgba(248, 248, 248, 0) !important;
+}
 #piePagina .second-bar .logo a{
     color:white;
     font-size: 28px;
