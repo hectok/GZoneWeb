@@ -217,6 +217,7 @@ body {
 #carrito {
   margin: auto;
   width: 47%;
+  
 }
 
 #carrito nav {
@@ -265,7 +266,6 @@ display: none;
   top: 60px;
   right:360px;
   float: left;
-  background: white;
   width: 320px;
   position: relative;
   border-radius: 3px;
@@ -282,7 +282,9 @@ display: none;
 #carrito .shopping-cart-total {
   float: right;
 }
-
+.shopping-cart{
+	background-color: #f4f1f1 !important;
+}
 #carrito .shopping-cart-items {
     padding-top: 20px;
 }

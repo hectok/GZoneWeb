@@ -264,7 +264,7 @@
 									<span class="item-price"><%= lineas.getProduct().getNombre() %></span>
 									<span class="item-price"><%= lineas.getProduct().getPrecio() %>€</span>
 									<form name="informacionProducto" method="POST" action="/GZoneWeb/ShoppingCartServlet" name="shopping-cart">
-										<span><button type="submit" class="fa fa-close " name="shopping-cart" value="eliminar" style="color:red"></button></span>
+										<span><button type="submit" class="fa fa-close " name="shopping-cart" value="eliminar" style="color:red;background-color:transparent"></button></span>
 										<input type="hidden" name="idProducto" value="<%= lineas.getProduct().getIdProducto() %>"  />
 									</form>
 								</li>
@@ -272,7 +272,7 @@
 					<% 
 							}
 					%>
-								<li><a href="/GZoneWeb/CheckoutServlet"><button type="button" id="cerrado" class="btn btn-lg btn-primary">Checkout</button></a></li>		
+								<li><a href="/GZoneWeb/html/shopping/shopping.jsp"><button type="button" id="cerrado" class="btn btn-lg btn-primary">Checkout</button></a></li>		
 					<%			
 						}else {
 					%>

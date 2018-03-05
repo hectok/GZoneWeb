@@ -4,7 +4,6 @@
 package com.gzone.ecommerce.web.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,13 +12,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.gzone.ecommerce.model.Categoria;
+import com.gzone.ecommerce.model.Idioma;
+import com.gzone.ecommerce.model.NJugadores;
 import com.gzone.ecommerce.model.Producto;
+import com.gzone.ecommerce.service.CategoriaService;
+import com.gzone.ecommerce.service.IdiomaService;
+import com.gzone.ecommerce.service.NJugadoresService;
 import com.gzone.ecommerce.service.ProductoCriteria;
 import com.gzone.ecommerce.service.ProductoService;
+import com.gzone.ecommerce.service.impl.CategoriaServiceImpl;
+import com.gzone.ecommerce.service.impl.IdiomaServiceImpl;
+import com.gzone.ecommerce.service.impl.NJugadoresServiceImpl;
 import com.gzone.ecommerce.service.impl.ProductoServiceImpl;
 import com.gzone.ecommerce.web.util.ArrayUtils;
-import com.mysql.fabric.xmlrpc.base.Param;
 
 /**
  * @author hector.ledo.doval
@@ -28,12 +37,19 @@ import com.mysql.fabric.xmlrpc.base.Param;
 @WebServlet("/SearchServlet")
 public class SearchServlet extends HttpServlet{
 	
-	private ProductoService productoService = null;
+	private static Logger logger = LogManager.getLogger(SignInServlet.class.getName());
 	
-	 public SearchServlet () {
+	private ProductoService productoService = null;
+	private CategoriaService categoriaService = null;
+	private NJugadoresService njugadoresService = null;
+//	private IdiomaService idiomaService = null;
+	
+	public SearchServlet () {
 	        super();
 	        productoService = new ProductoServiceImpl();
-
+	        categoriaService = new CategoriaServiceImpl();
+	        njugadoresService = new NJugadoresServiceImpl();
+//	        idiomaService = new IdiomaServiceImpl();
 	    }
 	 
 	 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,7 +66,7 @@ public class SearchServlet extends HttpServlet{
 			
 			ProductoCriteria criteria = null;
 			ArrayUtils arrayUtil = null;
-			
+						
 			
 			if (type.equals(ParameterNames.SIMPLE)) {
 				criteria  = new ProductoCriteria() ;
@@ -83,17 +99,26 @@ public class SearchServlet extends HttpServlet{
 				}
 			}		
 			try {
-				List<Producto> productos = productoService.findByCriteria(criteria, 1, 10, idioma);	
+				List<Categoria> todasCategorias = categoriaService.findAll(1, 30, SessionAttributeNames.ES);
+				List<NJugadores> todosJugadores = njugadoresService.findAll(1, 10);
+//				List<Idioma> todosIdiomas = idiomaService.findAll(1, 10);
+				List<Producto> productos = productoService.findByCriteria(criteria, 1, 10, idioma);
+				
+				request.setAttribute(SessionAttributeNames.CATEGORY, todasCategorias);
+				request.setAttribute(SessionAttributeNames.PLAYERS, todosJugadores);
+//				request.setAttribute(SessionAttributeNames.LANGUAGE, todosIdiomas);
+				
 				if (productos==null ) {
 					request.setAttribute(AttributeNames.ERROR, AttributeNames.NOT_FOUND);
 					target = ViewsPaths.SEARCH;
 				} else {	
 					target = ViewsPaths.SEARCH;
 					request.setAttribute(SessionAttributeNames.PRODUCT, productos);
+					
 				}
 					request.getRequestDispatcher(target).forward(request, response);
 			} catch (Exception e) {
-				e.printStackTrace();
+				logger.error(AttributeNames.ERROR);
 			}
 			
 		}

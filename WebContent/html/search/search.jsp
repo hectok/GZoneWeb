@@ -7,6 +7,10 @@
 
 <%
 	List<Producto> productos = (List <Producto>) request.getAttribute(SessionAttributeNames.PRODUCT);
+	List<Categoria> categorias = (List <Categoria>) request.getAttribute(SessionAttributeNames.CATEGORY);
+/* 	List<Idioma> idiomas = (List <Idioma>) request.getAttribute(SessionAttributeNames.LANGUAGE);
+ */	List<NJugadores> njugadores = (List <NJugadores>) request.getAttribute(SessionAttributeNames.PLAYERS);
+
 %>
 
 <div id="todo">
@@ -20,21 +24,15 @@
 	        <div class="panel-body">
 	          <input type="checkbox" class="read-more-state" id="categ" />
 	          <div class="read-more-wrap form-group categoria ">
+	          <%
+				for (Categoria iterador: categorias) {
+				%>
 	              <div class="checkbox ">
-	                <label><input type="checkbox" name="categoria" value="1">Accion</label>
+	                <label><input type="checkbox" name="categoria" value="<%= iterador.getIdCategoria()%>"><%= iterador.getCategoria() %></label>
 	              </div>
-	              <div class="checkbox">
-	                <label><input type="checkbox" name="categoria" value="2">Option 2</label>
-	              </div>
-	              <div class="checkbox read-more-target">
-	                <label><input type="checkbox" name="categoria" value="3" >Option 3</label>
-	              </div>
-	              <div class="checkbox read-more-target">
-	                <label><input type="checkbox" name="categoria" value="4" >Option 4</label>
-	              </div>
-	              <div class="checkbox read-more-target">
-	                <label><input type="checkbox" name="categoria" value="5" >Option 5</label>
-	              </div>
+				<%
+				}
+				%>
 	           </div>
 	           <label for="categ" class="read-more-trigger"></label>
 	        </div>
@@ -44,28 +42,16 @@
 	        <div class="panel-heading">NJugadores</div>
 	        <div class="panel-body">
 	          <input type="checkbox" class="read-more-state" id="post-3" />
-	          <div class="read-more-wrap form-group categoria" >
+	          <div class="read-more-wrap form-group jugadores" >
+	              <%
+				for (NJugadores iterador: njugadores) {
+				%>
 	              <div class="checkbox ">
-	                <label><input type="checkbox" name="jugadores" value="1">Un jugador</label>
+	                <label><input type="checkbox" name="jugadores" value="<%= iterador.getIdNJugadores()%>"><%= iterador.getnJugadores() %></label>
 	              </div>
-	              <div class="checkbox">
-	                <label><input type="checkbox" name="jugadores" value="2">Multijugador</label>
-	              </div>
-	              <div class="checkbox ">
-	                <label><input type="checkbox" name="jugadores" value="3">Multijugador en línea</label>
-	              </div>
-	              <div class="checkbox read-more-target ">
-	                <label><input type="checkbox" name="jugadores" value="4">Multijugador local</label>
-	              </div>
-	              <div class="checkbox read-more-target">
-	                <label><input type="checkbox" name="jugadores" value="5">Pantalla dividida</label>
-	              </div>
-	              <div class="checkbox read-more-target">
-	                <label><input type="checkbox" name="jugadores" value="6" >Multijugador masivo</label>
-	              </div>
-	              <div class="checkbox read-more-target">
-	                <label><input type="checkbox" name="jugadores" value="7" >Cooperativo en linea</label>
-	              </div>
+				<%
+				}
+				%>
 	           </div>
 	           <label for="post-3" class="read-more-trigger"></label>
 	        </div>
@@ -75,7 +61,7 @@
 	        <div class="panel-heading">Idioma</div>
 	        <div class="panel-body">
 	          <input type="checkbox" class="read-more-state" id="post-4" />
-	          <div class="read-more-wrap form-group categoria ">
+	          <div class="read-more-wrap form-group idioma ">
 	              <div class="checkbox ">
 	                <label><input type="checkbox" name="idioma" value="'ES'">Español</label>
 	              </div>
@@ -184,6 +170,21 @@
 		}
 	%>
   	 </section>
+ 	<nav aria-label="..." id="pagination">
+	  <ul class="pagination">
+	    <li class="page-item disabled">
+	      <a class="page-link" href="#" tabindex="-1">Previous</a>
+	    </li>
+	    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+	    <li class="page-item">
+	      <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+	    </li>
+	    <li class="page-item"><a class="page-link" href="#">3</a></li>
+	    <li class="page-item">
+	      <a class="page-link" href="#">Next</a>
+	    </li>
+	  </ul>
+	</nav>
   </div>
  </div>
  <%@include file="/html/common/footer.jsp"%>

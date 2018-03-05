@@ -83,7 +83,7 @@ background-image: linear-gradient(to bottom, #898989, #696675, #4c4560, #30264c,
 #biblioteca .juegos{
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: flex-wrap;
   min-height: 500px;
 }
 #biblioteca .juegos .container{
@@ -117,7 +117,7 @@ background-image: linear-gradient(to bottom, #898989, #696675, #4c4560, #30264c,
 }
 #biblioteca figure.juego figcaption {
   position: absolute;
-  padding: 40px 25px;
+  padding: 10px 25px;
   top: 0;
   left: 0;
 }
