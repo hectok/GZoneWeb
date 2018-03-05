@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@page session="false"%>
+<%@page import="com.gzone.ecommerce.model.*, com.gzone.ecommerce.web.model.*, com.gzone.ecommerce.web.util.*, com.gzone.ecommerce.web.controller.*,java.util.List " %>
+
  <html>
  <head>
  	<title>Resumen de tu pedido</title>
@@ -9,6 +12,10 @@
 	<link rel="stylesheet" href="/GZoneWeb/css/checkout.css">
 </head>
 <body>
+	<%	
+		Usuario user = (Usuario) SessionManager.get(request, SessionAttributeNames.USER); 
+		ShoppingCart carrito = (ShoppingCart) SessionManager.get(request, SessionAttributeNames.SHOPPING_CART);
+	%>
   <div class="container-fluid background">
       <div class="row padding-top-20">
           <div class="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-8 offset-md-1 offset-lg-1 offset-xl-2 padding-horizontal-40">

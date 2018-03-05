@@ -60,7 +60,6 @@ public class SignInServlet extends HttpServlet {
 					redirect = true;
 					try {
 						if (remember.equals("ON")) {
-	
 							CookieManager.addCookie(response, ParameterNames.LOGIN, user.getUsuario(), "/",7*60*60);
 						}
 					}catch(NullPointerException unchecked) {

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.gzone.ecommerce.model.Producto;
 import com.gzone.ecommerce.web.model.ShoppingCart;
 
 
@@ -25,71 +26,61 @@ public class ShoppingCartServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*String productId = request.getParameter(.productId..)
-		Producto p = findBuyId		
-		
-		ShoppingCartLine l = new ShoppingCartLine();
-		l.setProducto(p);
-		ShoppingCart c = (ShoppingCart) SessionManager.get(request, SessionAttributeNames.SHOPPING_CART);
-		if (c==null) {
-			c = new ShoppingCart();
-			SessionManager.set(request, SessionAttributeNames.SHOPPING_CART, c);			
-		}
-		
-		c.add(l);
-		//forward("")
-		 * 
-		 */
+
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String strAction = request.getParameter("action");
+		String strAction = request.getParameter(SessionAttributeNames.SHOPPING_CART);
 
 		if (strAction != null && !strAction.equals("")) {
-			if (strAction.equals("add")) {
+			if (strAction.equals(SessionAttributeNames.ANADIR)) {
 				addToCart(request);
-			} else if (strAction.equals("Delete")) {
+			} else if (strAction.equals(SessionAttributeNames.ELIMINAR)) {
 				deleteCart(request);
 			}
-		}
-		response.sendRedirect("../ShoppingCart.jsp");
+		}	
+		response.sendRedirect(ViewsPaths.INDEX_SERVLET);
 	}
 
 	protected void deleteCart(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		String strItemIndex = request.getParameter("itemIndex");
+		Long idProducto = Long.valueOf(request.getParameter(SessionAttributeNames.IDPRODUCT));
 		ShoppingCart cartBean = null;
 
-		Object objCartBean = session.getAttribute("cart");
+		Object objCartBean = session.getAttribute(SessionAttributeNames.SHOPPING_CART);
 		if (objCartBean != null) {
 			cartBean = (ShoppingCart) objCartBean;
 		} else {
 			cartBean = new ShoppingCart();
 		}
-		cartBean.deleteProduct(strItemIndex);
+		cartBean.deleteProduct(idProducto);
 	}
 
 
 	protected void addToCart(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		String strModelNo = request.getParameter("modelNo");
-		String strDescription = request.getParameter("description");
-		String strPrice = request.getParameter("price");
-		String strQuantity = request.getParameter("quantity");
+		Long idProducto = Long.valueOf(request.getParameter(SessionAttributeNames.IDPRODUCT));
+		Double precioProducto = Double.valueOf(request.getParameter(SessionAttributeNames.PRECIO));
+		String nombreProducto = request.getParameter(SessionAttributeNames.NOMBREPRODUCT);
 
+		
+		Producto anadir = new Producto();
+		anadir.setIdProducto(idProducto);
+		anadir.setPrecio(precioProducto);
+		anadir.setNombre(nombreProducto);
+		
 		ShoppingCart cartBean = null;
 
-		Object objCartBean = session.getAttribute("cart");
+		Object objCartBean = session.getAttribute(SessionAttributeNames.SHOPPING_CART);
 
 		if (objCartBean != null) {
 			cartBean = (ShoppingCart) objCartBean;
 		} else {
 			cartBean = new ShoppingCart();
-			session.setAttribute("cart", cartBean);
+			session.setAttribute(SessionAttributeNames.SHOPPING_CART, cartBean);
 		}
-
-		cartBean.addCartItem(strModelNo, strDescription, strPrice, strQuantity);
+		cartBean.addCartItem(anadir);
 	}
 
 }

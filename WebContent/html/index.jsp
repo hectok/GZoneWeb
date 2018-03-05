@@ -22,20 +22,23 @@
 					<ul class="bordes">
 						<li><img src="/GZoneWeb/CMS/producto_<%=oferta.getIdProducto()%>/preview<%=oferta.getIdProducto()%>.jpg" alt="<%=oferta.getNombre()%>"></li>
 					</ul>
-	
-					<div class="barraBlanca">
-						<div class="informacion_articulo">
-							<b><a href="/GZoneWeb/ProductServlet?product=<%=oferta.getIdProducto()%>"><%=oferta.getNombre()%> </a></b>
-							<em> <%=oferta.getPrecio()%>€</em>
+					<form name="informacionProducto" method="POST" action="/GZoneWeb/ShoppingCartServlet" name="shopping-cart">
+						<div class="barraBlanca">
+							<div class="informacion_articulo">
+								<b><a href="/GZoneWeb/ProductServlet?product=<%=oferta.getIdProducto()%>"><%=oferta.getNombre()%> </a></b>
+								<input type="hidden" name="nombreProducto" value="<%=oferta.getNombre()%>" >										
+								<input type="hidden" name="idProducto" value=<%=oferta.getIdProducto()%>>
+								<em> <%=oferta.getPrecio()%>€</em>
+								<input type="hidden" name="precioProducto" value=<%=oferta.getPrecio()%>>
+							</div>
+							<button type="submit" class="anadir" name="shopping-cart" value="anadir">
+								<em>Añadir</em>
+								<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
+									<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
+								</svg>
+							</button>
 						</div>
-	
-						<button class="anadir ">
-							<em>Añadir</em>
-							<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
-								<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
-							</svg>
-						</button>
-					</div>
+					</form>
 				</div>
 			</li>
 			<%
@@ -97,20 +100,24 @@
 						<li class="selected"><img src="/GZoneWeb/CMS/producto_<%=explorar.get(i).getIdProducto()%>/preview<%=explorar.get(i).getIdProducto()%>.jpg" alt="<%=explorar.get(i).getNombre()%>"></li>
 					</ul>
 				</a>
-
-				<div class="barraBlanca">
-					<div class="informacion_articulo">
-						<b><a href="/GZoneWeb/ProductServlet?product=<%=explorar.get(i).getIdProducto()%>"><%=explorar.get(i).getNombre()%></a></b>
-						<em><%=explorar.get(i).getPrecio()%>€</em>
-					</div> <!-- informacion_articulo -->
-
-					<button class=" anadir action action--button action--buy">
-						<em>Añadir</em>
-						<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
-							<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
-						</svg>
-					</button>
-				</div> <!-- .barraBlanca -->
+				<form name="informacionProducto" method="POST" action="/GZoneWeb/ShoppingCartServlet" name="shopping-cart">
+					<div class="barraBlanca">
+						<div class="informacion_articulo">
+							<b><a href="/GZoneWeb/ProductServlet?product=<%=explorar.get(i).getIdProducto()%>"><%=explorar.get(i).getNombre()%></a></b>
+							<input type="hidden" name="nombreProducto" value="<%=explorar.get(i).getNombre()%>">										
+							<input type="hidden" name="idProducto" value=<%=explorar.get(i).getIdProducto()%>>
+							<em><%=explorar.get(i).getPrecio()%>€</em>
+							<input type="hidden" name="precioProducto" value=<%=explorar.get(i).getPrecio()%>>	
+						</div> <!-- informacion_articulo -->
+	
+						<button class="anadir action action--button action--buy" name="shopping-cart" value="anadir">
+							<em>Añadir</em>
+							<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
+								<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
+							</svg>
+						</button>
+					</div> <!-- .barraBlanca -->
+				</form>
 			</div> <!-- .producto -->
 		</div>
 		<%

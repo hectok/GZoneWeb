@@ -26,9 +26,9 @@ public class ShoppingCart {
 	public List<ShoppingCartLine> getLines() {
 		return lines;
 	}
-
-	public void setLineas(List<ShoppingCartLine> lineas) {
-		this.lines = lineas;
+	
+	public void setLines(List<ShoppingCartLine> lines) {
+		this.lines = lines;
 	}
 
 	public double getTicketTotal() {
@@ -39,8 +39,8 @@ public class ShoppingCart {
 		this.ticketTotal = ticketTotal;
 	}
 
-	public void setLines(List<ShoppingCartLine> lines) {
-		this.lines = lines;
+	public void setLineas(List<ShoppingCartLine> lineas) {
+		this.lines = lineas;
 	}
 	
 	//Metodo para retornar el numero de lineas que tiene el carrito
@@ -50,29 +50,29 @@ public class ShoppingCart {
 	
 	//Metodo para eliminar un producto del carrito
 	public void deleteProduct(Long idProducto) {
-		  try {
-		   lines.remove(idProducto - 1);
-		   calculateOrderTotal();
-		  } catch(NumberFormatException e) {
-		  logger.error("Error al eliminar del carrito: "+ e.getMessage());	   
-		  }
+		try {
+			for (int i=0;i<lines.size();i++) {
+				if (lines.get(i).getProduct().getIdProducto()==idProducto) {
+					lines.remove(i);
+				}
+			}
+			calculateOrderTotal();	   
+			   
+		} catch(NumberFormatException e) {
+			  
+			logger.error("Error al eliminar del carrito: "+ e.getMessage());	   
+		}
 	}
 	
+	//Metodo para añadir una linea al carrito
 	public void addCartItem(Producto p) {
-		double precioTotal = 0.0;
-		double precioProducto = 0.0;
-		int cantidad = 1;
+		
 		ShoppingCartLine cartItem = new ShoppingCartLine();
 		try {
-			precioProducto = p.getPrecio()*cantidad;
-			if (cantidad ==1) {
-				precioTotal = precioProducto * cantidad;
-				cartItem.setProduct(p);
-				cartItem.setCantidad(cantidad);
-				cartItem.setPrecioTotal(precioTotal);
-				lines.add(cartItem);
-				calculateOrderTotal();
-			}
+			cartItem.setProduct(p);
+			cartItem.setPrecioTotal(p.getPrecio());
+			lines.add(cartItem);
+			calculateOrderTotal();
 
 		} catch (NumberFormatException e) {
 			logger.error("Error al añadir al carrito: "+ e.getMessage());	
@@ -92,13 +92,13 @@ public class ShoppingCart {
 	}
 	
 	protected void calculateOrderTotal() {
-		  double dblTotal = 0;
-		  for(int counter=0;counter<lines.size();counter++) {
-			  ShoppingCartLine cartItem = (ShoppingCartLine) lines.get(counter);
-		   dblTotal+=cartItem.getPrecioTotal();
+		  double totalCarrito = 0;
+		  for(int contador=0;contador<lines.size(); contador++) {
+			  ShoppingCartLine cartItem = (ShoppingCartLine) lines.get(contador);
+			  totalCarrito+=cartItem.getPrecioTotal();
 		    
 		  }
-		  setTicketTotal(dblTotal);
-		 }
+		  setTicketTotal(totalCarrito);
+	 }
 }
 

@@ -419,3 +419,11 @@ display: none;
 #busquedaBanner input::-webkit-input-placeholder {
 	color: transparent;
 }
+.caritacentrada {
+	margin: 0;
+	text-align: center !important;
+}
+ #cerrado{
+ 	float: left;
+ 	margin-top: 40px;
+ }

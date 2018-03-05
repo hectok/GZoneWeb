@@ -1,4 +1,4 @@
-<%@include file="/html/common/header.jsp"%>
+ <%@include file="/html/common/header.jsp"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
 	String product = request.getParameter(SessionAttributeNames.PRODUCT);
@@ -75,14 +75,19 @@
 	
 	        <div class="derecha">
 	          <div class="comprar">
-	            <img src="/GZoneWeb/CMS/producto_<%=producto.getIdProducto()%>/preview<%=producto.getIdProducto()%>.jpg" alt="<%=producto.getNombre()%>">
-	            <div class="des_breve">
-	              <p><%=producto.getDetalles_corto()%></p>
-	            </div>
-	            <div class="elegir">
-	              <p><%=producto.getPrecio()%>€</p>
-	              <a href="#" class="btn registro" data-toggle="modal" data-target="#registro"><i class="fa fa-shopping-cart  "></i> Comprar</a>
-	            </div>
+		          <form name="informacionProducto" method="POST" action="/GZoneWeb/ShoppingCartServlet" name="shopping-cart">
+		          		<input type="hidden" name="nombreProducto" value="<%=producto.getNombre()%>" >										
+						<input type="hidden" name="idProducto" value=<%=producto.getIdProducto()%>>		
+			            <img src="/GZoneWeb/CMS/producto_<%=producto.getIdProducto()%>/preview<%=producto.getIdProducto()%>.jpg" alt="<%=producto.getNombre()%>">
+			            <div class="des_breve">
+			              <p><%=producto.getDetalles_corto()%></p>
+			            </div>
+			            <div class="elegir">
+			              <p><%=producto.getPrecio()%>€</p>
+			              <input type="hidden" name="precioProducto" value=<%=producto.getPrecio()%>> 
+			              <button class="btn anadir" name="shopping-cart" value="anadir"><i class="fa fa-shopping-cart  "></i> Comprar</button>
+			            </div>
+			      </form>
 	          </div>
 	
 	          <div class="detalles">

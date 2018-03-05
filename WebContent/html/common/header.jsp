@@ -33,7 +33,10 @@
 	
 </head>
 <body>
-	<%	Usuario user = (Usuario) SessionManager.get(request, SessionAttributeNames.USER); %>
+	<%	
+		Usuario user = (Usuario) SessionManager.get(request, SessionAttributeNames.USER); 
+		ShoppingCart carrito = (ShoppingCart) SessionManager.get(request, SessionAttributeNames.SHOPPING_CART);
+	%>
 	<div class="maximo">
 		<nav id="barra_principal" class="navbar navbar-default navbar-fixed-top">
 			<div class="container-fluid">
@@ -121,7 +124,17 @@
 								<button class="cart cd-cart" id="carrito">
 									<i class="cart__icon fa fa-shopping-cart"></i>
 									<span class="text-hidden">Shopping cart</span>
-									<span class="cart__count">0</span>
+									<%
+										if (carrito==null || carrito.numeroLineas()==0){
+									%>
+										<span class="cart__count">0</span>
+									<%
+										} else {
+									%>
+										<span class="cart__count"><%=carrito.numeroLineas()%></span>
+									<%
+										}
+									%>
 								</button>
 							</a>
 						</li>
@@ -212,32 +225,65 @@
 		<div id="carrito" >
 			<div class="shopping-cart cd-cart-container empty">
 				<div class="shopping-cart-header">
-					<i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>
+					<i class="fa fa-shopping-cart cart-icon"></i><%
+										if (carrito==null || carrito.numeroLineas()==0){
+									%>
+										<span class="badge">0</span>
+									<%
+										} else {
+									%>
+										<span class="badge"><%=carrito.numeroLineas()%></span>
+									<%
+										}
+									%>
 					<div class="shopping-cart-total">
-						<span class="lighter-text">Total:</span> <span
-							class="main-color-text">$2,229.97</span>
+						<%
+							if (carrito==null || carrito.numeroLineas()==0){
+						%>
+							<span class="lighter-text">Total:</span> <span class="main-color-text">0€</span>
+						<%
+							} else {
+						%>
+							<span class="lighter-text">Total:</span> <span class="main-color-text"><%= carrito.getTicketTotal() %>€</span>						
+						<%
+							}
+						%>					
 					</div>
 				</div>
 				<!--end shopping-cart-header -->
 
 				<ul class="shopping-cart-items">
-					<li class="clearfix"><img src="/GZoneWeb/images/borderlands.jpg"
-						alt="borderlands 2" width="120" height="60" /> <span
-						class="item-name">Borderlands 2</span> <span class="item-price">29.99€</span>
-						<span class="item-quantity">Quantity: 01</span></li>
-
-					<li class="clearfix"><img src="/GZoneWeb/images/Darksouls.jpg"
-						alt="Darksouls 3" width="120" height="60" /> <span
-						class="item-name">Darksouls 3</span> <span class="item-price">19.99€</span>
-						<span class="item-quantity">Quantity: 01</span></li>
-
-					<li class="clearfix"><img src="/GZoneWeb/images/dont starve.jpg"
-						alt="Dont starve" width="120" height="60" /> <span
-						class="item-name">Dont starve</span> <span class="item-price">39.99€</span>
-						<span class="item-quantity">Quantity: 01</span></li>
+				<% 	
+					if (carrito!=null)
+					{
+						if (carrito.numeroLineas()!=0)
+						{
+							for (ShoppingCartLine lineas: carrito.getLines()) {
+							%>
+								<li class="clearfix"><img src="/GZoneWeb/CMS/producto_<%=lineas.getProduct().getIdProducto()%>/preview<%=lineas.getProduct().getIdProducto()%>.jpg" alt="<%=lineas.getProduct().getNombre()%>" width="120" height="60">
+									<span class="item-price"><%= lineas.getProduct().getNombre() %></span>
+									<span class="item-price"><%= lineas.getProduct().getPrecio() %>€</span>
+									<form name="informacionProducto" method="POST" action="/GZoneWeb/ShoppingCartServlet" name="shopping-cart">
+										<span><button type="submit" class="fa fa-close " name="shopping-cart" value="eliminar" style="color:red"></button></span>
+										<input type="hidden" name="idProducto" value="<%= lineas.getProduct().getIdProducto() %>"  />
+									</form>
+								</li>
+							
+					<% 
+							}
+					%>
+								<li><a href="/GZoneWeb/CheckoutServlet"><button type="button" id="cerrado" class="btn btn-lg btn-primary">Checkout</button></a></li>		
+					<%			
+						}else {
+					%>
+						<li class="clearfix caritacentrada"><i class="fa fa-frown-o" aria-hidden="true" style="font-size:56px;padding-left: 115px;"></i><p>Tu carrito está vacio </p></li>
+						<li><button type="button" id="cerrado" class="btn btn-lg btn-primary" disabled>Checkout</button></li>		
+				<%
+						}
+					}
+				%>
+						
 				</ul>
-
-				<a href="/GZoneWeb/html/shopping/shopping.jsp" class="button">Checkout</a>
 			</div>
 		<!--end shopping-cart -->
 	</div>
