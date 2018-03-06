@@ -252,7 +252,7 @@
 				</div>
 				<!--end shopping-cart-header -->
 
-				<ul class="shopping-cart-items">
+				<ul class="pre-scrollable shopping-cart-items" >
 				<% 	
 					if (carrito!=null)
 					{

@@ -30,7 +30,7 @@
                                               <span class="description">Revisa tu</span><br><span class="emphasized">Resumen de tu carrito</span>
                                           </div>
                                           <div class="col-6 order-number align-right">
-                                              <span class="description">Pedido #</span><br><span class="emphasized">{{order_number}}</span>
+                                              <span class="description">Pedido #</span><br><span class="emphasized">1-234</span>
                                           </div>
                                       </div>
                                       <div class="row column-titles padding-top-10">
@@ -41,27 +41,31 @@
                                       </div>
                                   </div>
                                   <div class="col-12 panel-body basket-body">
-                                      {{#products}}
-                                      <div class="row product">
-                                          <div class="col-2 product-image"><img src="{{thumbnail}}"></div>
-                                          <div class="col-5">{{name}}<br><span class="additional">{{additional}}</span></div>
-                                          <div class="col-2 align-right"><span class="sub">{{unit}}</span> {{quantity}}</div>
-                                          <div class="col-3 align-right"><span class="sub">{{{currency}}}</span> {{price}}</div>
-                                      </div>
-                                      {{/products}}
+									<% 	
+										if (carrito!=null)
+										{
+											if (carrito.numeroLineas()!=0)
+											{
+												for (ShoppingCartLine lineas: carrito.getLines()) {
+												%>
+			                                      <div class="row product">
+			                                          <div class="col-2 product-image"><img src="/GZoneWeb/CMS/producto_<%=lineas.getProduct().getIdProducto()%>/preview<%=lineas.getProduct().getIdProducto()%>.jpg" alt="<%=lineas.getProduct().getNombre()%>"></div>
+			                                          <div class="col-5"><%= lineas.getProduct().getNombre() %></div>
+			                                          <div class="col-3 align-right"><span class="sub"><%= lineas.getProduct().getPrecio() %>€</span></div>
+			                                      </div>
+														
+												<% 
+												}
+											}
+										}
+												%>
                                   </div>
                                   <div class="col-12 panel-footer basket-footer">
                                       <hr>
-                                      <div class="row">
-                                          <div class="col-8 align-right description"><div class="dive">Subtotal</div></div>
-                                          <div class="col-4 align-right"><span class="emphasized">{{{currency}}}{{subtotal}}</span></div>
-                                          <div class="col-8 align-right description"><div class="dive">Impuestos</div></div>
-                                          <div class="col-4 align-right"><span class="emphasized">{{{currency}}}{{taxes}}</span></div>
-                                      </div>
-                                      <hr>
+
                                       <div class="row">
                                           <div class="col-8 align-right description"><div class="dive">Total</div></div>
-                                          <div class="col-4 align-right"><span class="very emphasized">{{{currency}}}{{total}}</span></div>
+                                          <div class="col-4 align-right"><span class="very emphasized"><%= carrito.getTicketTotal() %> €</span></div>
                                       </div>
                                   </div>
                               </div>
@@ -97,7 +101,7 @@
                                   </div>
                                   <div class="col-12 panel-footer creditcard-footer">
                                       <div class="row">
-                                          <div class="col-12 align-right"><a href="/GZoneWeb/html/index.jsp"><button class="cancel">Cancelar</button></a>&nbsp;<button class="confirm">Confirmar y pagar</button></div>
+                                          <div class="col-12 align-right"><a href="/GZoneWeb/IndexServlet"><button class="cancel">Cancelar</button></a>&nbsp;<button class="confirm">Confirmar y pagar</button></div>
                                       </div>
                                   </div>
                               </div>
@@ -115,5 +119,4 @@
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js'></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js'></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js'></script>
-	<script src="/GZoneWeb/js/checkout/checkout.js"></script>
 
