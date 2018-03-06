@@ -37,11 +37,10 @@ public class ProductServlet extends HttpServlet{
 	 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			Long search = Long.parseLong(request.getParameter(SessionAttributeNames.PRODUCT)) ;	
 			String target = null;
-			String idioma = "ES";
 			
 			Producto productoDetail = new Producto();
 			try {
-				productoDetail = productoService.findById(search, idioma);	
+				productoDetail = productoService.findById(search, SessionAttributeNames.ES);	
 				if (productoDetail==null ) {
 					request.setAttribute(AttributeNames.ERROR, AttributeNames.NOT_FOUND);
 					target = ViewsPaths.INDEX_SERVLET;

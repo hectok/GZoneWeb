@@ -141,6 +141,7 @@ padding: 90px 100px 0 0;
   max-height: 0;
   font-size: 0;
   transition: .25s ease;
+  margin:0 0 0 0  !important;	
 }
 
 .read-more-state:checked ~ .read-more-wrap .read-more-target {
@@ -149,7 +150,7 @@ padding: 90px 100px 0 0;
   max-height: 999em;
 }
 .read-more-state ~ .read-more-trigger:before {
-  content: 'Show more';
+	content: 'Show more'; 
 }
 
 .read-more-state:checked ~ .read-more-trigger:before {

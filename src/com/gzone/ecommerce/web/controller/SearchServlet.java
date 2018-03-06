@@ -42,14 +42,14 @@ public class SearchServlet extends HttpServlet{
 	private ProductoService productoService = null;
 	private CategoriaService categoriaService = null;
 	private NJugadoresService njugadoresService = null;
-//	private IdiomaService idiomaService = null;
+	private IdiomaService idiomaService = null;
 	
 	public SearchServlet () {
 	        super();
 	        productoService = new ProductoServiceImpl();
 	        categoriaService = new CategoriaServiceImpl();
 	        njugadoresService = new NJugadoresServiceImpl();
-//	        idiomaService = new IdiomaServiceImpl();
+	        idiomaService = new IdiomaServiceImpl();
 	    }
 	 
 	 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -62,7 +62,6 @@ public class SearchServlet extends HttpServlet{
 			String [] jugadores = request.getParameterValues(SessionAttributeNames.PLAYERS);
 			String anio = request.getParameter(SessionAttributeNames.YEAR);
 			String [] idiomad = request.getParameterValues(SessionAttributeNames.LANGUAGE);
-
 			
 			ProductoCriteria criteria = null;
 			ArrayUtils arrayUtil = null;
@@ -101,12 +100,12 @@ public class SearchServlet extends HttpServlet{
 			try {
 				List<Categoria> todasCategorias = categoriaService.findAll(1, 30, SessionAttributeNames.ES);
 				List<NJugadores> todosJugadores = njugadoresService.findAll(1, 10);
-//				List<Idioma> todosIdiomas = idiomaService.findAll(1, 10);
+				List<Idioma> todosIdiomas = idiomaService.findAll(1, 10);
 				List<Producto> productos = productoService.findByCriteria(criteria, 1, 10, idioma);
 				
 				request.setAttribute(SessionAttributeNames.CATEGORY, todasCategorias);
 				request.setAttribute(SessionAttributeNames.PLAYERS, todosJugadores);
-//				request.setAttribute(SessionAttributeNames.LANGUAGE, todosIdiomas);
+				request.setAttribute(SessionAttributeNames.LANGUAGE, todosIdiomas);
 				
 				if (productos==null ) {
 					request.setAttribute(AttributeNames.ERROR, AttributeNames.NOT_FOUND);

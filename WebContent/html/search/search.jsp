@@ -8,9 +8,8 @@
 <%
 	List<Producto> productos = (List <Producto>) request.getAttribute(SessionAttributeNames.PRODUCT);
 	List<Categoria> categorias = (List <Categoria>) request.getAttribute(SessionAttributeNames.CATEGORY);
-/* 	List<Idioma> idiomas = (List <Idioma>) request.getAttribute(SessionAttributeNames.LANGUAGE);
- */	List<NJugadores> njugadores = (List <NJugadores>) request.getAttribute(SessionAttributeNames.PLAYERS);
-
+ 	List<Idioma> idiomas = (List <Idioma>) request.getAttribute(SessionAttributeNames.LANGUAGE); 
+ 	List<NJugadores> njugadores = (List <NJugadores>) request.getAttribute(SessionAttributeNames.PLAYERS);
 %>
 
 <div id="todo">
@@ -25,13 +24,21 @@
 	          <input type="checkbox" class="read-more-state" id="categ" />
 	          <div class="read-more-wrap form-group categoria ">
 	          <%
-				for (Categoria iterador: categorias) {
+				for (int i=0;i<categorias.size();i++) {
+					if(i<4){
 				%>
 	              <div class="checkbox ">
-	                <label><input type="checkbox" name="categoria" value="<%= iterador.getIdCategoria()%>"><%= iterador.getCategoria() %></label>
+	                <label><input type="checkbox" name="categoria" value="<%= categorias.get(i).getIdCategoria()%>"><%= categorias.get(i).getCategoria() %></label>
 	              </div>
 				<%
+				}else {
+				%>
+				<div class="checkbox read-more-target">
+	                <label><input type="checkbox" name="categoria" value="<%= categorias.get(i).getIdCategoria()%>"><%= categorias.get(i).getCategoria() %></label>
+	              </div>
+	            <%
 				}
+					}
 				%>
 	           </div>
 	           <label for="categ" class="read-more-trigger"></label>
@@ -44,13 +51,21 @@
 	          <input type="checkbox" class="read-more-state" id="post-3" />
 	          <div class="read-more-wrap form-group jugadores" >
 	              <%
-				for (NJugadores iterador: njugadores) {
-				%>
-	              <div class="checkbox ">
-	                <label><input type="checkbox" name="jugadores" value="<%= iterador.getIdNJugadores()%>"><%= iterador.getnJugadores() %></label>
-	              </div>
-				<%
-				}
+				for (int i=0;i<njugadores.size();i++) {
+					if(i<4){
+					%>
+		              <div class="checkbox ">
+		                <label><input type="checkbox" name="jugadores" value="<%= njugadores.get(i).getIdNJugadores()%>"><%= njugadores.get(i).getnJugadores() %></label>
+		              </div>
+					<%
+					}else {
+					%>
+						<div class="checkbox read-more-target">
+			                <label><input type="checkbox" name="jugadores" value="<%= njugadores.get(i).getIdNJugadores()%>"><%= njugadores.get(i).getnJugadores() %></label>
+						</div>
+			        <%
+							}
+					}
 				%>
 	           </div>
 	           <label for="post-3" class="read-more-trigger"></label>
@@ -62,22 +77,27 @@
 	        <div class="panel-body">
 	          <input type="checkbox" class="read-more-state" id="post-4" />
 	          <div class="read-more-wrap form-group idioma ">
-	              <div class="checkbox ">
-	                <label><input type="checkbox" name="idioma" value="'ES'">Español</label>
-	              </div>
-	              <div class="checkbox">
-	                <label><input type="checkbox" name="idioma" value="'EN'">Inglés</label>
-	              </div>
-	              <div class="checkbox read-more-target">
-	                <label><input type="checkbox" name="idioma" value="'FR'" >Francés</label>
-	              </div>
-	              <div class="checkbox read-more-target">
-	                <label><input type="checkbox" name="idioma" value="'GR'" >Alemán</label>
-	              </div>
+ 			<%
+				for (int i=0;i<idiomas.size();i++) {
+					if(i<4){
+					%>
+		              <div class="checkbox ">
+		                <label><input type="checkbox" name="jugadores" value="<%= idiomas.get(i).getIdIdioma()%>"><%= idiomas.get(i).getNombreIdioma() %></label>
+		              </div>
+					<%
+					}else {
+					%>
+						<div class="checkbox read-more-target">
+			                <label><input type="checkbox" name="jugadores" value="<%= idiomas.get(i).getIdIdioma()%>"><%=idiomas.get(i).getNombreIdioma() %></label>
+			              </div>
+			        <%
+							}
+					}
+				%>
 	           </div>
 	           <label for="post-4" class="read-more-trigger"></label>
 	        </div>
-	      </div>
+	      </div> 
 	      
 	      <div class="panel panel-default">
 	       <div class="panel-heading">Año</div>
@@ -139,7 +159,7 @@
                       
       <section class="col-xs-12 col-sm-6 col-md-12">
       <%
-		if (product!=null & product!=""){
+		if (productos!=null || !productos.isEmpty()){
 			for (Producto producto: productos) {
 				%>
 				<article class="search-result row" >
