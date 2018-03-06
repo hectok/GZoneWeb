@@ -91,8 +91,7 @@
 	          </div>
 	
 	          <div class="detalles">
-	            <h4>Requisitos minimos :</h4>
-	            <p><%=producto.getRequisitos()%></p>
+	            
 	            <h4>Categoria :</h4>
 	            <%
 				if (!producto.getCategorias().isEmpty()){
@@ -113,7 +112,8 @@
 						}
 					}
 	            %>
-	            
+	            <h4>Requisitos minimos :</h4>
+	            <p><%=producto.getRequisitos()%></p>
 	          </div>
 	        </div>
 	  </div>
