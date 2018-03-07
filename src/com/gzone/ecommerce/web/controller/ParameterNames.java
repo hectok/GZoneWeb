@@ -18,4 +18,6 @@ public interface ParameterNames {
 	public static final String LOGIN = "login";
 	public static final String CHECKED = "checked";
 
+	public static final String COOKIE = "cookie";
+
 }

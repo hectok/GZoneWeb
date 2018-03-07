@@ -55,7 +55,7 @@ public class SearchServlet extends HttpServlet{
 	 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			String target = null;
 			String idioma = SessionAttributeNames.ES;
-		 
+
 			String search = request.getParameter(SessionAttributeNames.PRODUCT);	
 			String type = request.getParameter(ParameterNames.SEARCH);	
 			String [] categorias = request.getParameterValues(SessionAttributeNames.CATEGORY);
@@ -98,6 +98,7 @@ public class SearchServlet extends HttpServlet{
 				}
 			}		
 			try {
+				
 				List<Categoria> todasCategorias = categoriaService.findAll(1, 30, SessionAttributeNames.ES);
 				List<NJugadores> todosJugadores = njugadoresService.findAll(1, 10);
 				List<Idioma> todosIdiomas = idiomaService.findAll(1, 10);

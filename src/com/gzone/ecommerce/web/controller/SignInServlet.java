@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -62,6 +63,7 @@ public class SignInServlet extends HttpServlet {
 						if (remember.equals("ON")) {
 							CookieManager.addCookie(response, ParameterNames.LOGIN, user.getUsuario(), "/",7*60*60);
 						}
+						
 					}catch(NullPointerException unchecked) {
 						logger.error("Unchecked");
 					}
@@ -75,7 +77,6 @@ public class SignInServlet extends HttpServlet {
 			
 		} catch (Exception e) {
 			logger.error(e);
-			e.printStackTrace();
 		}
 		
 	}

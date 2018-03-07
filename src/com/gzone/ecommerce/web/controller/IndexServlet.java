@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ import com.gzone.ecommerce.model.Producto;
 import com.gzone.ecommerce.service.ProductoCriteria;
 import com.gzone.ecommerce.service.ProductoService;
 import com.gzone.ecommerce.service.impl.ProductoServiceImpl;
+import com.gzone.ecommerce.web.util.CookieManager;
 
 
 /**
@@ -52,6 +54,11 @@ public class IndexServlet extends HttpServlet{
 				
 				List<Producto> oferta = productoService.findByCriteria(ofertas, 1, 12, idioma);	
 				List<Producto> explore = productoService.findAll(1, 40, idioma);	
+				
+				Cookie cookie = CookieManager.getCookie(request, ParameterNames.LOGIN);
+				if (cookie!=null) {
+					request.setAttribute(ParameterNames.COOKIE,cookie);
+				}
 				
 				if (oferta==null || explore==null) {
 					request.setAttribute(AttributeNames.ERROR, AttributeNames.NOT_FOUND);

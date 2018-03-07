@@ -190,18 +190,21 @@
 		}
 	%>
   	 </section>
+  	 
  	<nav aria-label="..." id="pagination">
 	  <ul class="pagination">
 	    <li class="page-item disabled">
-	      <a class="page-link" href="#" tabindex="-1">Previous</a>
+	      <a class="page-link" href="/GZoneWeb/SearchServlet?page=-1" tabindex="-1">Previous</a>
 	    </li>
-	    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+	    <li class="page-item active">
+	    	<a class="page-link" href="/GZoneWeb/SearchServlet?page=1">1</a>
 	    </li>
-	    <li class="page-item"><a class="page-link" href="#">3</a></li>
 	    <li class="page-item">
-	      <a class="page-link" href="#">Next</a>
+	    	<a class="page-link" href="/GZoneWeb/SearchServlet?page=2">2</a>
+	    </li>
+	    <li class="page-item"><a class="page-link" href="/GZoneWeb/SearchServlet?page=3">3</a></li>
+	    <li class="page-item">
+	     	<a class="page-link" href="/GZoneWeb/SearchServlet?page=1">Next</a>
 	    </li>
 	  </ul>
 	</nav>

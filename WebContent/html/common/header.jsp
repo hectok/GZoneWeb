@@ -36,6 +36,8 @@
 	<%	
 		Usuario user = (Usuario) SessionManager.get(request, SessionAttributeNames.USER); 
 		ShoppingCart carrito = (ShoppingCart) SessionManager.get(request, SessionAttributeNames.SHOPPING_CART);
+		Cookie cookie = (Cookie) request.getAttribute(ParameterNames.COOKIE);
+
 	%>
 	<div class="maximo">
 		<nav id="barra_principal" class="navbar navbar-default navbar-fixed-top">
@@ -142,7 +144,6 @@
 			</div>
 		</nav>
 
-
 		<!-- Modal inicio sesion -->
 		<div class="modal fade bd-example-modal-sm" id="iniciar">
 			<div class="modal-dialog modal-sm modal-dialog-centered">
@@ -153,12 +154,17 @@
 						<a href=""><img src="/GZoneWeb/images/logo.png" alt="Logo GZone" width=40px></a>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
-
+					<%
+						String value = "";
+						if (cookie!=null) {
+							value = cookie.getValue();
+						}
+					%>
 					<!-- Body -->
 					<div class="modal-body">
 						<form action="/GZoneWeb/SignInServlet" method="post">
 							<div class="form-group">
-								<label for="usuario">Nombre de usuario:</label> <input type="text" class="form-control" name="user" placeholder="Introduce tu usuario">
+								<label for="usuario">Nombre de usuario:</label> <input type="text" class="form-control" name="user" value="<%=value%>" placeholder="Introduce tu usuario">
 							</div>
 							<div class="form-group">
 								<label for="pwd">Contraseña:</label> <input type="password" class="form-control" id="pwd" name="password" placeholder="Introduce tu contraseña">

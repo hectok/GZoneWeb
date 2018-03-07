@@ -22,6 +22,8 @@ public interface SessionAttributeNames {
 	public static final String LANGUAGE = "idioma";
 
 	public static final String ES = "ES";
+	public static final String PAGINATION = "page";
+
 	
 	public static final String SHOPPING_CART = "shopping-cart";
 	public static final String ANADIR = "anadir";
