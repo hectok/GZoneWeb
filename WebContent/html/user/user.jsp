@@ -207,24 +207,7 @@
                     </div>
                   </div>
                   <hr />
-                  <!-- Text input-->
-                  <div class="form-group">
-                    <label class="col-md-4 control-label">Cambiar correo electronico</label>
-                    <div class="col-md-4 inputGroupContainer pull-right">
-                      <div class="input-group">
-                        <button type="submit" class="btn btn-danger" >Cambiar correo <span class="glyphicon glyphicon-send"></span></button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-md-4 control-label">Cambiar contraseña</label>
-                    <div class="col-md-4 inputGroupContainer pull-right">
-                      <div class="input-group ">
-                        <button type="submit" class="btn btn-danger" >Cambiar contraseña <span class="glyphicon glyphicon-send"></span></button>
-                      </div>
-                    </div>
-                  </div>
-                  <hr />
+              
                   <!-- Button -->
                   <div class="form-group">
                     <label class="col-md-4 control-label"></label>

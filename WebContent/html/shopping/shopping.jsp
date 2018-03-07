@@ -80,28 +80,32 @@
                                       </div>
                                   </div>
                                   <div class="col-12 panel-body creditcard-body">
-                                      <form action="#" method="post" target="_self">
+                                      <form action="#" method="post" action="/GZoneWeb/SearchServlet" >
                                           <fieldset>
                                               <label for="card-name">Nombre del titular</label><br>
-                                              <i class="fa fa-user-o" aria-hidden="true"></i><input type='text' id='card-name' name='card-name' placeholder='Hector Ledo' title='Titular'>
+                                              <i class="fa fa-user-o" aria-hidden="true"></i><input type='text' id='card-name' name="titular" placeholder='Hector Ledo' title='Titular'>
                                           </fieldset>
                                           <fieldset>
                                               <label for="card-number">Numero de la tarjeta</label><br>
-                                              <i class="fa fa-credit-card" aria-hidden="true"></i><input type='text' id='card-number' name='card-number' placeholder='1234 5678 9123 4567' title='Numero de tarjeta'>
+                                              <i class="fa fa-credit-card" aria-hidden="true"></i><input type='text' id='card-number' name="tarjeta" placeholder='1234 5678 9123 4567' title='Numero de tarjeta'>
                                           </fieldset>
                                           <fieldset>
                                               <label for="card-expiration">Fecha de caducidad</label><br>
-                                              <i class="fa fa-calendar" aria-hidden="true"></i><input type='text' id='card-expiration' name='card-expiration' placeholder='AA/MM' title='Caducidad' class="card-expiration">
+                                              <i class="fa fa-calendar" aria-hidden="true"></i><input type='text' id='card-expiration' name="caducidad" placeholder='AA/MM' title='Caducidad' class="card-expiration">
                                           </fieldset>
                                           <fieldset>
                                               <label for="card-ccv">CVC/CCV</label>&nbsp;<i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="El CCV es el número de 3 cifras que aparece por la parte posterior de tu tarjeta de crédito."></i><br>
-                                              <i class="fa fa-lock" aria-hidden="true"></i><input type='text' id='card-ccv' name='card-ccv' placeholder='123' title='CVC/CCV'>
+                                              <i class="fa fa-lock" aria-hidden="true"></i><input type='text' id='card-ccv' name="ccv" placeholder='123' title='CVC/CCV'>
                                           </fieldset>
                                       </form>
                                   </div>
                                   <div class="col-12 panel-footer creditcard-footer">
                                       <div class="row">
-                                          <div class="col-12 align-right"><a href="/GZoneWeb/IndexServlet"><button class="cancel">Cancelar</button></a>&nbsp;<button class="confirm">Confirmar y pagar</button></div>
+                                      	<div class="col-12 align-right">
+                                          <a href="/GZoneWeb/CheckoutServlet"><button class="cancel" name="checkout" value="cancelar">Cancelar</button></a>
+                                          &nbsp;
+                                          <a href="/GZoneWeb/CheckoutServlet"><button class="confirm" name="checkout" value="pagar">Confirmar y pagar</button></a>
+                                      	</div>
                                       </div>
                                   </div>
                               </div>

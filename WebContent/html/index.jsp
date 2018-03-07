@@ -28,8 +28,8 @@
 								<b><a href="/GZoneWeb/ProductServlet?product=<%=oferta.getIdProducto()%>"><%=oferta.getNombre()%> </a></b>
 								<input type="hidden" name="nombreProducto" value="<%=oferta.getNombre()%>" >										
 								<input type="hidden" name="idProducto" value=<%=oferta.getIdProducto()%>>
-								<em> <%=oferta.getPrecio()%>€</em>
-								<input type="hidden" name="precioProducto" value=<%=oferta.getPrecio()%>>
+								<em id="ofertaTachada"> <%=oferta.getPrecio()%>€</em>
+								<input  type="hidden" name="precioProducto" value=<%=oferta.getPrecio()%>>
 							</div>
 							<button type="submit" class="anadir" name="shopping-cart" value="anadir">
 								<em>Añadir</em>
