@@ -57,7 +57,7 @@ public class SearchServlet extends HttpServlet{
 			String idioma = SessionAttributeNames.ES;
 
 			String search = request.getParameter(SessionAttributeNames.PRODUCT);	
-			String type = request.getParameter(ParameterNames.SEARCH);	
+			String action = request.getParameter(ParameterNames.SEARCH);	
 			String [] categorias = request.getParameterValues(SessionAttributeNames.CATEGORY);
 			String [] jugadores = request.getParameterValues(SessionAttributeNames.PLAYERS);
 			String anio = request.getParameter(SessionAttributeNames.YEAR);
@@ -67,12 +67,12 @@ public class SearchServlet extends HttpServlet{
 			ArrayUtils arrayUtil = null;
 						
 			
-			if (type.equals(ParameterNames.SIMPLE)) {
+			if (action.equals(ParameterNames.SIMPLE)) {
 				criteria  = new ProductoCriteria() ;
 				criteria.setNombre(search);
 			}
 			else {
-				if (type.equals(ParameterNames.DETAILED))
+				if (action.equals(ParameterNames.DETAILED))
 				{
 					criteria= new ProductoCriteria() ;
 					arrayUtil = new ArrayUtils();
@@ -108,12 +108,12 @@ public class SearchServlet extends HttpServlet{
 				request.setAttribute(SessionAttributeNames.PLAYERS, todosJugadores);
 				request.setAttribute(SessionAttributeNames.LANGUAGE, todosIdiomas);
 				
-				if (productos==null ) {
+				if (productos.isEmpty() ) {
 					request.setAttribute(AttributeNames.ERROR, AttributeNames.NOT_FOUND);
 					target = ViewsPaths.SEARCH;
 				} else {	
 					target = ViewsPaths.SEARCH;
-					request.setAttribute(SessionAttributeNames.PRODUCT, productos);
+					request.setAttribute(AttributeNames.PRODUCT, productos);
 					
 				}
 					request.getRequestDispatcher(target).forward(request, response);

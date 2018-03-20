@@ -26,6 +26,7 @@ public class CheckoutServlet extends HttpServlet{
 	
 	private static Logger logger = LogManager.getLogger(SignInServlet.class.getName());
 	
+	
 	private TicketService ticketService = null;
 	
 	 public CheckoutServlet () {

@@ -18,4 +18,6 @@ public interface AttributeNames {
 	public static final String NOT_FOUND = "No se ha encontrado ningún producto que cumpla esos requisitos.";
 	//Error de cookies
 	public static final String COOKIE_NULL = "La cookie ha devuelto un null";
+	
+	public static final String PRODUCT = "product";
 }

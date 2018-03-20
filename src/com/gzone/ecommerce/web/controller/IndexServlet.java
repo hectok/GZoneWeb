@@ -72,6 +72,7 @@ public class IndexServlet extends HttpServlet{
 					request.getRequestDispatcher(target).forward(request, response);
 			} catch (Exception e) {
 				logger.error(e);
+				// TODO 
 			}
 			
 		}
