@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@page session="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 
 <%@page import="com.gzone.ecommerce.model.*, com.gzone.ecommerce.web.model.*, com.gzone.ecommerce.web.util.*, com.gzone.ecommerce.web.controller.*,java.util.List " %>
 
@@ -39,6 +40,8 @@
 		Cookie cookie = (Cookie) request.getAttribute(ParameterNames.COOKIE);
 
 	%>
+	<c:set var="user" value="${sessionScope.user}" />
+	
 	<div class="maximo">
 		<nav id="barra_principal" class="navbar navbar-default navbar-fixed-top">
 			<div class="container-fluid">
@@ -73,7 +76,7 @@
 								<li><a href="#">Inglés</a></li>
 							</ul>
 						</li>
-							<%
+						<%
 								if (user!=null) {
 									%>
 									<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%=user.getUsuario()%><span class="caret"></span> </a>
@@ -111,7 +114,6 @@
 							<%
 								}
 							%>
-
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li>

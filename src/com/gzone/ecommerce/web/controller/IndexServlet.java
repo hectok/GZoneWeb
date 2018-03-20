@@ -54,7 +54,7 @@ public class IndexServlet extends HttpServlet{
 				
 				List<Producto> oferta = productoService.findByCriteria(ofertas, 1, 12, idioma);	
 				List<Producto> explore = productoService.findAll(1, 40, idioma);	
-				
+
 				Cookie cookie = CookieManager.getCookie(request, ParameterNames.LOGIN);
 				if (cookie!=null) {
 					request.setAttribute(ParameterNames.COOKIE,cookie);

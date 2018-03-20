@@ -3,9 +3,10 @@
 
 <%
 	Usuario usuario = (Usuario) request.getAttribute(SessionAttributeNames.PROFILE);
- 	List<Producto> biblioteca = (List<Producto>) request.getAttribute(SessionAttributeNames.LIBRARY);
  
 %>
+<c:set var="biblioteca" value="${requestScope.library}" />
+
 <div id="perfil">
     <div id="centrar">
       <!-- Opciones del panel -->
@@ -28,32 +29,27 @@
         <div class="tab-content">
           <div class="tab-pane well fade active in " id="biblioteca">
             <legend>Tu panel de usuario</legend>
-            <p>Número de juegos : <%=biblioteca.size()%></p>
+            <p>Número de juegos : ${biblioteca.size()}</p>
             <div class="juegos">
-             <%
-				if (biblioteca!=null & biblioteca.size()>0){
-					for (Producto ticket: biblioteca) {
-						%>
-				<div class="col-md-4">
-				    <figure class="juego navy col-md-4">
-				      <img src="/GZoneWeb/CMS/producto_<%=ticket.getIdProducto()%>/preview<%=ticket.getIdProducto()%>.jpg" alt="<%=ticket.getNombre()%>" />
-				      <figcaption>
-				        <a href="/GZoneWeb/IndexServlet">Descargar</a>
-				        <a href="/GZoneWeb/ProductServlet?product=<%=ticket.getIdProducto()%>" title=<%=ticket.getNombre()%>>Ver producto</a>
-				      </figcaption>
-				    </figure>
-				</div>
-				
- 			<%
-				}
-					}
-					else
-					{
-			%>
-				<h3>Aún no tienes ningún juego en tu biblioteca!</h3>
-			<%
-				}
-			%>
+            <c:choose>
+            	<c:when test="${!biblioteca.isEmpty()}">
+            		<c:forEach items="${biblioteca}" var="item">
+            		<div class="col-md-4">
+					    <figure class="juego navy col-md-4">
+					      <img src="/GZoneWeb/CMS/producto_${item.getIdProducto()}/preview${item.getIdProducto()}.jpg" alt="${item.getNombre()}" />
+					      <figcaption>
+					        <a href="/GZoneWeb/IndexServlet">Descargar</a>
+					        <a href="/GZoneWeb/ProductServlet?product=${item.getIdProducto()}" title="${item.getNombre()}">Ver producto</a>
+					      </figcaption>
+					    </figure>
+					</div>
+            		</c:forEach>     	
+            	</c:when>
+            	<c:otherwise>
+            		<h3>Aún no tienes ningún juego en tu biblioteca!</h3>
+            	</c:otherwise>
+            </c:choose>
+
 			</div> 
           </div>
           <!--Panel de ajustes del usuario -->

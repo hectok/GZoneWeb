@@ -1,16 +1,14 @@
 <%@include file="/html/common/header.jsp"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%
-	String product = request.getParameter(SessionAttributeNames.PRODUCT);
-	if (product==null) {product ="";}
-%>
 
-<%
-	List<Producto> productos = (List <Producto>) request.getAttribute(SessionAttributeNames.PRODUCT);
-	List<Categoria> categorias = (List <Categoria>) request.getAttribute(SessionAttributeNames.CATEGORY);
- 	List<Idioma> idiomas = (List <Idioma>) request.getAttribute(SessionAttributeNames.LANGUAGE); 
- 	List<NJugadores> njugadores = (List <NJugadores>) request.getAttribute(SessionAttributeNames.PLAYERS);
-%>
+
+
+<c:set var="resultado" value="${param.product}"></c:set>
+
+<c:set var="productos" value="${requestScope.product}" />
+<c:set var="categorias" value="${requestScope.categoria}" />
+<c:set var="idiomas" value="${requestScope.idioma}" />
+<c:set var="njugadores" value="${requestScope.jugadores}" />
 
 <div id="todo">
      <div id="panel" class="panel-group">
@@ -23,23 +21,20 @@
 	        <div class="panel-body">
 	          <input type="checkbox" class="read-more-state" id="categ" />
 	          <div class="read-more-wrap form-group categoria ">
-	          <%
-				for (int i=0;i<categorias.size();i++) {
-					if(i<4){
-				%>
-	              <div class="checkbox ">
-	                <label><input type="checkbox" name="categoria" value="<%= categorias.get(i).getIdCategoria()%>"><%= categorias.get(i).getCategoria() %></label>
-	              </div>
-				<%
-				}else {
-				%>
-				<div class="checkbox read-more-target">
-	                <label><input type="checkbox" name="categoria" value="<%= categorias.get(i).getIdCategoria()%>"><%= categorias.get(i).getCategoria() %></label>
-	              </div>
-	            <%
-				}
-					}
-				%>
+				<c:forEach var = "i" begin = "0" end ="${categorias.size()-1}">
+					<c:choose> 
+						<c:when test="${i<4}">
+							<div class="checkbox ">
+				                <label><input type="checkbox" name="categoria" value="${categorias.get(i).getIdCategoria()}">${categorias.get(i).getCategoria()}</label>
+				            </div>
+						</c:when>
+						<c:otherwise>							
+							<div class="checkbox read-more-target">
+				                <label><input type="checkbox" name="categoria" value="${categorias.get(i).getIdCategoria()}">${categorias.get(i).getCategoria()}</label>
+				            </div>
+						</c:otherwise>
+					</c:choose>	
+				</c:forEach>
 	           </div>
 	           <label for="categ" class="read-more-trigger"></label>
 	        </div>
@@ -50,23 +45,20 @@
 	        <div class="panel-body">
 	          <input type="checkbox" class="read-more-state" id="post-3" />
 	          <div class="read-more-wrap form-group jugadores" >
-	              <%
-				for (int i=0;i<njugadores.size();i++) {
-					if(i<4){
-					%>
-		              <div class="checkbox ">
-		                <label><input type="checkbox" name="jugadores" value="<%= njugadores.get(i).getIdNJugadores()%>"><%= njugadores.get(i).getnJugadores() %></label>
-		              </div>
-					<%
-					}else {
-					%>
-						<div class="checkbox read-more-target">
-			                <label><input type="checkbox" name="jugadores" value="<%= njugadores.get(i).getIdNJugadores()%>"><%= njugadores.get(i).getnJugadores() %></label>
-						</div>
-			        <%
-							}
-					}
-				%>
+				<c:forEach var = "i" begin = "0" end ="${jugadores.size()-1}">
+					<c:choose> 
+						<c:when test="${i<4}">
+							<div class="checkbox ">
+				                <label><input type="checkbox" name="categoria" value="${jugadores.get(i).getIdNJugadores()}">${jugadores.get(i).getnJugadores()}</label>
+				            </div>
+						</c:when>
+						<c:otherwise>							
+							<div class="checkbox read-more-target">
+				                <label><input type="checkbox" name="categoria" value="${jugadores.get(i).getIdNJugadores()}">${jugadores.get(i).getnJugadores()}</label>
+				            </div>
+						</c:otherwise>
+					</c:choose>	
+				</c:forEach>
 	           </div>
 	           <label for="post-3" class="read-more-trigger"></label>
 	        </div>
@@ -77,23 +69,20 @@
 	        <div class="panel-body">
 	          <input type="checkbox" class="read-more-state" id="post-4" />
 	          <div class="read-more-wrap form-group idioma ">
- 			<%
-				for (int i=0;i<idiomas.size();i++) {
-					if(i<4){
-					%>
-		              <div class="checkbox ">
-		                <label><input type="checkbox" name="jugadores" value="<%= idiomas.get(i).getIdIdioma()%>"><%= idiomas.get(i).getNombreIdioma() %></label>
-		              </div>
-					<%
-					}else {
-					%>
-						<div class="checkbox read-more-target">
-			                <label><input type="checkbox" name="jugadores" value="<%= idiomas.get(i).getIdIdioma()%>"><%=idiomas.get(i).getNombreIdioma() %></label>
-			              </div>
-			        <%
-							}
-					}
-				%>
+ 			<c:forEach var = "i" begin = "0" end ="${idiomas.size()-1}">
+					<c:choose> 
+						<c:when test="${i<4}">
+							<div class="checkbox ">
+				                <label><input type="checkbox" name="categoria" value="${idiomas.get(i).getIdIdioma()}">${idiomas.get(i).getNombreIdioma()}</label>
+				            </div>
+						</c:when>
+						<c:otherwise>							
+							<div class="checkbox read-more-target">
+				                <label><input type="checkbox" name="categoria" value="${idiomas.get(i).getIdIdioma()}">${idiomas.get(i).getNombreIdioma()}</label>
+				            </div>
+						</c:otherwise>
+					</c:choose>	
+				</c:forEach>
 	           </div>
 	           <label for="post-4" class="read-more-trigger"></label>
 	        </div>
@@ -154,41 +143,36 @@
     
     <hgroup>
   		<h1>Resultados de búsqueda</h1>
-  		<h2 class="lead"><strong class="text-danger"><%=productos.size()%></strong> resultados cumplen con la búsqueda de : <strong class="text-danger"><%=product%></strong></h2>
+  		<h2 class="lead"><strong class="text-danger">${productos.size()}</strong> resultados cumplen con la búsqueda de : <strong class="text-danger">${resultado}</strong></h2>
   	</hgroup>
                       
       <section class="col-xs-12 col-sm-6 col-md-12">
-      <%
-		if (productos!=null || !productos.isEmpty()){
-			for (Producto producto: productos) {
-				%>
+		<c:choose>
+			<c:when test="${!productos.isEmpty() || productos!=null}">
+				<c:forEach items="${productos}" var="producto">
 				<article class="search-result row" >
 		  			<div class="col-xs-12 col-sm-12 col-md-3">
-		  				<a href="/GZoneWeb/ProductServlet?product=<%=producto.getIdProducto()%>" title=<%=producto.getNombre()%> class="thumbnail"><img src="/GZoneWeb/CMS/producto_<%=producto.getIdProducto()%>/preview<%=producto.getIdProducto()%>.jpg" alt="<%=producto.getNombre()%>"></a>
+		  				<a href="/GZoneWeb/ProductServlet?product=${producto.getIdProducto()}" title="${producto.getNombre()}" class="thumbnail"><img src="/GZoneWeb/CMS/producto_${producto.getIdProducto()}/preview${producto.getIdProducto()}.jpg" alt="${producto.getNombre()}"></a>
 		  			</div>
 		  			<div class="col-xs-12 col-sm-12 col-md-2">
 		  				<ul class="meta-search">
 		  					<li><i class="fa fa-users"></i> <span>Multijugador</span></li>
-		  					<li><i class="fa fa-credit-card"></i><span><%=producto.getPrecio()%></span></li>
+		  					<li><i class="fa fa-credit-card"></i><span>${producto.getPrecio()}</span></li>
 		  					<li><i class="fa fa-gamepad"></i><span>Accion</span></li>
 		  				</ul>
 		  			</div>
 		  			<div class="col-xs-12 col-sm-12 col-md-7 excerpet">
-		  				<h3><a href="/GZoneWeb/ProductServlet?product=<%=producto.getIdProducto()%>" title=""><%=producto.getNombre()%></a></h3>
-		  				<p><%=producto.getDetalles_corto()%></p>
+		  				<h3><a href="/GZoneWeb/ProductServlet?product=${producto.getIdProducto()}" title="">${producto.getNombre()}</a></h3>
+		  				<p>${producto.getDetalles_corto()}</p>
 		  			</div>
 		  			<span class="clearfix borda"></span>
 		  		</article>
-				<%
-			}
-		}
-		else
-		{
-			%>
-			<h3>No se han encontrado resultados</h3>
-	<%
-		}
-	%>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<h3>No se han encontrado resultados</h3>
+			</c:otherwise>
+		</c:choose>	
   	 </section>
   	 
  	<nav aria-label="..." id="pagination">

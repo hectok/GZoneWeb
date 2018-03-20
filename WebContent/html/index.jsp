@@ -1,56 +1,49 @@
 <%@include file="/html/common/header.jsp"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-<%
-	List<Producto> ofertas= (List <Producto>) request.getAttribute(SessionAttributeNames.SALE);
-	List<Producto> explorar= (List <Producto>) request.getAttribute(SessionAttributeNames.EXPLORE);
 
-%>
+<c:set var="explore" value="${requestScope.explore}" />
+
 	<header class="bp-header">
-		<h1>En Oferta</h1>
+		<h1>En Oferta</h1>		
 		<hr>
 	</header>
 	
 	<div id="agrupar">
 		<ul class="ofertas">
-		<%
-		if (ofertas!=null || ofertas.isEmpty()){
-			for (Producto oferta: ofertas) {
-				%>
-			<li>
-				<div class="producto ">
-					<ul class="bordes">
-						<li><img src="/GZoneWeb/CMS/producto_<%=oferta.getIdProducto()%>/preview<%=oferta.getIdProducto()%>.jpg" alt="<%=oferta.getNombre()%>"></li>
-					</ul>
-					<form name="informacionProducto" method="POST" action="/GZoneWeb/ShoppingCartServlet" name="shopping-cart">
-						<div class="barraBlanca">
-							<div class="informacion_articulo">
-								<b><a href="/GZoneWeb/ProductServlet?product=<%=oferta.getIdProducto()%>"><%=oferta.getNombre()%> </a></b>
-								<input type="hidden" name="nombreProducto" value="<%=oferta.getNombre()%>" >										
-								<input type="hidden" name="idProducto" value=<%=oferta.getIdProducto()%>>
-								<em id="ofertaTachada"> <%=oferta.getPrecio()%>€</em>
-								<input  type="hidden" name="precioProducto" value=<%=oferta.getPrecio()%>>
-							</div>
-							<button type="submit" class="anadir" name="shopping-cart" value="anadir">
-								<em>Añadir</em>
-								<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
-									<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
-								</svg>
-							</button>
+			<c:choose>
+	  			<c:when test="${!requestScope.sales.isEmpty()}">
+					<c:forEach items="${requestScope.sales}" var="oferta">
+					<li>
+						<div class="producto ">
+							<ul class="bordes">
+								<li><img src="/GZoneWeb/CMS/producto_${oferta.getIdProducto()}/preview${oferta.getIdProducto()}.jpg" alt="${oferta.getNombre()}"></li>
+							</ul>
+							<form name="informacionProducto" method="POST" action="/GZoneWeb/ShoppingCartServlet" name="shopping-cart">
+								<div class="barraBlanca">
+									<div class="informacion_articulo">
+										<b><a href="/GZoneWeb/ProductServlet?product=${oferta.getIdProducto()}">${oferta.getNombre()} </a></b>
+										<input type="hidden" name="nombreProducto" value="${oferta.getNombre()}" >										
+										<input type="hidden" name="idProducto" value="${oferta.getIdProducto()}">
+										<em id="ofertaTachada"> ${oferta.getPrecio()}€</em>
+										<input  type="hidden" name="precioProducto" value="${oferta.getIdProducto()}">
+									</div>
+									<button type="submit" class="anadir" name="shopping-cart" value="anadir">
+										<em>Añadir</em>
+										<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
+											<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
+										</svg>
+									</button>
+								</div>
+							</form>
 						</div>
-					</form>
-				</div>
-			</li>
-			<%
-			}
-			}
-			else
-			{
-				%>
-				<li>No se han encontrado Ofertas</li>
-		<%
-			}
-		%>
+					</li>
+					</c:forEach>
+	  			</c:when>
+	  			<c:otherwise>
+	  				<li>Ahora mismo no hay ninguna oferta que podemos ofrecerte.Lo sentimos. </li>
+	  			</c:otherwise>
+  			</c:choose>
 		</ul> <!-- ofertas -->
 	</div>
 
@@ -80,59 +73,53 @@
 		<!-- Loader -->
 		<img class="grid__loader" src="/GZoneWeb/images/grid.svg" width="60" alt="Loader image" />
 		<div class="grid__sizer"></div>
-		
-		<%
-		if (explorar!=null || explorar.isEmpty()){
-			String big = null;
-			for (int i=0; i<explorar.size();i++) {
-				if ((i % 8 == 0))
-				{
-					big="grid__item--size-a";
-				}
-				else {
-					big=" ";
-				}
-				%>
-		<div class="grid__item <%= big%> <%=explorar.get(i).getCategorias().get(0).getCategoria()%> ">
-			<div class="producto">
-				<a href="#0">
-					<ul class="bordes">
-						<li class="selected"><img src="/GZoneWeb/CMS/producto_<%=explorar.get(i).getIdProducto()%>/preview<%=explorar.get(i).getIdProducto()%>.jpg" alt="<%=explorar.get(i).getNombre()%>"></li>
-					</ul>
-				</a>
-				<form name="informacionProducto" method="POST" action="/GZoneWeb/ShoppingCartServlet" name="shopping-cart">
-					<div class="barraBlanca">
-						<div class="informacion_articulo">
-							<b><a href="/GZoneWeb/ProductServlet?product=<%=explorar.get(i).getIdProducto()%>"><%=explorar.get(i).getNombre()%></a></b>
-							<input type="hidden" name="nombreProducto" value="<%=explorar.get(i).getNombre()%>">										
-							<input type="hidden" name="idProducto" value=<%=explorar.get(i).getIdProducto()%>>
-							<em><%=explorar.get(i).getPrecio()%>€</em>
-							<input type="hidden" name="precioProducto" value=<%=explorar.get(i).getPrecio()%>>	
-						</div> <!-- informacion_articulo -->
-	
-						<button class="anadir action action--button action--buy" name="shopping-cart" value="anadir">
-							<em>Añadir</em>
-							<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
-								<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
-							</svg>
-						</button>
-					</div> <!-- .barraBlanca -->
-				</form>
-			</div> <!-- .producto -->
-		</div>
-		<%
+		<c:choose>
+	  			<c:when test="${!explore.isEmpty()}">
+					<c:forEach var = "i" begin = "0" end = "39">
+						<c:choose>
+							<c:when test="${i%6==0}">
+								<c:set var="big" value=" grid__item--size-a " />
+							</c:when>
+							<c:otherwise>
+								<c:set var="big" value=" " />
+							</c:otherwise>
+						</c:choose>	
+						<div class="grid__item ${big} ${explore.get(i).getCategorias().get(0).getCategoria()}  ">
+							<div class="producto">
+								<a href="#0">
+									<ul class="bordes">
+										<li class="selected"><img src="/GZoneWeb/CMS/producto_${explore.get(i).getIdProducto()}/preview${explore.get(i).getIdProducto()}.jpg" alt="${explore.get(i).getNombre()}"></li>
+									</ul>
+								</a>
+								<form name="informacionProducto" method="POST" action="/GZoneWeb/ShoppingCartServlet" name="shopping-cart">
+									<div class="barraBlanca">
+										<div class="informacion_articulo">
+											<b><a href="/GZoneWeb/ProductServlet?product=${explore.get(i).getIdProducto()}">${explore.get(i).getNombre()}</a></b>
+											<input type="hidden" name="nombreProducto" value="${explore.get(i).getNombre()}">										
+											<input type="hidden" name="idProducto" value="${explore.get(i).getIdProducto()}">
+											<em>${explore.get(i).getPrecio()}€</em>
+											<input type="hidden" name="precioProducto" value="${explore.get(i).getPrecio()}">	
+										</div> <!-- informacion_articulo -->
 					
-				}
-			}
-					else
-					{
-						%>
-						<p>No se han encontrado nada para explorar</p>
-				<%
-					}
-				%>
+										<button class="anadir action action--button action--buy" name="shopping-cart" value="anadir">
+											<em>Añadir</em>
+											<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
+												<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
+											</svg>
+										</button>
+									</div> <!-- .barraBlanca -->
+								</form>
+							</div> <!-- .producto -->
+						</div>
+					</c:forEach>
+	  			</c:when>
+	  			<c:otherwise>
+	  				<p>No se han encontrado nada para explorar</p>
+	  			</c:otherwise>
+  		</c:choose>
+  		
+  		
 </section>
 <!-- /grid-->
 </div>
-
 <%@include file="/html/common/footer.jsp"%>
