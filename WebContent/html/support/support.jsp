@@ -1,4 +1,5 @@
 <%@include file="/html/common/header.jsp"%>
+
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <div id="soporte">
@@ -105,4 +106,4 @@
 	<script src="/GZoneWeb/js/support/support.js"></script>
 
 </div>
-<%@include file="/html/common/footer.jsp"%>
+<c:import url="/html/common/footer.jsp"></c:import>

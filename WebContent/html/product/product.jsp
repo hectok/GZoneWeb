@@ -1,23 +1,18 @@
  <%@include file="/html/common/header.jsp"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%
-	String product = request.getParameter(SessionAttributeNames.PRODUCT);
-	if (product==null) {product ="";}
-%>
 
-<%
-	Producto producto = (Producto) request.getAttribute(SessionAttributeNames.PRODUCT);
-%>
+<c:set var="producto" value="${requestScope.product}" />
+
 	<script >
 	$(document).ready(function() {
-	    $('#fondo').css('background', 'url("/GZoneWeb/CMS/producto_<%=producto.getIdProducto()%>/wall<%=producto.getIdProducto()%>.jpg")');
+	    $('#fondo').css('background', 'url("/GZoneWeb/CMS/producto_${producto.getIdProducto()}/wall${producto.getIdProducto()}.jpg")');
 	});
 	</script>
 
 <div id="fondo">
 	<div class="articulo">
 	    <div class="titulo">
-	      <h1><%=producto.getNombre()%></h1>
+	      <h1>${producto.getNombre()}</h1>
 	      <hr>
 	    </div>
 	    <div class="izquierda">
@@ -36,19 +31,19 @@
 	          <div class="carousel-inner" role="listbox">
 	          
 	            <div class="item active">
-	              <img src="/GZoneWeb/CMS/producto_<%=producto.getIdProducto()%>/slide<%=producto.getIdProducto()%>_1.jpg" alt="<%=producto.getNombre()%>">
+	              <img src="/GZoneWeb/CMS/producto_${producto.getIdProducto()}/slide${producto.getIdProducto()}_1.jpg" alt="${producto.getNombre()}">
 	            </div>
 	            <div class="item">
-					<img src="/GZoneWeb/CMS/producto_<%=producto.getIdProducto()%>/slide<%=producto.getIdProducto()%>_2.jpg" alt="<%=producto.getNombre()%>">	            
+					<img src="/GZoneWeb/CMS/producto_${producto.getIdProducto()}/slide${producto.getIdProducto()}_2.jpg" alt="${producto.getNombre()}">	            
 				</div>
 	            <div class="item">
-	              <img src="/GZoneWeb/CMS/producto_<%=producto.getIdProducto()%>/slide<%=producto.getIdProducto()%>_3.jpg" alt="<%=producto.getNombre()%>">
+	              <img src="/GZoneWeb/CMS/producto_${producto.getIdProducto()}/slide${producto.getIdProducto()}_3.jpg" alt="${producto.getNombre()}">
 	            </div>
 	            <div class="item">
-	              <img src="/GZoneWeb/CMS/producto_<%=producto.getIdProducto()%>/slide<%=producto.getIdProducto()%>_4.jpg" alt="<%=producto.getNombre()%>">
+	              <img src="/GZoneWeb/CMS/producto_${producto.getIdProducto()}/slide${producto.getIdProducto()}_4.jpg" alt="${producto.getNombre()}">
 	            </div>
 	            <div class="item">
-	              <img src="/GZoneWeb/CMS/producto_<%=producto.getIdProducto()%>/slide<%=producto.getIdProducto()%>_5.jpg" alt="<%=producto.getNombre()%>">
+	              <img src="/GZoneWeb/CMS/producto_${producto.getIdProducto()}/slide${producto.getIdProducto()}_5.jpg" alt="${producto.getNombre()}">
 	            </div>
 
 	            <!-- Left and right controls -->
@@ -65,9 +60,9 @@
 	      </div>
 	      <div class="descripcion">
 	        <input type="checkbox" class="read-more-state" id="post-1" />
-	        <p class="read-more-wrap"> <%=producto.getDetalles_largo().substring(0, 200)%>
+	        <p class="read-more-wrap"> ${producto.getDetalles_largo().substring(0, 200)}
 	          <span class="read-more-target">
-	           <%=producto.getDetalles_largo().substring(200) %>
+	           ${producto.getDetalles_largo().substring(200)}
 	        </p>    
 	            <label for="post-1" class="read-more-trigger"></label>
 	          </div>
@@ -76,15 +71,15 @@
 	        <div class="derecha">
 	          <div class="comprar">
 		          <form name="informacionProducto" method="POST" action="/GZoneWeb/ShoppingCartServlet" name="shopping-cart">
-		          		<input type="hidden" name="nombreProducto" value="<%=producto.getNombre()%>" >										
-						<input type="hidden" name="idProducto" value=<%=producto.getIdProducto()%>>		
-			            <img src="/GZoneWeb/CMS/producto_<%=producto.getIdProducto()%>/preview<%=producto.getIdProducto()%>.jpg" alt="<%=producto.getNombre()%>">
+		          		<input type="hidden" name="nombreProducto" value="${producto.getNombre()}" >										
+						<input type="hidden" name="idProducto" value=${producto.getIdProducto()}>		
+			            <img src="/GZoneWeb/CMS/producto_${producto.getIdProducto()}/preview${producto.getIdProducto()}.jpg" alt="${producto.getNombre()}">
 			            <div class="des_breve">
-			              <p><%=producto.getDetalles_corto()%></p>
+			              <p>${producto.getDetalles_corto()}</p>
 			            </div>
 			            <div class="elegir">
-			              <p><%=producto.getPrecio()%>€</p>
-			              <input type="hidden" name="precioProducto" value=<%=producto.getPrecio()%>> 
+			              <p>${producto.getPrecio()}€</p>
+			              <input type="hidden" name="precioProducto" value="${producto.getPrecio()}"> 
 			              <button class="btn anadir" name="shopping-cart" value="anadir"><i class="fa fa-shopping-cart  "></i> Comprar</button>
 			            </div>
 			      </form>
@@ -93,30 +88,35 @@
 	          <div class="detalles">
 	            
 	            <h4>Categoria :</h4>
-	            <%
-				if (!producto.getCategorias().isEmpty()){
-					for (Categoria categorias: producto.getCategorias()) {
-				%>
-	            	<p><%=categorias.getCategoria()%></p>
-	            	<%
-						}
-					}
-	            %>
+	            <c:choose>
+					<c:when test="${!producto.getCategorias().isEmpty()}">
+						<c:forEach items="${producto.getCategorias()}" var="categorias">
+							<p>${categorias.getCategoria()}</p>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<p>Este juego no tiene ninguna categoría asignada.</p>
+					</c:otherwise>
+				</c:choose>	
+	           
+	            
 	            <h4>Idiomas disponibles :</h4>
-                <%
-				if (!producto.getIdioma().isEmpty()){
-					for (Idioma idioma: producto.getIdioma()) {
-				%>
-	            	<p><%=idioma.getNombreIdioma()%></p>
-	            	<%
-						}
-					}
-	            %>
+	            <c:choose>
+					<c:when test="${!producto.getIdioma().isEmpty()}">
+						<c:forEach items="${producto.getIdioma()}" var="idioma">
+							<p>${idioma.getNombreIdioma()}</p>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<p>Este juego no tiene ningun idioma asignado.</p>
+					</c:otherwise>
+				</c:choose>	
+                	            
 	            <h4>Requisitos minimos :</h4>
-	            <p><%=producto.getRequisitos()%></p>
+	            <p>${producto.getRequisitos()}</p>
 	          </div>
 	        </div>
 	  </div>
 	</div>
-  <%@include file="/html/common/footer.jsp"%>
+<c:import url="/html/common/footer.jsp"></c:import>
   

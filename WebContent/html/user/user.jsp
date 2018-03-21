@@ -1,11 +1,9 @@
 <%@include file="/html/common/header.jsp"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-<%
-	Usuario usuario = (Usuario) request.getAttribute(SessionAttributeNames.PROFILE);
- 
-%>
 <c:set var="biblioteca" value="${requestScope.library}" />
+<c:set var="user" value="${requestScope.profile}" />
+
 
 <div id="perfil">
     <div id="centrar">
@@ -66,7 +64,7 @@
                     <div class="col-md-4 inputGroupContainer">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input class="form-control" type="text" placeholder=<%=usuario.getUsuario()%> disabled>
+                        <input class="form-control" type="text" placeholder="${user.getUsuario()}" disabled>
                       </div>
                     </div>
                   </div>
@@ -77,7 +75,7 @@
                     <div class="col-md-4 inputGroupContainer">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input  name="first_name" placeholder=<%=usuario.getNombre()%> class="form-control"  type="text">
+                        <input  name="first_name" placeholder="${user.getNombre()}" class="form-control"  type="text">
                       </div>
                     </div>
                   </div>
@@ -88,7 +86,7 @@
                     <div class="col-md-4 inputGroupContainer">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input name="last_name" placeholder="<%=usuario.getApellido()%>" class="form-control"  type="text">
+                        <input name="last_name" placeholder="${user.getApellido()}" class="form-control"  type="text">
                       </div>
                     </div>
                   </div>
@@ -129,51 +127,6 @@
                           <option >Arkansas</option>
                           <option >California</option>
                           <option >Colorado</option>
-                          <option >Connecticut</option>
-                          <option >Delaware</option>
-                          <option >District of Columbia</option>
-                          <option> Florida</option>
-                          <option >Georgia</option>
-                          <option >Hawaii</option>
-                          <option >daho</option>
-                          <option >Illinois</option>
-                          <option >Indiana</option>
-                          <option >Iowa</option>
-                          <option> Kansas</option>
-                          <option >Kentucky</option>
-                          <option >Louisiana</option>
-                          <option>Maine</option>
-                          <option >Maryland</option>
-                          <option> Mass</option>
-                          <option >Michigan</option>
-                          <option >Minnesota</option>
-                          <option>Mississippi</option>
-                          <option>Missouri</option>
-                          <option>Montana</option>
-                          <option>Nebraska</option>
-                          <option>Nevada</option>
-                          <option>New Hampshire</option>
-                          <option>New Jersey</option>
-                          <option>New Mexico</option>
-                          <option>New York</option>
-                          <option>North Carolina</option>
-                          <option>North Dakota</option>
-                          <option>Ohio</option>
-                          <option>Oklahoma</option>
-                          <option>Oregon</option>
-                          <option>Pennsylvania</option>
-                          <option>Rhode Island</option>
-                          <option>South Carolina</option>
-                          <option>South Dakota</option>
-                          <option>Tennessee</option>
-                          <option>Texas</option>
-                          <option> Uttah</option>
-                          <option>Vermont</option>
-                          <option>Virginia</option>
-                          <option >Washington</option>
-                          <option >West Virginia</option>
-                          <option>Wisconsin</option>
-                          <option >Wyoming</option>
                         </select>
                       </div>
                     </div>
@@ -198,7 +151,7 @@
                     <div class="col-md-4 inputGroupContainer">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                        <textarea class="form-control" name="comment" placeholder="<%=usuario.getDescripcion()%>"></textarea>
+                        <textarea class="form-control" name="comment" placeholder="${user.getDescripcion()}"></textarea>
                       </div>
                     </div>
                   </div>
@@ -222,4 +175,4 @@
     </div>
   <script src="../js/flip/flip.js"></script>
 
-<%@include file="/html/common/footer.jsp"%>
+<c:import url="/html/common/footer.jsp"></c:import>

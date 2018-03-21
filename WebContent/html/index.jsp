@@ -26,7 +26,7 @@
 										<input type="hidden" name="nombreProducto" value="${oferta.getNombre()}" >										
 										<input type="hidden" name="idProducto" value="${oferta.getIdProducto()}">
 										<em id="ofertaTachada"> ${oferta.getPrecio()}€</em>
-										<input  type="hidden" name="precioProducto" value="${oferta.getIdProducto()}">
+										<input  type="hidden" name="precioProducto" value="${oferta.getPrecio()}">
 									</div>
 									<button type="submit" class="anadir" name="shopping-cart" value="anadir">
 										<em>Añadir</em>
@@ -75,7 +75,7 @@
 		<div class="grid__sizer"></div>
 		<c:choose>
 	  			<c:when test="${!explore.isEmpty()}">
-					<c:forEach var = "i" begin = "0" end = "39">
+					<c:forEach var = "i" begin = "0" end = "${explore.size()-1}">
 						<c:choose>
 							<c:when test="${i%6==0}">
 								<c:set var="big" value=" grid__item--size-a " />
@@ -122,4 +122,4 @@
 </section>
 <!-- /grid-->
 </div>
-<%@include file="/html/common/footer.jsp"%>
+<c:import url="/html/common/footer.jsp"></c:import>

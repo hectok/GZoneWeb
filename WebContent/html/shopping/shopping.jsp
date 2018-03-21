@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@page session="false"%>
 <%@page import="com.gzone.ecommerce.model.*, com.gzone.ecommerce.web.model.*, com.gzone.ecommerce.web.util.*, com.gzone.ecommerce.web.controller.*,java.util.List " %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 
  <html>
  <head>
@@ -12,10 +13,11 @@
 	<link rel="stylesheet" href="/GZoneWeb/css/checkout.css">
 </head>
 <body>
-	<%	
-		Usuario user = (Usuario) SessionManager.get(request, SessionAttributeNames.USER); 
-		ShoppingCart carrito = (ShoppingCart) SessionManager.get(request, SessionAttributeNames.SHOPPING_CART);
-	%>
+
+  <c:set var="user" value="${sessionScope.user}" />
+  <c:set var="carrito" value="${session.shopping-cart}" />
+  
+  
   <div class="container-fluid background">
       <div class="row padding-top-20">
           <div class="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-8 offset-md-1 offset-lg-1 offset-xl-2 padding-horizontal-40">
@@ -41,31 +43,29 @@
                                       </div>
                                   </div>
                                   <div class="col-12 panel-body basket-body">
-									<% 	
-										if (carrito!=null)
-										{
-											if (carrito.numeroLineas()!=0)
-											{
-												for (ShoppingCartLine lineas: carrito.getLines()) {
-												%>
-			                                      <div class="row product">
-			                                          <div class="col-2 product-image"><img src="/GZoneWeb/CMS/producto_<%=lineas.getProduct().getIdProducto()%>/preview<%=lineas.getProduct().getIdProducto()%>.jpg" alt="<%=lineas.getProduct().getNombre()%>"></div>
-			                                          <div class="col-5"><%= lineas.getProduct().getNombre() %></div>
-			                                          <div class="col-3 align-right"><span class="sub"><%= lineas.getProduct().getPrecio() %>€</span></div>
-			                                      </div>
-														
-												<% 
-												}
-											}
-										}
-												%>
+                                  <c:choose>
+                                  	<c:when test="${sessionScope.shopping-cart.numeroLineas()!=0}">
+                                  		
+                                  		<c:forEach items="${essionScope.shopping-cart.getLines()}" var="lineas">
+                               				<div class="row product">
+	                                          <div class="col-2 product-image"><img src="/GZoneWeb/CMS/producto_${lineas.getProduct().getIdProducto()}/preview${lineas.getProduct().getIdProducto()}.jpg" alt="${lineas.getProduct().getNombre()}"></div>
+	                                          <div class="col-5">${lineas.getProduct().getNombre()}</div>
+	                                          <div class="col-3 align-right"><span class="sub">${lineas.getProduct().getPrecio()}€</span></div>
+                                    		</div>
+                                  		</c:forEach>
+                                  	</c:when>
+                                  	<c:otherwise>
+                                  		<p>No deberias estar aqui!</p>
+                                  		<p><c:out value="${sessionScope.shopping-cart.numeroLineas()}" /></p>
+                                  	</c:otherwise>
+                                  </c:choose>
                                   </div>
                                   <div class="col-12 panel-footer basket-footer">
                                       <hr>
 
                                       <div class="row">
                                           <div class="col-8 align-right description"><div class="dive">Total</div></div>
-                                          <div class="col-4 align-right"><span class="very emphasized"><%= carrito.getTicketTotal() %> €</span></div>
+                                          <div class="col-4 align-right"><span class="very emphasized">${sessionScope.shopping-cart.getTicketTotal()}€</span></div>
                                       </div>
                                   </div>
                               </div>

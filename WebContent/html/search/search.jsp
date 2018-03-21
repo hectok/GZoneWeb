@@ -194,4 +194,4 @@
 	</nav>
   </div>
  </div>
- <%@include file="/html/common/footer.jsp"%>
+<c:import url="/html/common/footer.jsp"></c:import>
