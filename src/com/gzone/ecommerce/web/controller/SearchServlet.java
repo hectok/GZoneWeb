@@ -29,6 +29,7 @@ import com.gzone.ecommerce.service.impl.IdiomaServiceImpl;
 import com.gzone.ecommerce.service.impl.NJugadoresServiceImpl;
 import com.gzone.ecommerce.service.impl.ProductoServiceImpl;
 import com.gzone.ecommerce.web.util.ArrayUtils;
+import com.gzone.ecommerce.web.util.TrimmerUtil;
 
 /**
  * @author hector.ledo.doval
@@ -56,7 +57,7 @@ public class SearchServlet extends HttpServlet{
 			String target = null;
 			String idioma = SessionAttributeNames.ES;
 
-			String search = request.getParameter(SessionAttributeNames.PRODUCT);	
+			String search = TrimmerUtil.cleaner(request.getParameter(SessionAttributeNames.PRODUCT));	
 			String action = request.getParameter(ParameterNames.SEARCH);	
 			String [] categorias = request.getParameterValues(SessionAttributeNames.CATEGORY);
 			String [] jugadores = request.getParameterValues(SessionAttributeNames.PLAYERS);

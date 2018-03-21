@@ -80,7 +80,7 @@
 			            <div class="elegir">
 			              <p>${producto.getPrecio()}€</p>
 			              <input type="hidden" name="precioProducto" value="${producto.getPrecio()}"> 
-			              <button class="btn anadir" name="shopping-cart" value="anadir"><i class="fa fa-shopping-cart  "></i> Comprar</button>
+			              <button class="btn btn-primary" name="shopping-cart" value="anadir"><i class="fa fa-shopping-cart  "></i> Comprar</button>
 			            </div>
 			      </form>
 	          </div>
@@ -116,7 +116,34 @@
 	            <p>${producto.getRequisitos()}</p>
 	          </div>
 	        </div>
+			    
 	  </div>
-	</div>
+	<c:choose>
+		<c:when test="${requestScope.nombre_hotel!=null}">
+		<section class="xml_request">
+		    <div>
+		      <div class="container py-3">
+		        <div class="card">
+		          <div class="row ">
+		            <div class="col-md-4">
+		                <img src="<c:out value="${requestScope.fotos.item(0).getFirstChild().getNodeValue()}"/>" width="400px" height="200px">
+		              </div>
+		              <div class="col-md-8 px-3">
+		                <div class="card-block px-3">
+		                  <h4 class="card-title">Visita los mismos sitios que tu heroína favorita!</h4>
+		                  <p class="card-text">Bienvenido a <c:out value="${requestScope.nombre_hotel.item(0).getFirstChild().getNodeValue()}"/></p>
+		                  <p class="card-text"><c:out value="${requestScope.descripcion_hotel.item(0).getFirstChild().getNodeValue().substring(0, 304)}"/></p>
+		                  <p><c:out value="${requestScope.website.item(0).getFirstChild().getNodeValue()}"/></p>
+		                  <a href="http://<c:url value="${requestScope.website.item(0).getFirstChild().getNodeValue()}"/>" target="_blank" class="btn btn-primary">Visitar la web</a>
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+		</section> 
+		</c:when> 
+	</c:choose>   
+</div>
 <c:import url="/html/common/footer.jsp"></c:import>
   

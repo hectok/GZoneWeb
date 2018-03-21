@@ -143,7 +143,7 @@
     
     <hgroup>
   		<h1>Resultados de búsqueda</h1>
-  		<h2 class="lead"><strong class="text-danger">${productos.size()}</strong> resultados cumplen con la búsqueda de : <strong class="text-danger">${resultado}</strong></h2>
+  		<h2 class="lead"><strong class="text-danger"><c:out value="${productos.size()}" default="0"/></strong> resultados cumplen con la búsqueda de : <strong class="text-danger">${resultado}</strong></h2>
   	</hgroup>
                       
       <section class="col-xs-12 col-sm-6 col-md-12">

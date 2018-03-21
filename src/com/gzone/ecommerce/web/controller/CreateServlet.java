@@ -21,6 +21,7 @@ import com.gzone.ecommerce.model.Usuario;
 import com.gzone.ecommerce.service.UsuarioService;
 import com.gzone.ecommerce.service.impl.UsuarioServiceImpl;
 import com.gzone.ecommerce.web.util.SessionManager;
+import com.gzone.ecommerce.web.util.TrimmerUtil;
 import com.gzone.ecommerce.service.impl.MailServiceImpl;
 import com.gzone.ecommerce.service.MailService;
 
@@ -45,9 +46,9 @@ public class CreateServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userName = request.getParameter(ParameterNames.USER);
-		String email = request.getParameter(ParameterNames.EMAIL);
-		String password = request.getParameter(ParameterNames.PASSWORD);
+		String userName = TrimmerUtil.cleaner(request.getParameter(ParameterNames.USER));
+		String email = TrimmerUtil.cleaner(request.getParameter(ParameterNames.EMAIL));
+		String password = TrimmerUtil.cleaner(request.getParameter(ParameterNames.PASSWORD));
 		
 		Usuario creation = new Usuario();
 		creation.setUsuario(userName);

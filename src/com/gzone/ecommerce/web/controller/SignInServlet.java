@@ -21,6 +21,7 @@ import com.gzone.ecommerce.service.impl.UsuarioServiceImpl;
 import com.gzone.ecommerce.util.PasswordEncryptionUtil;
 import com.gzone.ecommerce.web.util.CookieManager;
 import com.gzone.ecommerce.web.util.SessionManager;
+import com.gzone.ecommerce.web.util.TrimmerUtil;
 
 /**
  * @author hector.ledo.doval
@@ -41,10 +42,11 @@ public class SignInServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userName = request.getParameter(ParameterNames.USER);
-		String password = request.getParameter(ParameterNames.PASSWORD);
+		String userName = TrimmerUtil.cleaner(request.getParameter(ParameterNames.USER));
+		String password = TrimmerUtil.cleaner(request.getParameter(ParameterNames.PASSWORD));
 		String remember = request.getParameter(ParameterNames.CHECKED);	
 		String target = null;
+		
 		boolean redirect = false;
 		try {
 			Usuario user = userService.findByNombre(userName);	
