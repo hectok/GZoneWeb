@@ -7,8 +7,9 @@
 
 <c:set var="productos" value="${requestScope.product}" />
 <c:set var="categorias" value="${requestScope.categoria}" />
-<c:set var="idiomas" value="${requestScope.idioma}" />
+<c:set var="idioma" value="${requestScope.idiomas}" />
 <c:set var="njugadores" value="${requestScope.jugadores}" />
+<c:set var="anio" value="${requestScope.anio}" />
 
 <div id="todo">
      <div id="panel" class="panel-group">
@@ -68,17 +69,18 @@
 	        <div class="panel-heading">Idioma</div>
 	        <div class="panel-body">
 	          <input type="checkbox" class="read-more-state" id="post-4" />
-	          <div class="read-more-wrap form-group idioma ">
- 			<c:forEach var = "i" begin = "0" end ="${idiomas.size()-1}">
+	          <div class="read-more-wrap form-group idiomas ">
+ 			<c:forEach var = "i" begin = "0" end ="${idioma.size()-1}">
 					<c:choose> 
 						<c:when test="${i<4}">
 							<div class="checkbox ">
-				                <label><input type="checkbox" name="idioma " value="${idiomas.get(i).getIdIdioma()}">${idiomas.get(i).getNombreIdioma()}</label>
+				                <label><input type="checkbox" name="idiomas" value="<c:out value="'${idioma.get(i).getIdIdioma()}'"></c:out>">${idioma.get(i).getNombreIdioma()}</label>
+				                
 				            </div>
 						</c:when>
 						<c:otherwise>							
 							<div class="checkbox read-more-target">
-				                <label><input type="checkbox" name="idioma " value="${idiomas.get(i).getIdIdioma()}">${idiomas.get(i).getNombreIdioma()}</label>
+				                <label><input type="checkbox" name="idiomas"  value="<c:out value="'${idioma.get(i).getIdIdioma()}'"></c:out>">${idioma.get(i).getNombreIdioma()}</label>
 				            </div>
 						</c:otherwise>
 					</c:choose>	
@@ -177,9 +179,6 @@
   	 
  	<nav aria-label="..." id="pagination">
 	  <ul class="pagination">
-	    <li class="page-item disabled">
-	      <a class="page-link" href="/GZoneWeb/SearchServlet?page=-1" tabindex="-1">Previous</a>
-	    </li>
 	    <li class="page-item active">
 	    	<a class="page-link" href="/GZoneWeb/SearchServlet?page=1">1</a>
 	    </li>
@@ -187,9 +186,7 @@
 	    	<a class="page-link" href="/GZoneWeb/SearchServlet?page=2">2</a>
 	    </li>
 	    <li class="page-item"><a class="page-link" href="/GZoneWeb/SearchServlet?page=3">3</a></li>
-	    <li class="page-item">
-	     	<a class="page-link" href="/GZoneWeb/SearchServlet?page=1">Next</a>
-	    </li>
+
 	  </ul>
 	</nav>
   </div>

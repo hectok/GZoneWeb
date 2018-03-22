@@ -59,10 +59,12 @@ public class SearchServlet extends HttpServlet{
 
 			String search = TrimmerUtil.cleaner(request.getParameter(SessionAttributeNames.PRODUCT));	
 			String action = request.getParameter(ParameterNames.SEARCH);	
+			
 			String [] categorias = request.getParameterValues(SessionAttributeNames.CATEGORY);
 			String [] jugadores = request.getParameterValues(SessionAttributeNames.PLAYERS);
 			String anio = request.getParameter(SessionAttributeNames.YEAR);
-			String [] idiomad = request.getParameterValues(SessionAttributeNames.LANGUAGE);
+			String [] idiomas = request.getParameterValues(SessionAttributeNames.LANGUAGE);
+			
 			
 			ProductoCriteria criteria = null;
 			ArrayUtils arrayUtil = null;
@@ -87,17 +89,20 @@ public class SearchServlet extends HttpServlet{
 					if (jugadores!=null)
 					{
 						criteria.setNjugadores(arrayUtil.arrayToNJugadores(jugadores));
+
 					}
 					if (anio!=null)
 					{
 						criteria.setAnio(Integer.valueOf(anio));
+
 					}
-					if (idiomad!=null)
+					if (idiomas!=null)
 					{
-						criteria.setIdioma(arrayUtil.arrayToIdioma(idiomad));
+						criteria.setIdioma(arrayUtil.arrayToIdioma(idiomas));
 					}
 				}
-			}		
+			}	
+
 			try {
 				
 				List<Categoria> todasCategorias = categoriaService.findAll(1, 30, SessionAttributeNames.ES);

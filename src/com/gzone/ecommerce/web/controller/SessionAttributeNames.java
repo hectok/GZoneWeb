@@ -19,7 +19,7 @@ public interface SessionAttributeNames {
 	public static final String CATEGORY = "categoria";
 	public static final String PLAYERS = "jugadores";
 	public static final String YEAR = "anio";
-	public static final String LANGUAGE = "idioma";
+	public static final String LANGUAGE = "idiomas";
 
 	public static final String ES = "ES";
 	public static final String PAGINATION = "page";
