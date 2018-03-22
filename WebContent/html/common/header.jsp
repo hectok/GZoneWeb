@@ -166,10 +166,10 @@
 					<div class="modal-body">
 						<form action="/GZoneWeb/SignInServlet" method="post">
 							<div class="form-group">
-								<label for="usuario">Nombre de usuario:</label> <input type="text" class="form-control" name="user" value="<%=value%>" placeholder="Introduce tu usuario">
+								<label for="usuario">Nombre de usuario:</label> <input type="text" class="form-control" name="user" value="<%=value%>" placeholder="Introduce tu usuario" required>
 							</div>
 							<div class="form-group">
-								<label for="pwd">Contraseña:</label> <input type="password" class="form-control" id="pwd" name="password" placeholder="Introduce tu contraseña">
+								<label for="pwd">Contraseña:</label> <input type="password" class="form-control" id="pwd" name="password" placeholder="Introduce tu contraseña" required>
 							</div>
 							<%
 								String error = (String) request.getAttribute("error");
@@ -205,13 +205,13 @@
 					<div class="modal-body">
 						<form action="/GZoneWeb/CreateServlet">
 							<div class="form-group">
-								<label for="user">Usuario:</label> <input type="user" class="form-control" id="user" name="user" placeholder="Introduce tu nuevo nombre de usuario">
+								<label for="user">Usuario:</label> <input type="user" class="form-control" id="user" name="user" placeholder="Introduce tu nuevo nombre de usuario" required>
 							</div>
 							<div class="form-group">
-								<label for="email">Correo electrónico:</label> <input type="email" class="form-control" id="email" name="email" placeholder="Introduce tu correo">
+								<label for="email">Correo electrónico:</label> <input type="email" class="form-control" id="email" name="email" placeholder="Introduce tu correo" required>
 							</div>
 							<div class="form-group">
-								<label for="pwd">Contraseña:</label> <input type="password" class="form-control" id="pwd" name="password" placeholder="Introduce tu contraseña">
+								<label for="pwd">Contraseña:</label> <input type="password" class="form-control" id="pwd" name="password" placeholder="Introduce tu contraseña" required>
 							</div>
 							<%
 								String errorCreating = (String) request.getAttribute("error");

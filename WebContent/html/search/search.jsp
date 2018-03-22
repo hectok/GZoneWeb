@@ -49,12 +49,12 @@
 					<c:choose> 
 						<c:when test="${i<4}">
 							<div class="checkbox ">
-				                <label><input type="checkbox" name="categoria" value="${jugadores.get(i).getIdNJugadores()}">${jugadores.get(i).getnJugadores()}</label>
+				                <label><input type="checkbox" name="jugadores" value="${jugadores.get(i).getIdNJugadores()}">${jugadores.get(i).getnJugadores()}</label>
 				            </div>
 						</c:when>
 						<c:otherwise>							
 							<div class="checkbox read-more-target">
-				                <label><input type="checkbox" name="categoria" value="${jugadores.get(i).getIdNJugadores()}">${jugadores.get(i).getnJugadores()}</label>
+				                <label><input type="checkbox" name="jugadores" value="${jugadores.get(i).getIdNJugadores()}">${jugadores.get(i).getnJugadores()}</label>
 				            </div>
 						</c:otherwise>
 					</c:choose>	
@@ -73,12 +73,12 @@
 					<c:choose> 
 						<c:when test="${i<4}">
 							<div class="checkbox ">
-				                <label><input type="checkbox" name="categoria" value="${idiomas.get(i).getIdIdioma()}">${idiomas.get(i).getNombreIdioma()}</label>
+				                <label><input type="checkbox" name="idioma " value="${idiomas.get(i).getIdIdioma()}">${idiomas.get(i).getNombreIdioma()}</label>
 				            </div>
 						</c:when>
 						<c:otherwise>							
 							<div class="checkbox read-more-target">
-				                <label><input type="checkbox" name="categoria" value="${idiomas.get(i).getIdIdioma()}">${idiomas.get(i).getNombreIdioma()}</label>
+				                <label><input type="checkbox" name="idioma " value="${idiomas.get(i).getIdIdioma()}">${idiomas.get(i).getNombreIdioma()}</label>
 				            </div>
 						</c:otherwise>
 					</c:choose>	
