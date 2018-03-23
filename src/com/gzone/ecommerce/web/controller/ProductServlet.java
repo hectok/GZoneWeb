@@ -4,6 +4,7 @@
 package com.gzone.ecommerce.web.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,13 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-
 import com.gzone.ecommerce.model.Producto;
 import com.gzone.ecommerce.service.ProductoService;
+import com.gzone.ecommerce.service.XMLService;
 import com.gzone.ecommerce.service.impl.ProductoServiceImpl;
-import com.gzone.ecommerce.web.util.XMLRequest;
+import com.gzone.ecommerce.service.impl.XMLServiceImpl;
 
 /**
  * @author hector.ledo.doval
@@ -27,6 +26,7 @@ import com.gzone.ecommerce.web.util.XMLRequest;
 public class ProductServlet extends HttpServlet{
 	
 	private ProductoService productoService = null;
+	private XMLService xmlservice = null;
 	
 	 public ProductServlet () {
 	        super();
@@ -41,18 +41,10 @@ public class ProductServlet extends HttpServlet{
 			Producto productoDetail = new Producto();
 			try {
 				if (search==6) {
-					Document xml_request = XMLRequest.get_response();
-					
-					NodeList nombre_hotel = xml_request.getElementsByTagName("nombre_h");
-					NodeList descripcion_hotel = xml_request.getElementsByTagName("desc_hotel");
-					NodeList fotos = xml_request.getElementsByTagName("foto");
-					NodeList website = xml_request.getElementsByTagName("web");
-					
-					request.setAttribute("nombre_hotel", nombre_hotel);
-					request.setAttribute("descripcion_hotel", descripcion_hotel);
-					request.setAttribute("fotos", fotos);
-					request.setAttribute("website", website);
-
+					//Cargamos el servicio de recuperacion del XML de Hotusa
+					xmlservice = new XMLServiceImpl();
+					List<String> xml_request = xmlservice.XMLRequest();
+					request.setAttribute(AttributeNames.HOTUSA, xml_request);
 				}
 				productoDetail = productoService.findById(search, SessionAttributeNames.ES);	
 				if (productoDetail==null ) {

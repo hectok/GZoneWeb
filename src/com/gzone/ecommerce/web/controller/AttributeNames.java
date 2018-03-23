@@ -20,4 +20,7 @@ public interface AttributeNames {
 	public static final String COOKIE_NULL = "La cookie ha devuelto un null";
 	
 	public static final String PRODUCT = "product";
+	
+	public static final String HOTUSA = "hotusa";
+
 }
