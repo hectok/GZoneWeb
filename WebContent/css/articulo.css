@@ -40,6 +40,7 @@ body {
   height: 100%; 
   min-height: 1400px;
 }
+
 #fondo:before {
   width:100%;
   content: '';
@@ -264,22 +265,22 @@ background-color:rgba(41, 41, 41, 0.8);
   width: 100%;
   border: 3px solid black;
   text-align: left;
-color:white !important;
-background-color:rgba(41, 41, 41, 0.8);
+  color:white !important;
+  background-color:rgba(41, 41, 41, 0.8);
   margin-top: 30px;
   min-height: 400px;
 }
 
 .detalles > * {
-	margin-left: 10px;
+  margin-left: 10px;
 }
 
 .xml_request{
-	padding: 10px 0 10px 0;
+	padding: 0 0 10px 0;
 	margin:auto;
 	width: 60%;
 	color:white !important;
-	background-color:rgba(41, 41, 41, 0.8);
+	background-color:rgba(41, 41, 41, 0.9);
 }
 .xml_request .card-text{
 	margin-right: 20px;
@@ -323,9 +324,9 @@ background-color:rgba(41, 41, 41, 0.8);
   	margin:auto;
 	width: 60%;
 	margin-bottom: 40px;
-	}
-	#fondo {
-	  height: 100%; 
- 	  min-height: 1700px;
-	}
+  }
+  #fondo {
+    height: 100%; 
+	min-height: 1700px;
+  }
 }

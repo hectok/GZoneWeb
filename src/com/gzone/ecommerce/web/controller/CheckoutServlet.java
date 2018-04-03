@@ -62,4 +62,3 @@ public class CheckoutServlet extends HttpServlet{
 		doGet(request, response);
 	}
 }
-

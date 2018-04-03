@@ -53,7 +53,7 @@
           <!--Panel de ajustes del usuario -->
           <div class="tab-pane fade" id="ajustes">
             <div class="container">
-              <form class="well form-horizontal" action="/GZoneWeb/UserServlet?action=update" method="post"  id="contact_form">
+              <form class="well form-horizontal" action="/GZoneWeb/UserServlet?profile=${user.getIdUsuario()}&action=update" method="post"  id="contact_form">
                 <fieldset>
                   <!-- Formulario -->
                   <legend>Tu panel de usuario</legend>

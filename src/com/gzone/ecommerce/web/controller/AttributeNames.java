@@ -19,6 +19,9 @@ public interface AttributeNames {
 	//Error de cookies
 	public static final String COOKIE_NULL = "La cookie ha devuelto un null";
 	
+	//Error de checkout sin iniciar sesion
+	public static final String SESSION_ERROR = "Debes iniciar sesion primero";
+
 	public static final String PRODUCT = "product";
 	
 	public static final String HOTUSA = "hotusa";
