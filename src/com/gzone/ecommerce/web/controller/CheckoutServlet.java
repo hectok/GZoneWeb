@@ -45,9 +45,7 @@ public class CheckoutServlet extends HttpServlet{
 				if (checkout==SessionAttributeNames.PAGAR) {
 					Ticket ticket = new Ticket();
 					if (SessionManager.get(request, SessionAttributeNames.USER)!=null) {
-						System.out.println("hola");
 					}else {
-						System.out.println("adios");
 
 					}
 				}

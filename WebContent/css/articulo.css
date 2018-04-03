@@ -73,7 +73,7 @@ img, svg {
 h4{
 	color: rgba(155, 88, 214, 1) !important;
 }
-button {
+btn {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;

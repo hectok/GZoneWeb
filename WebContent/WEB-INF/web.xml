@@ -4,4 +4,16 @@
   <welcome-file-list>
     <welcome-file>IndexServlet</welcome-file>    
   </welcome-file-list>
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/html/error/404.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/html/error/error500.jsp</location>
+  </error-page> 
+  <session-config>
+    <session-timeout>60</session-timeout>
+  </session-config>
+
 </web-app>

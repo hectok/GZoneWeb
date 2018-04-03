@@ -172,11 +172,23 @@
 								<label for="pwd">Contraseña:</label> <input type="password" class="form-control" id="pwd" name="password" placeholder="Introduce tu contraseña" required>
 							</div>
 							<%
-								String error = (String) request.getAttribute("error");
-								if (error!=null) {
-									%><%=error%><%
+								String errorSignIn = (String) request.getAttribute("El usuario no existe");
+								String errorDoNotExist = (String) request.getAttribute("Contraseña incorrecta");
+								
+								if (errorSignIn!=null || errorDoNotExist!=null) {
+									%>
+									<script type="text/javascript">
+									    $(window).on('load',function(){
+									        $('#iniciar').modal('show');
+									    });
+									</script>
+									<div class="alert alert-danger" role="alert">
+									  	<strong>Ups!</strong> <%=errorSignIn%>
+									</div>
+									<%
 								}
 							%>
+					
 							<div class="checkbox">
 								<label><input type="checkbox" name="checked" value="ON"> Recuerdame</label>
 							</div>
@@ -189,6 +201,7 @@
 			</div>
 		</div>
 
+		</script>
 		<!-- Modal registro -->
 		<div class="modal fade bd-example-modal-sm" id="registro">
 			<div class="modal-dialog modal-sm modal-dialog-centered">
@@ -203,7 +216,7 @@
 
 					<!-- Body -->
 					<div class="modal-body">
-						<form action="/GZoneWeb/CreateServlet">
+						<form action="/GZoneWeb/CreateServlet" method="post">
 							<div class="form-group">
 								<label for="user">Usuario:</label> <input type="text" class="form-control" id="user" name="user" placeholder="Introduce tu nuevo nombre de usuario" required>
 							</div>
@@ -216,7 +229,17 @@
 							<%
 								String errorCreating = (String) request.getAttribute("error");
 								if (errorCreating!=null) {
-									%><%=error%><%
+									%>							
+            						<script type="text/javascript">
+									    $(window).on('load',function(){
+									        $('#registro').modal('show');
+									    });
+									</script>	
+									<div class="alert alert-danger" role="alert">
+									  	<strong>Ups!</strong> <%=errorCreating%>
+									</div>
+									<%
+									
 								}
 							%>
 							<div class="modal-footer">
@@ -294,5 +317,6 @@
 			</div>
 		<!--end shopping-cart -->
 	</div>
+
 	</div>
 	<!--end container -->

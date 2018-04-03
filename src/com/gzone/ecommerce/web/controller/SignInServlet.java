@@ -51,11 +51,11 @@ public class SignInServlet extends HttpServlet {
 		try {
 			Usuario user = userService.findByNombre(userName);	
 			if (user==null) {
-				request.setAttribute(AttributeNames.ERROR, AttributeNames.USER_NOT_FOUND_ERROR);
+				request.setAttribute(AttributeNames.USER_NOT_FOUND_ERROR, AttributeNames.USER_NOT_FOUND_ERROR);
 				target = ViewsPaths.INDEX_SERVLET;
 			} else {				
 				if (!PasswordEncryptionUtil.checkPassword(password,user.getContrasena())) {
-					request.setAttribute(AttributeNames.ERROR, AttributeNames.WRONG_PASSWORD_ERROR);			
+					request.setAttribute(AttributeNames.WRONG_PASSWORD_ERROR, AttributeNames.WRONG_PASSWORD_ERROR);			
 					target = ViewsPaths.INDEX_SERVLET;
 				} else {
 					SessionManager.set(request, SessionAttributeNames.USER, user);
@@ -67,7 +67,7 @@ public class SignInServlet extends HttpServlet {
 						}
 						
 					}catch(NullPointerException unchecked) {
-						logger.error("Null pointer excepcion" + unchecked);
+						logger.error("Null pointer excepcion on cookie" + unchecked);
 					}
 				}
 			}

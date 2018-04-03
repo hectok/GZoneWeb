@@ -74,7 +74,7 @@
 	          <div class="comprar">
 		          <form name="informacionProducto" method="POST" action="/GZoneWeb/ShoppingCartServlet" name="shopping-cart">
 		          		<input type="hidden" name="nombreProducto" value="${producto.getNombre()}" >										
-						<input type="hidden" name="idProducto" value=${producto.getIdProducto()}>		
+						<input type="hidden" name="idProducto" value="${producto.getIdProducto()}">		
 			            <img src="/GZoneWeb/CMS/producto_${producto.getIdProducto()}/preview${producto.getIdProducto()}.jpg" alt="${producto.getNombre()}">
 			            <div class="des_breve">
 			              <p>${producto.getDetalles_corto()}</p>
