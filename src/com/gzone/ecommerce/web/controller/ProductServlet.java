@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.gzone.ecommerce.model.Hotel;
 import com.gzone.ecommerce.model.Producto;
 import com.gzone.ecommerce.service.ProductoService;
 import com.gzone.ecommerce.service.XMLService;
@@ -43,7 +44,7 @@ public class ProductServlet extends HttpServlet{
 				if (search==6) {
 					//Cargamos el servicio de recuperacion del XML de Hotusa
 					xmlservice = new XMLServiceImpl();
-					List<String> xml_request = xmlservice.XMLRequest();
+					List<Hotel> xml_request = xmlservice.XMLRequest();
 					request.setAttribute(AttributeNames.HOTUSA, xml_request);
 				}
 				productoDetail = productoService.findById(search, SessionAttributeNames.ES);	

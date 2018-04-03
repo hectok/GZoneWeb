@@ -2,7 +2,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <c:set var="producto" value="${requestScope.product}" />
-<c:set var="hotel" value="${requestScope.hotusa}" />
+<c:set var="hoteles" value="${requestScope.hotusa}" />
 
 	<script >
 	$(document).ready(function() {
@@ -67,6 +67,7 @@
 	        </p>    
 	            <label for="post-1" class="read-more-trigger"></label>
 	          </div>
+	          
 	        </div>
 	
 	        <div class="derecha">
@@ -117,33 +118,34 @@
 	            <p>${producto.getRequisitos()}</p>
 	          </div>
 	        </div>
-			    
 	  </div>
-	<c:choose>
-		<c:when test="${requestScope.nombre_hotel!=null}">
-		<section class="xml_request">
-		    <div>
-		      <div class="container py-3">
-		        <div class="card">
-		          <div class="row ">
-		            <div class="col-md-4">
-		                <img src="<c:out value="${hotel.get(2)}"/>" width="400px" height="200px">
-		              </div>
-		              <div class="col-md-8 px-3">
-		                <div class="card-block px-3">
-		                  <h4 class="card-title">Visita los mismos sitios que tu heroína favorita!</h4>
-		                  <p class="card-text">Bienvenido a <c:out value="${hotel.get(0)}"/></p>
-		                  <p class="card-text"><c:out value="${hotel.get(1).subString(0,304)}"/></p>
-		                  <a href="http://<c:url value="${hotel.get(3)}"/>" target="_blank" class="btn btn-primary">Visitar la web</a>
-		                </div>
-		              </div>
-		            </div>
-		          </div>
-		        </div>
-		      </div>
-		</section> 
+  <c:choose>
+		<c:when test="${!hoteles.isEmpty()}">
+			<c:forEach items="${hoteles}" var="hotel">
+				<section class="xml_request">
+				    <div>
+				      <div class="container py-3">
+				        <div class="card">
+				          <div class="row ">
+				            <div class="col-md-4">
+				                <img src="<c:out value="${hotel.getFotos()}"/>" width="400px" height="200px">
+				              </div>
+				              <div class="col-md-8 px-3">
+				                <div class="card-block px-3">
+				                  <h4 class="card-title">Visita los mismos sitios que tu heroína favorita!</h4>
+				                  <p class="card-text">Bienvenido a <c:out value="${hotel.getNombre_hotel()}"/></p>
+				                  <p class="card-text"><c:out value="${hotel.getDescripcion_hotel().substring(0, 304)}"/></p>
+				                  <a href="http://<c:url value="${hotel.getWebsite()}"/>" target="_blank" class="btn btn-primary">Visitar la web</a>
+				                </div>
+				              </div>
+				            </div>
+				          </div>
+				        </div>
+				      </div>
+				</section> 
+			</c:forEach>
 		</c:when> 
-	</c:choose>   
+	</c:choose>  	
 </div>
 <c:import url="/html/common/footer.jsp"></c:import>
   

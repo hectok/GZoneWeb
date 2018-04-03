@@ -16,14 +16,9 @@ public class SessionManager {
 		getSession(request).setAttribute(attName, attValue);
 	}
 	
-	/**
-	 * Método factoria de la sesión, y sus objetos mandatorios.
-	 * @param request
-	 * @return
-	 */
+
 	protected static HttpSession getSession(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
-		// Atención a: https://guneetsahai.com/2008/08/09/request-getsession-false-always-returning-a-session/
 		if (session==null) {
 			// Inicializo la sesion y todos los objetos obligatorios
 			session = request.getSession(true);
