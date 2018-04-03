@@ -67,7 +67,7 @@ public class SignInServlet extends HttpServlet {
 						}
 						
 					}catch(NullPointerException unchecked) {
-						logger.error("Unchecked");
+						logger.error("Null pointer excepcion" + unchecked);
 					}
 				}
 			}

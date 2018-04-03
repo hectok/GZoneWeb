@@ -205,7 +205,7 @@
 					<div class="modal-body">
 						<form action="/GZoneWeb/CreateServlet">
 							<div class="form-group">
-								<label for="user">Usuario:</label> <input type="user" class="form-control" id="user" name="user" placeholder="Introduce tu nuevo nombre de usuario" required>
+								<label for="user">Usuario:</label> <input type="text" class="form-control" id="user" name="user" placeholder="Introduce tu nuevo nombre de usuario" required>
 							</div>
 							<div class="form-group">
 								<label for="email">Correo electrónico:</label> <input type="email" class="form-control" id="email" name="email" placeholder="Introduce tu correo" required>

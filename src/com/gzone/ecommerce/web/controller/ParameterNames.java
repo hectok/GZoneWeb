@@ -23,5 +23,12 @@ public interface ParameterNames {
 	public static final String DOCUMENT = "document";
 	
 	public static final String PAGE = "page";
+	
+	public static final String ACTION = "action";
+	public static final String UPDATE = "update";
+	public static final String NOMBRE = "first_name";
+	public static final String APELLIDOS = "last_name";
+	public static final String CP = "codigoPostal";
+	public static final String COMENTARIO = "comentario";
 
 }

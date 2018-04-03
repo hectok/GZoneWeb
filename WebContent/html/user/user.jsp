@@ -53,7 +53,7 @@
           <!--Panel de ajustes del usuario -->
           <div class="tab-pane fade" id="ajustes">
             <div class="container">
-              <form class="well form-horizontal" action=" " method="post"  id="contact_form">
+              <form class="well form-horizontal" action="/GZoneWeb/UserServlet?action=update" method="post"  id="contact_form">
                 <fieldset>
                   <!-- Formulario -->
                   <legend>Tu panel de usuario</legend>
@@ -64,7 +64,7 @@
                     <div class="col-md-4 inputGroupContainer">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input class="form-control" type="text" placeholder="${user.getUsuario()}" disabled>
+                        <input class="form-control" type="text" name="usuario" placeholder="${user.getUsuario()}" disabled>
                       </div>
                     </div>
                   </div>
@@ -139,7 +139,7 @@
                     <div class="col-md-4 inputGroupContainer">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input name="zip" placeholder="Codigo postal" class="form-control"  type="text">
+                        <input name="codigoPostal" placeholder="Codigo postal" class="form-control"  type="text">
                       </div>
                     </div>
                   </div>
@@ -151,7 +151,7 @@
                     <div class="col-md-4 inputGroupContainer">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                        <textarea class="form-control" name="comment" placeholder="${user.getDescripcion()}"></textarea>
+                        <textarea class="form-control" name="comentario" placeholder="${user.getDescripcion()}"></textarea>
                       </div>
                     </div>
                   </div>
@@ -161,7 +161,7 @@
                   <div class="form-group">
                     <label class="col-md-4 control-label"></label>
                     <div class="col-md-4">
-                      <button type="submit" class="btn btn-warning" >Enviar <span class="glyphicon glyphicon-send"></span></button>
+                      <button type="submit" name="submit" value="update" class="btn btn-warning" >Actualizar <span class="glyphicon glyphicon-send"></span></button>
                     </div>
                   </div>
                 </fieldset>

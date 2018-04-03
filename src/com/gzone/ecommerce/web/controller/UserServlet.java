@@ -56,6 +56,13 @@ public class UserServlet extends HttpServlet{
 			
 			String idioma = SessionAttributeNames.ES;		
 			TicketCriteria ticketById = null;
+			
+			String update = request.getParameter(ParameterNames.ACTION);	
+
+			String nombre = request.getParameter(ParameterNames.NOMBRE);
+			String apellido = request.getParameter(ParameterNames.APELLIDOS);	
+			String comentario = request.getParameter(ParameterNames.COMENTARIO);	
+
 			List<Ticket> biblioteca = new ArrayList<Ticket>();
 			List<Long> listaProductosId = new ArrayList<Long>();
 			List<LineaTicket> a = null;
@@ -97,10 +104,35 @@ public class UserServlet extends HttpServlet{
 					target = ViewsPaths.INDEX;
 				} else {	
 					target = ViewsPaths.PROFILE;
+
 					request.setAttribute(SessionAttributeNames.PROFILE, usuarioDetail);
 					request.setAttribute(SessionAttributeNames.LIBRARY, productos);
 				}
 					request.getRequestDispatcher(target).forward(request, response);
+					
+				//Actualizamos la informacion del usuario si este pulsa en el boton de actualizar
+				if (update!=null && update==ParameterNames.UPDATE ) {
+					Usuario usuarioUpdate = usuarioDetail;
+					System.out.println("Hasta aqui llego " + usuarioDetail.getIdUsuario() + usuarioDetail.getUsuario());
+					if (nombre!=null)
+					{	
+						usuarioUpdate.setNombre(nombre);
+					}
+					if (apellido!=null)
+					{
+						usuarioUpdate.setApellido(apellido);
+					}
+
+					if (comentario!=null)
+					{
+						usuarioUpdate.setDescripcion(comentario);
+					}
+
+					usuarioService.update(usuarioUpdate);
+
+				}
+					
+					
 			} catch (NullPointerException e) {
 				logger.error("Null pointer excepction "+e);
 			} catch (InstanceNotFoundException e) {
