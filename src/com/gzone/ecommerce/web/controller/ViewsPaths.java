@@ -8,4 +8,5 @@ public interface ViewsPaths {
 	public static final String PROFILE = "html/user/user.jsp";
 	public static final String INDEX_SERVLET = "IndexServlet";
 	public static final String CHECKOUT =" html/shopping/shopping.jsp";
+	public static final String SERVLET = "/GZoneWeb/IndexServlet";
 }

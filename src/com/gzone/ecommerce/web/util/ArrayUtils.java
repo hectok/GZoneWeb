@@ -8,7 +8,9 @@ import java.util.List;
 
 import com.gzone.ecommerce.model.Categoria;
 import com.gzone.ecommerce.model.Idioma;
+import com.gzone.ecommerce.model.LineaTicket;
 import com.gzone.ecommerce.model.NJugadores;
+import com.gzone.ecommerce.web.model.ShoppingCartLine;
 
 
 /**
@@ -52,5 +54,17 @@ public class ArrayUtils {
 		}
 		return lista;
 	}
-
+	
+	public static List<LineaTicket> carritoToTicket(List<ShoppingCartLine> lineasCarrito) {
+		
+			List<LineaTicket> lineas = new ArrayList<LineaTicket>();
+			LineaTicket lineaTicket = new LineaTicket();
+			for (ShoppingCartLine iterador : lineasCarrito) {
+				lineaTicket.setIdProducto(iterador.getProduct().getIdProducto());
+				lineaTicket.setPrecio(iterador.getProduct().getPrecio());
+				lineas.add(lineaTicket);
+				lineaTicket=new LineaTicket();
+			}
+			return lineas;
+	}
 }

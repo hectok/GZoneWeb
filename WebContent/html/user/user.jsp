@@ -28,12 +28,12 @@
           <div class="tab-pane well fade active in " id="biblioteca">
             <legend>Tu panel de usuario</legend>
             <p>Número de juegos : ${biblioteca.size()}</p>
-            <div class="juegos">
+            <div class="row">
             <c:choose>
             	<c:when test="${!biblioteca.isEmpty()}">
             		<c:forEach items="${biblioteca}" var="item">
-            		<div class="col-md-4">
-					    <figure class="juego navy col-md-4">
+            		<div class="col-md-3">
+					    <figure class="juego">
 					      <img src="/GZoneWeb/CMS/producto_${item.getIdProducto()}/preview${item.getIdProducto()}.jpg" alt="${item.getNombre()}" />
 					      <figcaption>
 					        <a href="/GZoneWeb/IndexServlet">Descargar</a>

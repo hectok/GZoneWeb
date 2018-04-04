@@ -30,7 +30,7 @@ public interface SessionAttributeNames {
 	public static final String ELIMINAR = "eliminar";
 	
 	public static final String CHECKOUT = "checkout";
-	public static final String PAGAR = "pagar";
+	public static final String CONFIRM = "confirm";
 	public static final String CANCELAR = "cancelar";
 
 

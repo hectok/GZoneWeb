@@ -92,3 +92,14 @@
 #centro2 img {
   width: 10%;
 }
+
+@media (max-width: 800px) {
+	#cuerpo{
+	width:100%;
+	}
+    #cuadrado{
+    width:100%;
+    font-size: 10px;
+    }
+}
+

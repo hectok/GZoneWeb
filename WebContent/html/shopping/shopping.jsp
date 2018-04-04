@@ -103,9 +103,9 @@
                                   <div class="col-12 panel-footer creditcard-footer">
                                       <div class="row">
                                       	<div class="col-12 align-right">
-                                          <a href="/GZoneWeb/CheckoutServlet"><button class="cancel" name="checkout" value="cancelar">Cancelar</button></a>
+                                          <a href="/GZoneWeb/CheckoutServlet?checkout=cancel"><button class="cancel" name="checkout" value="cancelar">Cancelar</button></a>
                                           &nbsp;
-                                          <a href="/GZoneWeb/CheckoutServlet"><button class="confirm" name="checkout" value="pagar">Confirmar y pagar</button></a>
+                                          <a href="/GZoneWeb/CheckoutServlet?checkout=confirm"><button class="confirm" name="checkout" value="pagar">Confirmar y pagar</button></a>
                                       	</div>
                                       </div>
                                   </div>
