@@ -4,6 +4,8 @@
 package com.gzone.ecommerce.web.controller;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +19,7 @@ import org.apache.logging.log4j.Logger;
 import com.gzone.ecommerce.model.Ticket;
 import com.gzone.ecommerce.service.TicketService;
 import com.gzone.ecommerce.service.impl.TicketServiceImpl;
+import com.gzone.ecommerce.web.model.ShoppingCart;
 import com.gzone.ecommerce.web.util.SessionManager;
 
 /**
@@ -27,7 +30,7 @@ import com.gzone.ecommerce.web.util.SessionManager;
 public class CheckoutServlet extends HttpServlet{
 	
 	private static Logger logger = LogManager.getLogger(SignInServlet.class.getName());
-	
+	Date date = Calendar.getInstance().getTime();
 	
 	private TicketService ticketService = null;
 	
@@ -37,17 +40,19 @@ public class CheckoutServlet extends HttpServlet{
 	    }
 	 
 	 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 
 			String target = null;
 			String checkout = request.getParameter(SessionAttributeNames.CHECKOUT);	
 			
-			
+			ShoppingCart carrito = null;
+					
 			try {
 				if (checkout==SessionAttributeNames.PAGAR) {
+					carrito= (ShoppingCart) SessionManager.get(request, SessionAttributeNames.SHOPPING_CART);
 					Ticket ticket = new Ticket();
-					if (SessionManager.get(request, SessionAttributeNames.USER)!=null) {
-					}else {
-
-					}
+					ticket.setFechaTicket(date);
+					ticket.setCantidad(1L);
+					
 				}
 				
 			}
