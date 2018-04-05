@@ -85,7 +85,7 @@ public class CreateServlet extends HttpServlet {
 		catch (DataException o)
 		{
 			logger.error(o);
-			request.setAttribute(AttributeNames.ERROR, AttributeNames.DUPLICATED_USER);
+			request.setAttribute(AttributeNames.DUPLICATED_USER, AttributeNames.DUPLICATED_USER);
 			target = ViewsPaths.INDEX_SERVLET;
 			request.getRequestDispatcher(target).forward(request,response);
 

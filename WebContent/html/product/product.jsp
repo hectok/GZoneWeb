@@ -80,11 +80,11 @@
 			              <p>${producto.getDetalles_corto()}</p>
 			            </div>
 			            <div class="elegir">
-			              <em id="ofertaTachada"> ${producto.getPrecio()}€</em>
+			              <em class="ofertaTachada"> ${producto.getPrecio()}€</em>
 			              <c:forEach items="${requestScope.salesList}" var="salesList">
 							<c:choose>
 								<c:when test="${salesList.getIdOferta()==producto.getOferta()}">
-									<em id="ofertaNueva"><fmt:formatNumber type="number" maxFractionDigits="2" value="${producto.getPrecio()-producto.getPrecio()*salesList.getPrecio()}" />€</em>
+									<em class="ofertaNueva"><fmt:formatNumber type="number" maxFractionDigits="2" value="${producto.getPrecio()-producto.getPrecio()*salesList.getPrecio()}" />€</em>
 									<input  type="hidden" name="precioProducto" value="${producto.getPrecio()-producto.getPrecio()*salesList.getPrecio()}">
 								</c:when>
 							</c:choose>

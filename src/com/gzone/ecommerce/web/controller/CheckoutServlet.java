@@ -72,7 +72,7 @@ public class CheckoutServlet extends HttpServlet{
 						SessionManager.set(request, SessionAttributeNames.SHOPPING_CART, carrito);
 						target=ViewsPaths.SERVLET;
 					}
-					request.getRequestDispatcher(target).forward(request, response);
+					response.sendRedirect(target);
 				}else {
 					target=ViewsPaths.SERVLET;
 					response.sendRedirect(target);

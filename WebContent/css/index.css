@@ -25,15 +25,6 @@ footer, header, hgroup, menu, nav, section, main {
 	display: block;
 }
 
-body {
-	line-height: 1;
-	height: 100%;
-	color: black;
-	/* font-family: 'Barlow', sans-serif; */
-	/* font-family: 'Roboto Condensed', sans-serif; */
-	font-family: 'Open Sans', sans-serif;
-	font-weight: 400;
-}
 ol, ul {
 	list-style: none;
 }
@@ -134,7 +125,7 @@ button:focus {
 
 #ofertaTachada{
 	text-decoration:line-through;
-	color: red;
+	color: rgb(224, 96, 96);
 }
 #ofertaNueva{
 	margin-left:20px;
@@ -186,7 +177,7 @@ Producto
 }
 
 .no-touch .producto:hover .barraBlanca, .producto.hover .barraBlanca {
-  background-color:rgba(65, 65, 65,0.5);
+  background-color:rgba(65, 65, 65,0.7);
   pointer-events: auto;
   visibility: visible;
   opacity: 1;

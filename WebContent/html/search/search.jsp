@@ -1,8 +1,6 @@
 <%@include file="/html/common/header.jsp"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-
-
 <c:set var="resultado" value="${param.product}"></c:set>
 
 <c:set var="productos" value="${requestScope.product}" />

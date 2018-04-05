@@ -172,8 +172,8 @@
 							<%
 								String errorSignIn = (String) request.getAttribute("El usuario no existe");
 								String errorDoNotExist = (String) request.getAttribute("Contraseña incorrecta");
-								
-								if (errorSignIn!=null || errorDoNotExist!=null) {
+								String signInFirst = (String) request.getAttribute("signInFirst");
+								if (errorSignIn!=null || errorDoNotExist!=null || signInFirst!=null) {
 									%>
 									<script type="text/javascript">
 									    $(window).on('load',function(){
@@ -225,7 +225,7 @@
 								<label for="pwd">Contraseña:</label> <input type="password" class="form-control" id="pwd" name="password" placeholder="Introduce tu contraseña" required>
 							</div>
 							<%
-								String errorCreating = (String) request.getAttribute("error");
+								String errorCreating =(String) request.getAttribute("Ese nombre de usuario ya esta cogido.");
 								if (errorCreating!=null) {
 									%>							
             						<script type="text/javascript">

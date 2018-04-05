@@ -29,6 +29,7 @@ public interface AttributeNames {
 	
 	public static final String HOTUSA = "hotusa";
 	
-	
+	public static final String SIGN_IN_FIRST = "signInFirst";
+
 
 }

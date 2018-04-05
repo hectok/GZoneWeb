@@ -204,6 +204,21 @@ background-color:rgba(41, 41, 41, 0.8);
 	flex-direction: column;
 }
 
+.derecha .ofertaNueva {
+	font-size: 20px;	
+	margin-right: 10px;
+	float:left;
+}
+
+.derecha .ofertaTachada{
+	font-size: 20px;
+	margin-right: 10px;	
+	float:left;
+	padding: 0 0 0 10px;
+	color:grey;
+	text-decoration:line-through;
+	
+}
 .comprar {
  	width: 100%;
 	border: 3px solid black;
@@ -217,14 +232,6 @@ background-color:rgba(41, 41, 41, 0.8);
 	padding-top: 30px;
 }
 
-.comprar .elegir p{
-	float: left;
-  font-size: 20px;
-	margin-left: 10px;
-}
-.comprar .elegir a{
-	margin-right: 10px;
-}
 
 .comprar .des_breve{
 	padding: 10px 0 0 10px;
