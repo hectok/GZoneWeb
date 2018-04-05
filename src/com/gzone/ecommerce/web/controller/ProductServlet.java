@@ -13,9 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.gzone.ecommerce.model.Hotel;
+import com.gzone.ecommerce.model.Oferta;
 import com.gzone.ecommerce.model.Producto;
+import com.gzone.ecommerce.service.OfertaService;
 import com.gzone.ecommerce.service.ProductoService;
 import com.gzone.ecommerce.service.XMLService;
+import com.gzone.ecommerce.service.impl.OfertaServiceImpl;
 import com.gzone.ecommerce.service.impl.ProductoServiceImpl;
 import com.gzone.ecommerce.service.impl.XMLServiceImpl;
 
@@ -28,19 +31,25 @@ public class ProductServlet extends HttpServlet{
 	
 	private ProductoService productoService = null;
 	private XMLService xmlservice = null;
-	
-	 public ProductServlet () {
+	private OfertaService ofertaService = null;
+
+	public ProductServlet () {
 	        super();
 	        productoService = new ProductoServiceImpl();
-
+	        ofertaService = new OfertaServiceImpl();
 	    }
 	 
-	 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			Long search = Long.parseLong(request.getParameter(SessionAttributeNames.PRODUCT)) ;	
 			String target = null;
 			
 			Producto productoDetail = new Producto();
+			
+			
 			try {
+				//Lista todas las ofertas
+				List<Oferta> ofertasService = ofertaService.findAll(1, 10);
+				
 				if (search==6) {
 					//Cargamos el servicio de recuperacion del XML de Hotusa
 					xmlservice = new XMLServiceImpl();
@@ -54,14 +63,16 @@ public class ProductServlet extends HttpServlet{
 				} else {	
 					target = ViewsPaths.PRODUCT_DETAIL;
 					request.setAttribute(SessionAttributeNames.PRODUCT, productoDetail);
+					request.setAttribute(ParameterNames.SALES_LIST, ofertasService);
 				}
 					request.getRequestDispatcher(target).forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
-		}
-		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			doGet(request, response);
-		}
+	}
 }

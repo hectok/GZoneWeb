@@ -65,18 +65,24 @@ public class ShoppingCart {
 	}
 	
 	//Metodo para añadir una linea al carrito
-	public void addCartItem(Producto p) {
+	public boolean addCartItem(Producto p) {
 		
 		ShoppingCartLine cartItem = new ShoppingCartLine();
+		boolean checkDuplicate = false;
 		try {
-			cartItem.setProduct(p);
-			cartItem.setPrecioTotal(p.getPrecio());
-			lines.add(cartItem);
-			calculateOrderTotal();
-
+			if (!checkDuplicated(p)) {
+				checkDuplicate=false;
+				cartItem.setProduct(p);
+				cartItem.setPrecioTotal(p.getPrecio());
+				lines.add(cartItem);
+				calculateOrderTotal();
+			}else {
+				checkDuplicate = true;
+			}
 		} catch (NumberFormatException e) {
 			logger.error("Error al añadir al carrito: "+ e.getMessage());	
 		}
+		return checkDuplicate;
 	}
 
 	public void addCartItem(ShoppingCartLine lineaProducto) {
@@ -100,5 +106,19 @@ public class ShoppingCart {
 		  }
 		  setTicketTotal(totalCarrito);
 	 }
+	
+	protected boolean checkDuplicated(Producto p) {
+		boolean repetido=false;
+		
+		for (int i=0;i<lines.size();i++) {
+			if (lines.get(i).getProduct().getIdProducto()==p.getIdProducto()) {
+				repetido=true;
+			}else {
+				repetido=false;
+			}
+		}
+		
+		return repetido;
+	}
 }
 

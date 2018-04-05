@@ -132,6 +132,13 @@ button:focus {
   }
 }
 
+#ofertaTachada{
+	text-decoration:line-through;
+	color: red;
+}
+#ofertaNueva{
+	margin-left:20px;
+}
 /* --------------------------------
 Galeria
 -------------------------------- */

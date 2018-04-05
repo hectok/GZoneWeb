@@ -19,11 +19,16 @@ public interface AttributeNames {
 	//Error de cookies
 	public static final String COOKIE_NULL = "La cookie ha devuelto un null";
 	
+	//Error a la hora de añadir al carrito
+	public static final String ALREADY_ON_CART = "Ya has añadido ese producto al carrito";
+	
 	//Error de checkout sin iniciar sesion
 	public static final String SESSION_ERROR = "Debes iniciar sesion primero";
 
 	public static final String PRODUCT = "product";
 	
 	public static final String HOTUSA = "hotusa";
+	
+	
 
 }

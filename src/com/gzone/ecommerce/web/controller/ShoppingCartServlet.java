@@ -64,6 +64,7 @@ public class ShoppingCartServlet extends HttpServlet {
 		Double precioProducto = Double.valueOf(request.getParameter(SessionAttributeNames.PRECIO));
 		String nombreProducto = request.getParameter(SessionAttributeNames.NOMBREPRODUCT);
 
+		boolean checkDuplicated ;
 		
 		Producto anadir = new Producto();
 		anadir.setIdProducto(idProducto);
@@ -80,7 +81,11 @@ public class ShoppingCartServlet extends HttpServlet {
 			cartBean = new ShoppingCart();
 			session.setAttribute(SessionAttributeNames.SHOPPING_CART, cartBean);
 		}
-		cartBean.addCartItem(anadir);
+		checkDuplicated=cartBean.addCartItem(anadir);
+		if (checkDuplicated) {
+			request.setAttribute(ParameterNames.CART_DUPLICATED,AttributeNames.ALREADY_ON_CART);
+			
+		}
 	}
 
 }

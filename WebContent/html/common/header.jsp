@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@page import="com.gzone.ecommerce.model.*, com.gzone.ecommerce.web.model.*, com.gzone.ecommerce.web.util.*, com.gzone.ecommerce.web.controller.*,java.util.List " %>
 
@@ -37,10 +38,8 @@
 		Usuario user = (Usuario) SessionManager.get(request, SessionAttributeNames.USER); 
 		ShoppingCart carrito = (ShoppingCart) SessionManager.get(request, SessionAttributeNames.SHOPPING_CART);
 		Cookie cookie = (Cookie) request.getAttribute(ParameterNames.COOKIE);
-
 	%>
-	<c:set var="user" value="${sessionScope.user}" />
-	
+		
 	<div class="maximo">
 		<nav id="barra_principal" class="navbar navbar-default navbar-fixed-top">
 			<div class="container-fluid">

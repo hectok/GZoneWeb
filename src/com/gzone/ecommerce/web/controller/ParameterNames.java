@@ -30,5 +30,9 @@ public interface ParameterNames {
 	public static final String APELLIDOS = "last_name";
 	public static final String CP = "codigoPostal";
 	public static final String COMENTARIO = "comentario";
+	
+	public static final String CART_DUPLICATED = "duplicatedCart";
+	
+	public static final String SALES_LIST = "salesList";
 
 }

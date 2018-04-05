@@ -1,6 +1,6 @@
- <%@include file="/html/common/header.jsp"%>
+<%@include file="/html/common/header.jsp"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="producto" value="${requestScope.product}" />
 <c:set var="hoteles" value="${requestScope.hotusa}" />
 
@@ -80,8 +80,15 @@
 			              <p>${producto.getDetalles_corto()}</p>
 			            </div>
 			            <div class="elegir">
-			              <p>${producto.getPrecio()}€</p>
-			              <input type="hidden" name="precioProducto" value="${producto.getPrecio()}"> 
+			              <em id="ofertaTachada"> ${producto.getPrecio()}€</em>
+			              <c:forEach items="${requestScope.salesList}" var="salesList">
+							<c:choose>
+								<c:when test="${salesList.getIdOferta()==producto.getOferta()}">
+									<em id="ofertaNueva"><fmt:formatNumber type="number" maxFractionDigits="2" value="${producto.getPrecio()-producto.getPrecio()*salesList.getPrecio()}" />€</em>
+									<input  type="hidden" name="precioProducto" value="${producto.getPrecio()-producto.getPrecio()*salesList.getPrecio()}">
+								</c:when>
+							</c:choose>
+						</c:forEach>
 			              <button class="btn btn-primary" name="shopping-cart" value="anadir"><i class="fa fa-shopping-cart  "></i> Comprar</button>
 			            </div>
 			      </form>

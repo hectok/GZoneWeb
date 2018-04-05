@@ -4,6 +4,7 @@
 package com.gzone.ecommerce.web.controller;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -16,9 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.gzone.ecommerce.model.Oferta;
 import com.gzone.ecommerce.model.Producto;
+import com.gzone.ecommerce.service.OfertaService;
 import com.gzone.ecommerce.service.ProductoCriteria;
 import com.gzone.ecommerce.service.ProductoService;
+import com.gzone.ecommerce.service.impl.OfertaServiceImpl;
 import com.gzone.ecommerce.service.impl.ProductoServiceImpl;
 import com.gzone.ecommerce.web.util.CookieManager;
 
@@ -33,11 +37,13 @@ public class IndexServlet extends HttpServlet{
 	private static Logger logger = LogManager.getLogger(SignInServlet.class.getName());
 
 	private ProductoService productoService = null;
+	private OfertaService ofertaService = null;
+	private static DecimalFormat format = new DecimalFormat(".##");
 	
 	 public IndexServlet () {
 	        super();
 	        productoService = new ProductoServiceImpl();
-
+	        ofertaService = new OfertaServiceImpl();
 	    }
 	 
 	 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,9 +55,12 @@ public class IndexServlet extends HttpServlet{
 			try {
 				//Ofertas
 				ofertas  = new ProductoCriteria() ;
-				ofertas.setOferta(true);
-				//Todas
+				ofertas.setOferta(1L);
 				
+				//Lista todas las ofertas
+				List<Oferta> ofertasService = ofertaService.findAll(1, 10);
+				
+				//Todas				
 				List<Producto> oferta = productoService.findByCriteria(ofertas, 1, 12, idioma);	
 				List<Producto> explore = productoService.findAll(1, 40, idioma);	
 
@@ -67,7 +76,7 @@ public class IndexServlet extends HttpServlet{
 					target = ViewsPaths.INDEX;
 					request.setAttribute(SessionAttributeNames.SALE, oferta);
 					request.setAttribute(SessionAttributeNames.EXPLORE, explore);
-
+					request.setAttribute(ParameterNames.SALES_LIST, ofertasService);
 				}
 					request.getRequestDispatcher(target).forward(request, response);
 			} catch (Exception e) {

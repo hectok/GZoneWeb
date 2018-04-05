@@ -1,5 +1,6 @@
 <%@include file="/html/common/header.jsp"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <c:set var="explore" value="${requestScope.explore}" />
@@ -26,7 +27,14 @@
 										<input type="hidden" name="nombreProducto" value="${oferta.getNombre()}" >										
 										<input type="hidden" name="idProducto" value="${oferta.getIdProducto()}">
 										<em id="ofertaTachada"> ${oferta.getPrecio()}€</em>
-										<input  type="hidden" name="precioProducto" value="${oferta.getPrecio()}">
+										<c:forEach items="${requestScope.salesList}" var="salesList">
+										<c:choose>
+	  										<c:when test="${salesList.getIdOferta()==oferta.getOferta()}">
+	  											<em id="ofertaNueva"> <fmt:formatNumber type="number" maxFractionDigits="2" value="${oferta.getPrecio()-oferta.getPrecio()*salesList.getPrecio()}" />€</em>
+	  											<input  type="hidden" name="precioProducto" value="${oferta.getPrecio()-oferta.getPrecio()*salesList.getPrecio()}">
+	  										</c:when>
+	  									</c:choose>
+										</c:forEach>									
 									</div>
 									<button type="submit" class="anadir" name="shopping-cart" value="anadir">
 										<em>Añadir</em>
@@ -41,7 +49,7 @@
 					</c:forEach>
 	  			</c:when>
 	  			<c:otherwise>
-	  				<li>Ahora mismo no hay ninguna oferta que podemos ofrecerte.Lo sentimos. </li>
+	  				<li>Ahora mismo no hay ninguna oferta para ofrecerte.Lo sentimos. </li>
 	  			</c:otherwise>
   			</c:choose>
 		</ul> <!-- ofertas -->
