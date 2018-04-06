@@ -19,12 +19,6 @@
 	<filter>
 	   <filter-name>InitSessionFilter</filter-name>
 	   <filter-class>com.gzone.ecommerce.web.filter.InitSessionFilter</filter-class>
-	   <!-- Si el filtro tuviese parametros de configuracion  
-	   <init-param>
-	      <param-name>nombreparametro</param-name>
-	      <param-value>valor</param-value>
-	   </init-param>
-	    -->
 	</filter>
 			
 	<filter>
@@ -44,7 +38,7 @@
 			
 	<filter-mapping>
 	   <filter-name>UserFilter</filter-name>
-	   <url-pattern>/html/*</url-pattern>
+	   <url-pattern>/GZoneWeb/html/about/about.jsp</url-pattern>
 	</filter-mapping>  
 	
 <!-- 	<filter-mapping>
