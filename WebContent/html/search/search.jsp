@@ -11,8 +11,8 @@
 
 <div id="todo">
      <div id="panel" class="panel-group">
-      <form  id="busqueda_detallada" role="form" action="/GZoneWeb/SearchServlet" method="post">
-	      <button type="submit" name="submit" value="detailed" class="btn btn-primary buscar-central"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+      <form  id="busqueda_detallada" role="form" action="/GZoneWeb/SearchServlet?action=${Actions.DETAILED}" method="post">
+	      <button type="submit" name="submit" class="btn btn-primary buscar-central"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 	      <input type="text" id="cuadro" class="form-control" name="product" placeholder="Hacer una nueva búsqueda" />
 
 	      <div class="panel panel-default">
@@ -152,7 +152,7 @@
 				<c:forEach items="${productos}" var="producto">
 				<article class="search-result row" >
 		  			<div class="col-xs-12 col-sm-12 col-md-3">
-		  				<a href="/GZoneWeb/ProductServlet?product=${producto.getIdProducto()}" title="${producto.getNombre()}" class="thumbnail"><img src="/GZoneWeb/CMS/producto_${producto.getIdProducto()}/preview${producto.getIdProducto()}.jpg" alt="${producto.getNombre()}"></a>
+		  				<a href="/GZoneWeb/SearchServlet?action=<c:out value="${Actions.UNIQUE}"/>&product=${producto.getIdProducto()}" title="${producto.getNombre()}" class="thumbnail"><img src="/GZoneWeb/CMS/producto_${producto.getIdProducto()}/preview${producto.getIdProducto()}.jpg" alt="${producto.getNombre()}"></a>
 		  			</div>
 		  			<div class="col-xs-12 col-sm-12 col-md-2">
 		  				<ul class="meta-search">

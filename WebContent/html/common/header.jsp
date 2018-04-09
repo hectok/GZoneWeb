@@ -38,8 +38,7 @@
 		Usuario user = (Usuario) SessionManager.get(request, SessionAttributeNames.USER); 
 		ShoppingCart carrito = (ShoppingCart) SessionManager.get(request, SessionAttributeNames.SHOPPING_CART);
 		Cookie cookie = (Cookie) request.getAttribute(ParameterNames.COOKIE);
-	%>
-		
+	%>	
 	<div class="maximo">
 		<nav id="barra_principal" class="navbar navbar-default navbar-fixed-top">
 			<div class="container-fluid">
@@ -54,18 +53,7 @@
 				</div>
 				<div id="navbar1" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li class="dropdown active"><a href="#"	class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Tienda <span class="caret"></span></a>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="#">Nuevos</a></li>
-								<li><a href="#">En oferta</a></li>
-								<li><a href="#">Mas</a></li>
-								<li class="divider"></li>
-								<li class="dropdown-header">Categorias</li>
-								<li><a href="#">Acción</a></li>
-								<li><a href="#">Indie</a></li>
-								<li><a href="#">Aventuras</a></li>
-							</ul>
-						</li>
+						<li class="active"><a href="/GZoneWeb/IndexServlet">Tienda</a></li>
 						<li><a href="/GZoneWeb/html/support/support.jsp">Soporte</a></li>
 						<li><a href="/GZoneWeb/html/about/about.jsp">Acerca de</a></li>
 						<li class="dropdown">
@@ -82,7 +70,7 @@
 											<li><a href="/GZoneWeb/UserServlet?profile=<%=user.getIdUsuario()%>">Mi perfil</a></li>
 											<li class="divider"></li>
 											<li class="dropdown-header">Otros</li>
-											<li><a href="/GZoneWeb/SignOutServlet">Cerrar sesión</a></li>
+											<li><a href="/GZoneWeb/SignInServlet?action=<%=Actions.SIGN_OUT%>">Cerrar sesión</a></li>
 										</ul>
 									</li>
 									<%
@@ -115,9 +103,8 @@
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<form id="busquedaBanner" action="/GZoneWeb/SearchServlet" method="post">
+							<form id="busquedaBanner" action="/GZoneWeb/SearchServlet?action=<%=Actions.SIMPLE%>" method="post">
 								<input type="search" placeholder="Buscar" NAME="product">
-								<input type="submit" name="submit" value="simple" style="display:none;" />							
 							</form>
 						</li>
 						<li>
@@ -192,6 +179,7 @@
 							</div>
 							<div class="modal-footer">
 								<button type="submit" value="Submit" class="btn registro">Iniciar sesion</button>
+								<input type="hidden" name="action" value="<%=Actions.SIGN_IN%>"/>							
 							</div>
 						</form>
 					</div>
@@ -214,7 +202,7 @@
 
 					<!-- Body -->
 					<div class="modal-body">
-						<form action="/GZoneWeb/CreateServlet" method="post">
+						<form action="/GZoneWeb/SignInServlet" method="post">				
 							<div class="form-group">
 								<label for="user">Usuario:</label> <input type="text" class="form-control" id="user" name="user" placeholder="Introduce tu nuevo nombre de usuario" required>
 							</div>
@@ -241,7 +229,8 @@
 								}
 							%>
 							<div class="modal-footer">
-								<button type="submit" value="Subtmit" class="btn registro">Registrarse</button>
+								<button type="submit" value="submit" class="btn registro">Registrarse</button>
+								<input type="hidden" name="action" value="<%=Actions.SIGN_UP%>"/>
 							</div>
 						</form>
 					</div>

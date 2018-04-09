@@ -7,7 +7,6 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,13 +14,20 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.gzone.ecommerce.exceptions.DataException;
+import com.gzone.ecommerce.exceptions.DuplicateInstanceException;
+import com.gzone.ecommerce.exceptions.MailException;
 import com.gzone.ecommerce.model.Usuario;
+import com.gzone.ecommerce.service.MailService;
 import com.gzone.ecommerce.service.UsuarioService;
+import com.gzone.ecommerce.service.impl.MailServiceImpl;
 import com.gzone.ecommerce.service.impl.UsuarioServiceImpl;
 import com.gzone.ecommerce.util.PasswordEncryptionUtil;
 import com.gzone.ecommerce.web.util.CookieManager;
 import com.gzone.ecommerce.web.util.SessionManager;
 import com.gzone.ecommerce.web.util.TrimmerUtil;
+import com.gzone.ecommerce.web.controller.Actions;
+import com.gzone.ecommerce.web.controller.ParameterNames;
 
 /**
  * @author hector.ledo.doval
@@ -32,55 +38,116 @@ import com.gzone.ecommerce.web.util.TrimmerUtil;
 public class SignInServlet extends HttpServlet {    
 
 	private static Logger logger = LogManager.getLogger(SignInServlet.class.getName());
-
+	private MailService mailService = null;
 	private UsuarioService userService = null;
 	
     public SignInServlet() {
         super();
         userService = new UsuarioServiceImpl();
+        mailService = new MailServiceImpl();
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userName = TrimmerUtil.cleaner(request.getParameter(ParameterNames.USER));
-		String password = TrimmerUtil.cleaner(request.getParameter(ParameterNames.PASSWORD));
-		String remember = request.getParameter(ParameterNames.CHECKED);	
+    	String action = request.getParameter(ParameterNames.ACTION);	
 		String target = null;
-		
 		boolean redirect = false;
-		try {
-			Usuario user = userService.findByNombre(userName);	
-			if (user==null) {
-				request.setAttribute(AttributeNames.USER_NOT_FOUND_ERROR, AttributeNames.USER_NOT_FOUND_ERROR);
-				target = ViewsPaths.INDEX_SERVLET;
-			} else {				
-				if (!PasswordEncryptionUtil.checkPassword(password,user.getContrasena())) {
-					request.setAttribute(AttributeNames.WRONG_PASSWORD_ERROR, AttributeNames.WRONG_PASSWORD_ERROR);			
+		
+		//Iniciar sesion
+		if (Actions.SIGN_IN.equalsIgnoreCase(action)) {
+			String userName = TrimmerUtil.cleaner(request.getParameter(ParameterNames.USER));
+			String password = TrimmerUtil.cleaner(request.getParameter(ParameterNames.PASSWORD));
+			String remember = request.getParameter(ParameterNames.CHECKED);	
+			try {
+				Usuario user = userService.findByNombre(userName);	
+				if (user==null) {
+					request.setAttribute(AttributeNames.USER_NOT_FOUND_ERROR, AttributeNames.USER_NOT_FOUND_ERROR);
 					target = ViewsPaths.INDEX_SERVLET;
-				} else {
-					SessionManager.set(request, SessionAttributeNames.USER, user);
-					target = ViewsPaths.INDEX_SERVLET;
-					redirect = true;
-					try {
-						if (remember.equals("ON")) {
-							CookieManager.addCookie(response, ParameterNames.LOGIN, user.getUsuario(), "/",7*60*60);
+				} else {				
+					if (!PasswordEncryptionUtil.checkPassword(password,user.getContrasena())) {
+						request.setAttribute(AttributeNames.WRONG_PASSWORD_ERROR, AttributeNames.WRONG_PASSWORD_ERROR);			
+						target = ViewsPaths.INDEX_SERVLET;
+					} else {
+						SessionManager.set(request, SessionAttributeNames.USER, user);
+						target = ViewsPaths.INDEX_SERVLET;
+						redirect = true;
+						try {
+							if (remember.equals("ON")) {
+								CookieManager.addCookie(response, ParameterNames.LOGIN, user.getUsuario(), "/",7*60*60);
+							}
+							
+						}catch(NullPointerException unchecked) {
+							logger.error("Null pointer excepcion on cookie" + unchecked);
 						}
-						
-					}catch(NullPointerException unchecked) {
-						logger.error("Null pointer excepcion on cookie" + unchecked);
 					}
 				}
+				if (redirect) {
+					response.sendRedirect(target);
+				} else {
+					request.getRequestDispatcher(target).forward(request, response);
+				}
+				
+			} catch (Exception e) {
+				logger.error(e);
 			}
-			if (redirect) {
-				response.sendRedirect(target);
-			} else {
-				request.getRequestDispatcher(target).forward(request, response);
-			}
-			
-		} catch (Exception e) {
-			logger.error(e);
-		}
-		
+		//Cerrar sesión
+		}else if (Actions.SIGN_OUT.equalsIgnoreCase(action)) {
+			target = ViewsPaths.INDEX_SERVLET;
+			request.getSession(true).setAttribute(ParameterNames.USER, null);
+			response.sendRedirect(target);
+			CookieManager.removeCookie(response, ParameterNames.LOGIN, "/");
+		//Crear usuario	
+    	}else if (Actions.SIGN_UP.equalsIgnoreCase(action)) {
+    		target = null;
+    		redirect = false;
+    		
+    		String userName = TrimmerUtil.cleaner(request.getParameter(ParameterNames.USER));
+    		String email = TrimmerUtil.cleaner(request.getParameter(ParameterNames.EMAIL));
+    		String password = TrimmerUtil.cleaner(request.getParameter(ParameterNames.PASSWORD));
+    		
+    		Usuario creation = new Usuario();
+    		creation.setUsuario(userName);
+    		creation.setCorreo(email);
+    		creation.setContrasena(password);
+
+    		
+    		try {
+    			
+    			Usuario user = userService.create(creation);
+    			if (user==null) {
+    				request.setAttribute(AttributeNames.ERROR, AttributeNames.DUPLICATED_USER);
+    				target = ViewsPaths.INDEX_SERVLET;
+    			} else {	
+    				mailService.sendMail(Email.SUBJECT, Email.BODY, email);
+
+    				SessionManager.set(request, SessionAttributeNames.USER, user);
+    				target = ViewsPaths.INDEX_SERVLET;
+    				redirect = true;			
+    			}
+    			if (redirect) {
+    				response.sendRedirect(target);
+    			} else {
+    				request.getRequestDispatcher(target).forward(request, response);
+    			}
+    			
+    		} catch (DuplicateInstanceException e) {
+    			logger.error(e);
+    			request.setAttribute(AttributeNames.ERROR, AttributeNames.DUPLICATED_USER);
+    			target = ViewsPaths.INDEX_SERVLET;
+    			request.getRequestDispatcher(target).forward(request,response);
+    		}
+    		catch (DataException o)
+    		{
+    			logger.error(o);
+    			request.setAttribute(AttributeNames.DUPLICATED_USER, AttributeNames.DUPLICATED_USER);
+    			target = ViewsPaths.INDEX_SERVLET;
+    			request.getRequestDispatcher(target).forward(request,response);
+
+    		} catch (MailException e) {
+    			logger.error(e);
+    		}
+    		
+    	}
 	}
 
 

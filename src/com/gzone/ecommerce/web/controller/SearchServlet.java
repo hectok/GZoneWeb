@@ -16,18 +16,24 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.gzone.ecommerce.model.Categoria;
+import com.gzone.ecommerce.model.Hotel;
 import com.gzone.ecommerce.model.Idioma;
 import com.gzone.ecommerce.model.NJugadores;
+import com.gzone.ecommerce.model.Oferta;
 import com.gzone.ecommerce.model.Producto;
 import com.gzone.ecommerce.service.CategoriaService;
 import com.gzone.ecommerce.service.IdiomaService;
 import com.gzone.ecommerce.service.NJugadoresService;
+import com.gzone.ecommerce.service.OfertaService;
 import com.gzone.ecommerce.service.ProductoCriteria;
 import com.gzone.ecommerce.service.ProductoService;
+import com.gzone.ecommerce.service.XMLService;
 import com.gzone.ecommerce.service.impl.CategoriaServiceImpl;
 import com.gzone.ecommerce.service.impl.IdiomaServiceImpl;
 import com.gzone.ecommerce.service.impl.NJugadoresServiceImpl;
+import com.gzone.ecommerce.service.impl.OfertaServiceImpl;
 import com.gzone.ecommerce.service.impl.ProductoServiceImpl;
+import com.gzone.ecommerce.service.impl.XMLServiceImpl;
 import com.gzone.ecommerce.web.util.ArrayUtils;
 import com.gzone.ecommerce.web.util.TrimmerUtil;
 
@@ -36,99 +42,129 @@ import com.gzone.ecommerce.web.util.TrimmerUtil;
  *
  */
 @WebServlet("/SearchServlet")
-public class SearchServlet extends HttpServlet{
-	
+public class SearchServlet extends HttpServlet {
+
 	private static Logger logger = LogManager.getLogger(SignInServlet.class.getName());
-	
+
 	private ProductoService productoService = null;
 	private CategoriaService categoriaService = null;
 	private NJugadoresService njugadoresService = null;
 	private IdiomaService idiomaService = null;
-	
-	public SearchServlet () {
-	        super();
-	        productoService = new ProductoServiceImpl();
-	        categoriaService = new CategoriaServiceImpl();
-	        njugadoresService = new NJugadoresServiceImpl();
-	        idiomaService = new IdiomaServiceImpl();
-	    }
-	 
-	 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			String target = null;
-			String idioma = SessionAttributeNames.ES;
+	private XMLService xmlservice = null;
+	private OfertaService ofertaService = null;
 
-			String search = TrimmerUtil.cleaner(request.getParameter(SessionAttributeNames.PRODUCT));	
-			String action = request.getParameter(ParameterNames.SEARCH);	
+	public SearchServlet() {
+		super();
+		productoService = new ProductoServiceImpl();
+		categoriaService = new CategoriaServiceImpl();
+		njugadoresService = new NJugadoresServiceImpl();
+		idiomaService = new IdiomaServiceImpl();
+        ofertaService = new OfertaServiceImpl();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		String target = null;
+		String idioma = SessionAttributeNames.ES;
+		String action = request.getParameter(ParameterNames.ACTION);
+
+		
+		//Busqueda de un solo producto(Vista detallada)
+		if (Actions.UNIQUE.equalsIgnoreCase(action)) {
+			Long idProducto = Long.parseLong(request.getParameter(SessionAttributeNames.PRODUCT)) ;	
+			Producto productoDetail = new Producto();
 			
-			String [] categorias = request.getParameterValues(SessionAttributeNames.CATEGORY);
-			String [] jugadores = request.getParameterValues(SessionAttributeNames.PLAYERS);
+			try {
+			//Lista todas las ofertas
+			List<Oferta> ofertasService = ofertaService.findAll(1, 10);
+			
+			if (idProducto==6) {
+				//Cargamos el servicio de recuperacion del XML de Hotusa solo si entra en el videojuego de tomb raider
+				xmlservice = new XMLServiceImpl();
+				List<Hotel> xml_request = xmlservice.XMLRequest();
+				request.setAttribute(AttributeNames.HOTUSA, xml_request);
+			}
+			productoDetail = productoService.findById(idProducto, SessionAttributeNames.ES);	
+			if (productoDetail==null ) {
+				request.setAttribute(AttributeNames.ERROR, AttributeNames.NOT_FOUND);
+				target = ViewsPaths.INDEX_SERVLET;
+			} else {	
+				target = ViewsPaths.PRODUCT_DETAIL;
+				request.setAttribute(SessionAttributeNames.PRODUCT, productoDetail);
+				request.setAttribute(ParameterNames.SALES_LIST, ofertasService);
+			}
+				request.getRequestDispatcher(target).forward(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+
+			String search = TrimmerUtil.cleaner(request.getParameter(SessionAttributeNames.PRODUCT));
+
+			String[] categorias = request.getParameterValues(SessionAttributeNames.CATEGORY);
+			String[] jugadores = request.getParameterValues(SessionAttributeNames.PLAYERS);
 			String anio = request.getParameter(SessionAttributeNames.YEAR);
-			String [] idiomas = request.getParameterValues(SessionAttributeNames.LANGUAGE);
-			
-			
+			String[] idiomas = request.getParameterValues(SessionAttributeNames.LANGUAGE);
+
 			ProductoCriteria criteria = null;
 			ArrayUtils arrayUtil = null;
-						
 			
-			if (action.equals(ParameterNames.SIMPLE)) {
-				criteria  = new ProductoCriteria() ;
+			if (Actions.SIMPLE.equalsIgnoreCase(action)) {
+				criteria = new ProductoCriteria();
 				criteria.setNombre(search);
-			}
-			else {
-				if (action.equals(ParameterNames.DETAILED))
-				{
-					criteria= new ProductoCriteria() ;
+			} else {
+				if (Actions.DETAILED.equalsIgnoreCase(action)) {
+					criteria = new ProductoCriteria();
 					arrayUtil = new ArrayUtils();
 
 					criteria.setNombre(search);
 
-					if (categorias!=null)
-					{	
+					if (categorias != null) {
 						criteria.setCategorias(arrayUtil.arrayToCategoria(categorias));
 					}
-					if (jugadores!=null)
-					{
+					if (jugadores != null) {
 						criteria.setNjugadores(arrayUtil.arrayToNJugadores(jugadores));
 
 					}
-					if (anio!=null)
-					{
+					if (anio != null) {
 						criteria.setAnio(Integer.valueOf(anio));
 
 					}
-					if (idiomas!=null)
-					{
+					if (idiomas != null) {
 						criteria.setIdioma(arrayUtil.arrayToIdioma(idiomas));
 					}
 				}
-			}	
+			}
 
 			try {
-				
+
 				List<Categoria> todasCategorias = categoriaService.findAll(1, 30, SessionAttributeNames.ES);
 				List<NJugadores> todosJugadores = njugadoresService.findAll(1, 10);
 				List<Idioma> todosIdiomas = idiomaService.findAll(1, 10);
 				List<Producto> productos = productoService.findByCriteria(criteria, 1, 10, idioma);
-				
+
 				request.setAttribute(SessionAttributeNames.CATEGORY, todasCategorias);
 				request.setAttribute(SessionAttributeNames.PLAYERS, todosJugadores);
 				request.setAttribute(SessionAttributeNames.LANGUAGE, todosIdiomas);
-				
-				if (productos.isEmpty() ) {
+
+				if (productos.isEmpty()) {
 					request.setAttribute(AttributeNames.ERROR, AttributeNames.NOT_FOUND);
 					target = ViewsPaths.SEARCH;
-				} else {	
+				} else {
 					target = ViewsPaths.SEARCH;
 					request.setAttribute(AttributeNames.PRODUCT, productos);
-					
+
 				}
-					request.getRequestDispatcher(target).forward(request, response);
+				request.getRequestDispatcher(target).forward(request, response);
 			} catch (Exception e) {
 				logger.error(AttributeNames.ERROR);
 			}
-			
 		}
-		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			doGet(request, response);
-		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
 }

@@ -23,7 +23,7 @@
 							<form name="informacionProducto" method="POST" action="/GZoneWeb/ShoppingCartServlet" name="shopping-cart">
 								<div class="barraBlanca">
 									<div class="informacion_articulo">
-										<b><a href="/GZoneWeb/ProductServlet?product=${oferta.getIdProducto()}">${oferta.getNombre()} </a></b>
+										<b><a href="/GZoneWeb/SearchServlet?action=<%=Actions.UNIQUE%>&product=${oferta.getIdProducto()}">${oferta.getNombre()} </a></b>
 										<input type="hidden" name="nombreProducto" value="${oferta.getNombre()}" >										
 										<input type="hidden" name="idProducto" value="${oferta.getIdProducto()}">
 										<em id="ofertaTachada"> ${oferta.getPrecio()}€</em>
@@ -102,7 +102,7 @@
 								<form name="informacionProducto" method="POST" action="/GZoneWeb/ShoppingCartServlet" name="shopping-cart">
 									<div class="barraBlanca">
 										<div class="informacion_articulo">
-											<b><a href="/GZoneWeb/ProductServlet?product=${explore.get(i).getIdProducto()}">${explore.get(i).getNombre()}</a></b>
+											<b><a href="/GZoneWeb/ProductServlet?action=<%=Actions.UNIQUE%>&product=${explore.get(i).getIdProducto()}">${explore.get(i).getNombre()}</a></b>
 											<input type="hidden" name="nombreProducto" value="${explore.get(i).getNombre()}">										
 											<input type="hidden" name="idProducto" value="${explore.get(i).getIdProducto()}">
 											<em>${explore.get(i).getPrecio()}€</em>

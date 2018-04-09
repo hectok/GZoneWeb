@@ -38,7 +38,6 @@ public class IndexServlet extends HttpServlet{
 
 	private ProductoService productoService = null;
 	private OfertaService ofertaService = null;
-	private static DecimalFormat format = new DecimalFormat(".##");
 	
 	 public IndexServlet () {
 	        super();
