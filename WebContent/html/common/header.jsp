@@ -4,6 +4,9 @@
 
 <%@page import="com.gzone.ecommerce.model.*, com.gzone.ecommerce.web.model.*, com.gzone.ecommerce.web.util.*, com.gzone.ecommerce.web.controller.*,java.util.List " %>
 
+
+<c:set var="user" value='${sessionScope["user"]}' scope="session"/>
+
 <html lang="es">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,7 +38,6 @@
 </head>
 <body>
 	<%	
-		Usuario user = (Usuario) SessionManager.get(request, SessionAttributeNames.USER); 
 		ShoppingCart carrito = (ShoppingCart) SessionManager.get(request, SessionAttributeNames.SHOPPING_CART);
 		Cookie cookie = (Cookie) request.getAttribute(ParameterNames.COOKIE);
 	%>	
@@ -62,19 +64,18 @@
 								<li><a href="#">Inglés</a></li>
 							</ul>
 						</li>
-						<%
-								if (user!=null) {
-									%>
-									<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%=user.getUsuario()%><span class="caret"></span> </a>
-										<ul class="dropdown-menu" role="menu">
-											<li><a href="/GZoneWeb/UserServlet?profile=<%=user.getIdUsuario()%>">Mi perfil</a></li>
-											<li class="divider"></li>
-											<li class="dropdown-header">Otros</li>
-											<li><a href="/GZoneWeb/SignInServlet?action=<%=Actions.SIGN_OUT%>">Cerrar sesión</a></li>
-										</ul>
-									</li>
-									<%
-								} else {
+						<c:choose>  
+						    <c:when test="${user!=null}">  
+						       <li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">${user.getUsuario()}<span class="caret"></span> </a>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="/GZoneWeb/UserServlet?profile=${user.getIdUsuario()}">Mi perfil</a></li>
+										<li class="divider"></li>
+										<li class="dropdown-header">Otros</li>
+										<li><a href="/GZoneWeb/SignInServlet?action=${Actions.SIGN_OUT}">Cerrar sesión</a></li>
+									</ul>
+								</li>  
+						    </c:when>  
+							<c:otherwise>  
 									%>
 									<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
 										<ul id="cuadro-login" class="dropdown-menu">
@@ -97,9 +98,8 @@
 											</li>
 										</ul>
 									</li>
-							<%
-								}
-							%>
+						    </c:otherwise>  
+						</c:choose>  
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li>

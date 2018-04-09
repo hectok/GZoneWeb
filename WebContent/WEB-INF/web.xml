@@ -36,10 +36,15 @@
 	   <url-pattern>/*</url-pattern>
 	</filter-mapping>  
 			
-<!-- 	<filter-mapping>
+	<filter-mapping>
 	   <filter-name>UserFilter</filter-name>
-	   <url-pattern>/GZoneWeb/html/about/about.jsp</url-pattern>
-	</filter-mapping>   -->
+	   <url-pattern>/html/user/*</url-pattern>
+	</filter-mapping> 
+	
+	<filter-mapping>
+	   <filter-name>UserFilter</filter-name>
+	   <url-pattern>/html/shopping/*</url-pattern>
+	</filter-mapping> 
 	
 <!-- 	<filter-mapping>
 	   <filter-name>LocaleFilter</filter-name>

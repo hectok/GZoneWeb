@@ -162,7 +162,7 @@
 		  				</ul>
 		  			</div>
 		  			<div class="col-xs-12 col-sm-12 col-md-7 excerpet">
-		  				<h3><a href="/GZoneWeb/ProductServlet?product=${producto.getIdProducto()}" title="">${producto.getNombre()}</a></h3>
+		  				<h3><a href="/GZoneWeb/SearchServlet?action=${Actions.UNIQUE}&product=${producto.getIdProducto()}" title="">${producto.getNombre()}</a></h3>
 		  				<p>${producto.getDetalles_corto()}</p>
 		  			</div>
 		  			<span class="clearfix borda"></span>

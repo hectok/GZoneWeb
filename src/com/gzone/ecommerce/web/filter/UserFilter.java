@@ -20,13 +20,14 @@ import org.apache.logging.log4j.Logger;
 import com.gzone.ecommerce.web.controller.AttributeNames;
 import com.gzone.ecommerce.web.controller.SessionAttributeNames;
 import com.gzone.ecommerce.web.controller.ViewsPaths;
+import com.gzone.ecommerce.web.util.SessionManager;
 
 /**
  * @author hector.ledo.doval
  *
  */
 public class UserFilter implements Filter {
-	private static Logger logger = LogManager.getLogger(InitSessionFilter.class.getName());
+	private static Logger logger = LogManager.getLogger(UserFilter.class.getName());
 	  
     public UserFilter() {       
     }
@@ -39,19 +40,20 @@ public class UserFilter implements Filter {
 			throws IOException, ServletException {
 		
 		HttpServletRequest httpRequest = ((HttpServletRequest) request);
-		HttpSession session = httpRequest.getSession(false);
+		
 		
 		String target = null;
 
-        boolean loggedIn = session != null && session.getAttribute(SessionAttributeNames.USER) != null;
-        System.out.println(loggedIn);
+        boolean loggedIn = SessionManager.get(httpRequest, SessionAttributeNames.USER) != null;
         
         if (loggedIn) {
             chain.doFilter(request, response);
-        } else {
-        	target = ViewsPaths.SERVLET;
-        	request.setAttribute(AttributeNames.SIGN_IN_FIRST, AttributeNames.SIGN_IN_FIRST);		
+        } else {        	
+        	target = ViewsPaths.REDIRIGIR;
+        	request.setAttribute(AttributeNames.SIGN_IN_FIRST, AttributeNames.SIGN_IN_FIRST);
+        	logger.warn("Redirigiendo a "+ target +" "+request.getRemoteHost());
         	request.getRequestDispatcher(target).forward(request, response);
+        	
         }
     }
 

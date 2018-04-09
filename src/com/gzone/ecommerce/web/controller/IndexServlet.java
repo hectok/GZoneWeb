@@ -34,7 +34,7 @@ import com.gzone.ecommerce.web.util.CookieManager;
 @WebServlet("/IndexServlet")
 public class IndexServlet extends HttpServlet{
 	
-	private static Logger logger = LogManager.getLogger(SignInServlet.class.getName());
+	private static Logger logger = LogManager.getLogger(IndexServlet.class.getName());
 
 	private ProductoService productoService = null;
 	private OfertaService ofertaService = null;
