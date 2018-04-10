@@ -13,12 +13,12 @@
         <ul class="nav nav-tabs nav-justified  barra" role="tablist">
           <li class="active">
               <a href="#biblioteca" role="tab" data-toggle="tab">
-                  <icon class="fa fa-book"></icon> Biblioteca
+                  <icon class="fa fa-book"></icon> <fmt:message key="user.biblioteca" bundle="${messages}"/>
               </a>
           </li>
           <li>
               <a href="#ajustes" role="tab" data-toggle="tab">
-                  <i class="fa fa-cog"></i> Ajustes
+                  <i class="fa fa-cog"></i> <fmt:message key="user.ajustes" bundle="${messages}"/>
               </a>
           </li>
         </ul>
@@ -26,8 +26,8 @@
         <!-- Tab panes -->
         <div class="tab-content">
           <div class="tab-pane well fade active in " id="biblioteca">
-            <legend>Tu panel de usuario</legend>
-            <p>Número de juegos : ${biblioteca.size()}</p>
+            <legend><fmt:message key="user.panel_usuario" bundle="${messages}"/></legend>
+            <p><fmt:message key="user.numero_juegos" bundle="${messages}"/> ${biblioteca.size()}</p>
             <div class="row">
             <c:choose>
             	<c:when test="${!biblioteca.isEmpty()}">
@@ -36,15 +36,15 @@
 					    <figure class="juego">
 					      <img src="/GZoneWeb/CMS/producto_${item.getIdProducto()}/preview${item.getIdProducto()}.jpg" alt="${item.getNombre()}" />
 					      <figcaption>
-					        <a href="/GZoneWeb/IndexServlet">Descargar</a>
-					        <a href="/GZoneWeb/SearchServlet?action=${Actions.UNIQUE}&product=${item.getIdProducto()}" title="${item.getNombre()}">Ver producto</a>
+					        <a href="/GZoneWeb/IndexServlet"><fmt:message key="user.descargar" bundle="${messages}"/></a>
+					        <a href="/GZoneWeb/SearchServlet?action=${Actions.UNIQUE}&product=${item.getIdProducto()}" title="${item.getNombre()}"><fmt:message key="user.verProducto" bundle="${messages}"/></a>
 					      </figcaption>
 					    </figure>
 					</div>
             		</c:forEach>     	
             	</c:when>
             	<c:otherwise>
-            		<h3>Aún no tienes ningún juego en tu biblioteca!</h3>
+            		<h3><fmt:message key="user.no_games" bundle="${messages}"/></h3>
             	</c:otherwise>
             </c:choose>
 
@@ -56,11 +56,11 @@
               <form class="well form-horizontal" action="/GZoneWeb/UserServlet?profile=${user.getIdUsuario()}&action=update" method="post"  id="contact_form">
                 <fieldset>
                   <!-- Formulario -->
-                  <legend>Tu panel de usuario</legend>
+                  <legend><fmt:message key="user.panel_usuario" bundle="${messages}"/></legend>
                   <!-- Perfil del usuario-->
                   <!-- Nombre-->
                   <div class="form-group">
-                    <label class="col-md-4 control-label">Tu usuario</label>
+                    <label class="col-md-4 control-label"><fmt:message key="user.tu_usuario" bundle="${messages}"/></label>
                     <div class="col-md-4 inputGroupContainer">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -71,7 +71,7 @@
 
                   <!-- Nombre-->
                   <div class="form-group">
-                    <label class="col-md-4 control-label">Tu nombre</label>
+                    <label class="col-md-4 control-label"><fmt:message key="user.tu_nombre" bundle="${messages}"/></label>
                     <div class="col-md-4 inputGroupContainer">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -82,7 +82,7 @@
 
                   <!-- Apellidos-->
                   <div class="form-group">
-                    <label class="col-md-4 control-label" >Apellidos</label>
+                    <label class="col-md-4 control-label" ><fmt:message key="user.tus_apellidos" bundle="${messages}"/></label>
                     <div class="col-md-4 inputGroupContainer">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -147,7 +147,7 @@
                   <!-- Text area -->
                   <hr />
                   <div class="form-group">
-                    <label class="col-md-4 control-label">Sobre ti</label>
+                    <label class="col-md-4 control-label"><fmt:message key="user.sobre_ti" bundle="${messages}"/></label>
                     <div class="col-md-4 inputGroupContainer">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
@@ -161,7 +161,7 @@
                   <div class="form-group">
                     <label class="col-md-4 control-label"></label>
                     <div class="col-md-4">
-                      <button type="submit" name="submit" value="update" class="btn btn-warning" >Actualizar <span class="glyphicon glyphicon-send"></span></button>
+                      <button type="submit" name="submit" value="update" class="btn btn-warning" ><fmt:message key="user.actualizar" bundle="${messages}"/><span class="glyphicon glyphicon-send"></span></button>
                     </div>
                   </div>
                 </fieldset>

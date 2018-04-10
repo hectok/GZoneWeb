@@ -167,7 +167,8 @@ public class SignInServlet extends HttpServlet {
 				logger.debug("Locale changed to "+newLocale);
 			}
 			
-			target = request.getContextPath(); 	
+			target = request.getHeader("referer");
+			System.out.println(target);
 			redirect = true;
 			response.sendRedirect(target);
     	}

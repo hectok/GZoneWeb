@@ -1,32 +1,35 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value='${sessionScope["user-locale"]}' scope="session"/>
+<fmt:setBundle basename = "resources.Messages" var = "messages" scope="session"/>
     <footer id="piePagina">
         <div class="container">
             <div class="row">
                 <div class="col-sm-3">
-                    <h5>Empecemos</h5>
+                    <h5><fmt:message key="footer.empecemos" bundle="${messages}"/></h5>
                     <ul>
                         <li><a href="/GZoneWeb/html/index.jsp">Inicio</a></li>
-                        <li><a href="#" data-toggle="modal"	data-target="#iniciar">Iniciar sesion</a></li>
-                        <li><a href="#" data-toggle="modal" data-target="#registro">Registrate</a></li>
+                        <li><a href="#" data-toggle="modal"	data-target="#iniciar"><fmt:message key="header.iniciar_sesion" bundle="${messages}"/></a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#registro"><fmt:message key="header.registro" bundle="${messages}"/></a></li>
                     </ul>
                 </div>
                 <div class="col-sm-3">
-                    <h5>Acerca de</h5>
+                    <h5><fmt:message key="header.acerca" bundle="${messages}"/></h5>
                     <ul>
                         <li><a href="/GZoneWeb/html/about/about.jsp">GZone</a></li>
-                        <li><a href="#">Contacta con nosotros</a></li>
+                        <li><a href="#"><fmt:message key="footer.contacta" bundle="${messages}"/></a></li>
                     </ul>
                 </div>
                 <div class="col-sm-3">
-                    <h5>Soporte</h5>
+                    <h5><fmt:message key="header.soporte" bundle="${messages}"/></h5>
                     <ul>
                         <li><a href="#">FAQ</a></li>
-                        <li><a href="/GZoneWeb/html/support/support.jsp">Ayuda</a></li>
+                        <li><a href="/GZoneWeb/html/support/support.jsp"><fmt:message key="footer.ayuda" bundle="${messages}"/></a></li>
                         <li><a href="#">Foros</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-3 info">
-                    <h5>Informacion</h5>
-                    <p> GZone es un servicio de venta y distribución de videojuegos para que puedas descargarlos y disfrutarlos libremente. </p>
+                    <h5><fmt:message key="footer.informacion" bundle="${messages}"/></h5>
+                    <p> <fmt:message key="header.bienvenida" bundle="${messages}"/></p>
                 </div>
             </div>
         </div>

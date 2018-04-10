@@ -13,10 +13,10 @@
      <div id="panel" class="panel-group">
       <form  id="busqueda_detallada" role="form" action="/GZoneWeb/SearchServlet?action=${Actions.DETAILED}" method="post">
 	      <button type="submit" name="submit" class="btn btn-primary buscar-central"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-	      <input type="text" id="cuadro" class="form-control" name="product" placeholder="Hacer una nueva búsqueda" />
+	      <input type="text" id="cuadro" class="form-control" name="product" placeholder="<fmt:message key="search.nueva_busqueda" bundle="${messages}"/>" />
 
 	      <div class="panel panel-default">
-	        <div class="panel-heading">Categorias</div>
+	        <div class="panel-heading"><fmt:message key="search.categorias" bundle="${messages}"/></div>
 	        <div class="panel-body">
 	          <input type="checkbox" class="read-more-state" id="categ" />
 	          <div class="read-more-wrap form-group categoria ">
@@ -40,7 +40,7 @@
 	      </div>
 	      
 	      <div class="panel panel-default">
-	        <div class="panel-heading">NJugadores</div>
+	        <div class="panel-heading"><fmt:message key="search.numero_jugadores" bundle="${messages}"/></div>
 	        <div class="panel-body">
 	          <input type="checkbox" class="read-more-state" id="post-3" />
 	          <div class="read-more-wrap form-group jugadores" >
@@ -64,7 +64,7 @@
 	      </div>
 	      
 	      <div class="panel panel-default">
-	        <div class="panel-heading">Idioma</div>
+	        <div class="panel-heading"><fmt:message key="header.idioma" bundle="${messages}"/></div>
 	        <div class="panel-body">
 	          <input type="checkbox" class="read-more-state" id="post-4" />
 	          <div class="read-more-wrap form-group idiomas ">
@@ -89,7 +89,7 @@
 	      </div> 
 	      
 	      <div class="panel panel-default">
-	       <div class="panel-heading">Año</div>
+	       <div class="panel-heading"><fmt:message key="search.anio" bundle="${messages}"/></div>
 	        <div class="panel-body">
 	       <div class="form-group">
 			  <label for="Anio">Select list:</label>
@@ -142,8 +142,8 @@
      <div class="container">
     
     <hgroup>
-  		<h1>Resultados de búsqueda</h1>
-  		<h2 class="lead"><strong class="text-danger"><c:out value="${productos.size()}" default="0"/></strong> resultados cumplen con la búsqueda de : <strong class="text-danger">${resultado}</strong></h2>
+  		<h1><fmt:message key="search.resultados_busqueda" bundle="${messages}"/></h1>
+  		<h2 class="lead"><strong class="text-danger"><c:out value="${productos.size()}" default="0"/></strong> <fmt:message key="search.resultados_busqueda_cumplen" bundle="${messages}"/><strong class="text-danger">${resultado}</strong></h2>
   	</hgroup>
                       
       <section class="col-xs-12 col-sm-6 col-md-12">

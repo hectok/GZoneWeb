@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value='${sessionScope["user-locale"]}' scope="session"/>
+<fmt:setBundle basename = "resources.Messages" var = "messages" scope="session"/>
 
 <%@page import="com.gzone.ecommerce.model.*, com.gzone.ecommerce.web.model.*, com.gzone.ecommerce.web.util.*, com.gzone.ecommerce.web.controller.*,java.util.List " %>
 
@@ -13,7 +15,7 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>GZone.com - Your gaming zone</title>
+	<title><fmt:message key="head.titulo" bundle="${messages}"/></title>
 	<link rel="icon" href="/GZoneWeb/images/logo.png">
 	<link rel="stylesheet" href="/GZoneWeb/css/banner.css">
 	<link rel="stylesheet" href="/GZoneWeb/css/index.css">
@@ -54,42 +56,43 @@
 				</div>
 				<div id="navbar1" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="/GZoneWeb/IndexServlet">Tienda</a></li>
-						<li><a href="/GZoneWeb/html/support/support.jsp">Soporte</a></li>
-						<li><a href="/GZoneWeb/html/about/about.jsp">Acerca de</a></li>
+						<li class="active"><a href="/GZoneWeb/IndexServlet"><fmt:message key="header.tienda" bundle="${messages}"/></a></li>
+						<li><a href="/GZoneWeb/html/support/support.jsp"><fmt:message key="header.soporte" bundle="${messages}"/></a></li>
+						<li><a href="/GZoneWeb/html/about/about.jsp"><fmt:message key="header.acerca" bundle="${messages}"/></a></li>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Idioma <span class="caret"></span></a>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="#">Inglés</a></li>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><fmt:message key="header.idioma" bundle="${messages}"/><span class="caret"></span></a>
+							<ul id="menu_idiomas" class="dropdown-menu" role="menu">
+								<li><a href="/GZoneWeb/SignInServlet?action=change-locale&locale=es"><fmt:message key="header.espanol" bundle="${messages}"/></a></li>
+								<li><a href="/GZoneWeb/SignInServlet?action=change-locale&locale=en"><fmt:message key="header.ingles" bundle="${messages}"/></a></li>
 							</ul>
 						</li>
 						<c:choose>  
 						    <c:when test="${user!=null}">  
 						       <li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">${user.getUsuario()}<span class="caret"></span> </a>
 									<ul class="dropdown-menu" role="menu">
-										<li><a href="/GZoneWeb/UserServlet?profile=${user.getIdUsuario()}">Mi perfil</a></li>
+										<li><a href="/GZoneWeb/UserServlet?profile=${user.getIdUsuario()}"><fmt:message key="header.perfil" bundle="${messages}"/></a></li>
 										<li class="divider"></li>
-										<li class="dropdown-header">Otros</li>
-										<li><a href="/GZoneWeb/SignInServlet?action=${Actions.SIGN_OUT}">Cerrar sesión</a></li>
+										<li class="dropdown-header"><fmt:message key="header.otro" bundle="${messages}"/></li>
+										<li><a href="/GZoneWeb/SignInServlet?action=${Actions.SIGN_OUT}"><fmt:message key="header.cerrar_sesion" bundle="${messages}"/></a></li>
 									</ul>
 								</li>  
 						    </c:when>  
 							<c:otherwise>  
-									<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+									<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><fmt:message key="header.login" bundle="${messages}"/></b> <span class="caret"></span></a>
 										<ul id="cuadro-login" class="dropdown-menu">
 											<li>
 												<div class="row">
 													<div class="col-md-12">
 														<div class="elegir">
-															<a href="#" class="btn iniciar" data-toggle="modal"	data-target="#iniciar"><i class="fa fa-sign-in "></i>Iniciar sesion</a>
-															<a href="#" class="btn registro" data-toggle="modal" data-target="#registro"><i	class="fa fa-user-plus  "></i> Registrarse</a>
+															<a href="#" class="btn iniciar" data-toggle="modal"	data-target="#iniciar"><i class="fa fa-sign-in "></i><fmt:message key="header.iniciar_sesion" bundle="${messages}"/></a>
+															<a href="#" class="btn registro" data-toggle="modal" data-target="#registro"><i	class="fa fa-user-plus  "></i><fmt:message key="header.registro" bundle="${messages}"/></a>
 														</div>
 														<div class="muestra">
 															<img class="img-responsive"
 																src="/GZoneWeb/images/banner/muestra.png" alt="Muestra juegos"></img>
 														</div>
 														<div class="muestra">
-															<p>GZone es un servicio de venta y distribución de videojuegos para que puedas descargarlos y disfrutarlos libremente.</p>
+															<p><fmt:message key="header.bienvenida" bundle="${messages}"/></p>
 														</div>
 													</div>
 												</div>
@@ -102,7 +105,7 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li>
 							<form id="busquedaBanner" action="/GZoneWeb/SearchServlet?action=${Actions.SIMPLE}" method="post">
-								<input type="search" placeholder="Buscar" NAME="product">
+								<input type="search" placeholder="<fmt:message key="header.buscar" bundle="${messages}"/>" NAME="product">
 							</form>
 						</li>
 						<li>
@@ -140,10 +143,10 @@
 					<div class="modal-body">
 						<form action="/GZoneWeb/SignInServlet" method="post">
 							<div class="form-group">
-								<label for="usuario">Nombre de usuario:</label> <input type="text" class="form-control" name="user" value="${requestScope.cookie.getValue()}" placeholder="Introduce tu usuario" required>
+								<label for="usuario"><fmt:message key="header.nombre_usuario" bundle="${messages}"/></label> <input type="text" class="form-control" name="user" value="${requestScope.cookie.getValue()}" placeholder="Introduce tu usuario" required>
 							</div>
 							<div class="form-group">
-								<label for="pwd">Contraseña:</label> <input type="password" class="form-control" id="pwd" name="password" placeholder="Introduce tu contraseña" required>
+								<label for="pwd"><fmt:message key="header.contrasena" bundle="${messages}"/></label> <input type="password" class="form-control" id="pwd" name="password" placeholder="Introduce tu contraseña" required>
 							</div>
 							<c:if test="${requestScope.sign_in_error!=null }">	
 									<script type="text/javascript">
@@ -157,10 +160,10 @@
 							</c:if>
 					
 							<div class="checkbox">
-								<label><input type="checkbox" name="checked" value="ON"> Recuerdame</label>
+								<label><input type="checkbox" name="checked" value="ON"><fmt:message key="header.recuerdame" bundle="${messages}"/></label>
 							</div>
 							<div class="modal-footer">
-								<button type="submit" value="Submit" class="btn registro">Iniciar sesion</button>
+								<button type="submit" value="Submit" class="btn registro"><fmt:message key="header.iniciar_sesion" bundle="${messages}"/></button>
 								<input type="hidden" name="action" value="${Actions.SIGN_IN}"/>							
 							</div>
 						</form>
@@ -186,13 +189,13 @@
 					<div class="modal-body">
 						<form action="/GZoneWeb/SignInServlet" method="post">				
 							<div class="form-group">
-								<label for="user">Usuario:</label> <input type="text" class="form-control" id="user" name="user" placeholder="Introduce tu nuevo nombre de usuario" required>
+								<label for="user"><fmt:message key="header.nombre_usuario" bundle="${messages}"/></label> <input type="text" class="form-control" id="user" name="user" placeholder="Introduce tu nuevo nombre de usuario" required>
 							</div>
 							<div class="form-group">
-								<label for="email">Correo electrónico:</label> <input type="email" class="form-control" id="email" name="email" placeholder="Introduce tu correo" required>
+								<label for="email"><fmt:message key="header.correo" bundle="${messages}"/></label> <input type="email" class="form-control" id="email" name="email" placeholder="Introduce tu correo" required>
 							</div>
 							<div class="form-group">
-								<label for="pwd">Contraseña:</label> <input type="password" class="form-control" id="pwd" name="password" placeholder="Introduce tu contraseña" required>
+								<label for="pwd"><fmt:message key="header.contrasena" bundle="${messages}"/></label> <input type="password" class="form-control" id="pwd" name="password" placeholder="Introduce tu contraseña" required>
 							</div>
 	
 							<c:if test="${requestScope.sign_up_error!=null }">						
@@ -207,7 +210,7 @@
 							</c:if>	
 
 							<div class="modal-footer">
-								<button type="submit" value="submit" class="btn registro">Registrarse</button>
+								<button type="submit" value="submit" class="btn registro"><fmt:message key="header.registro" bundle="${messages}"/></button>
 								<input type="hidden" name="action" value="${Actions.SIGN_UP}"/>
 							</div>
 						</form>
@@ -258,7 +261,7 @@
 						<li><a href="/GZoneWeb/html/shopping/shopping.jsp"><button type="button" id="cerrado" class="btn btn-lg btn-primary">Checkout</button></a></li>										
 					</c:when>
 					<c:otherwise>
-						<li class="clearfix caritacentrada"><i class="fa fa-frown-o" aria-hidden="true" style="font-size:56px;padding-left: 115px;"></i><p>Tu carrito está vacio </p></li>
+						<li class="clearfix caritacentrada"><i class="fa fa-frown-o" aria-hidden="true" style="font-size:56px;padding-left: 115px;"></i><p><fmt:message key="cart.carrito" bundle="${messages}"/></p></li>
 						<li><button type="button" id="cerrado" class="btn btn-lg btn-primary" disabled>Checkout</button></li>		
 					</c:otherwise>
 				</c:choose>	

@@ -89,7 +89,7 @@
 								</c:when>
 							</c:choose>
 						</c:forEach>
-			              <button class="btn btn-primary" name="shopping-cart" value="anadir"><i class="fa fa-shopping-cart  "></i> Comprar</button>
+			              <button class="btn btn-primary" name="shopping-cart" value="anadir"><i class="fa fa-shopping-cart  "></i><fmt:message key="cart.anadir_carrito" bundle="${messages}"/></button>
 			            </div>
 			      </form>
 	          </div>
