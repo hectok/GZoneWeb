@@ -123,7 +123,7 @@ public class SignInServlet extends HttpServlet {
     				mailService.sendMail(Email.SUBJECT, Email.BODY, email);
 
     				SessionManager.set(request, SessionAttributeNames.USER, user);
-    				target = request.getHeader(ViewsPaths.REFERER);
+    				target = request.getHeader(ViewsPaths.INDEX_SERVLET);
     				redirect = true;			
     			}
     			if (redirect) {
