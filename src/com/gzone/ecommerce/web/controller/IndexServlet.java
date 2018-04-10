@@ -80,7 +80,8 @@ public class IndexServlet extends HttpServlet{
 					request.getRequestDispatcher(target).forward(request, response);
 			} catch (Exception e) {
 				logger.error(e);
-				// TODO 
+				target = ViewsPaths.INDEX;
+				request.setAttribute(AttributeNames.ERROR,target);
 			}
 			
 		}

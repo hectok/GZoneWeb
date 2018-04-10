@@ -22,19 +22,24 @@
 	</filter>
 			
 	<filter>
-	   <filter-name>UserFilter</filter-name>
-	   <filter-class>com.gzone.ecommerce.web.filter.UserFilter</filter-class>
-	</filter>
-		
-	<filter>
 	   <filter-name>LocaleFilter</filter-name>
 	   <filter-class>com.gzone.ecommerce.web.filter.LocaleFilter</filter-class>
 	</filter>	
+			
+	<filter>
+	   <filter-name>UserFilter</filter-name>
+	   <filter-class>com.gzone.ecommerce.web.filter.UserFilter</filter-class>
+	</filter>
 	
 	<filter-mapping>
 	   <filter-name>InitSessionFilter</filter-name>
 	   <url-pattern>/*</url-pattern>
 	</filter-mapping>  
+		
+<!-- 	<filter-mapping>
+	   <filter-name>LocaleFilter</filter-name>
+	   <url-pattern>/*</url-pattern>
+	</filter-mapping> -->
 			
 	<filter-mapping>
 	   <filter-name>UserFilter</filter-name>
@@ -43,11 +48,12 @@
 	
 	<filter-mapping>
 	   <filter-name>UserFilter</filter-name>
-	   <url-pattern>/html/shopping/*</url-pattern>
+	   <url-pattern>/UserServlet</url-pattern>
 	</filter-mapping> 
 	
-<!-- 	<filter-mapping>
-	   <filter-name>LocaleFilter</filter-name>
-	   <url-pattern>/*</url-pattern>
-	</filter-mapping>  --> 
+	<filter-mapping>
+	   <filter-name>UserFilter</filter-name>
+	   <url-pattern>/html/shopping/*</url-pattern>
+	</filter-mapping> 
+
 </web-app>

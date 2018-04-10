@@ -50,7 +50,7 @@ public class UserFilter implements Filter {
             chain.doFilter(request, response);
         } else {        	
         	target = ViewsPaths.REDIRIGIR;
-        	request.setAttribute(AttributeNames.SIGN_IN_FIRST, AttributeNames.SIGN_IN_FIRST);
+        	request.setAttribute(AttributeNames.SIGN_IN_ERROR, AttributeNames.SESSION_ERROR);
         	logger.warn("Redirigiendo a "+ target +" "+request.getRemoteHost());
         	request.getRequestDispatcher(target).forward(request, response);
         	

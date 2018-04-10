@@ -81,6 +81,9 @@ public class CheckoutServlet extends HttpServlet{
 			}
 			catch (Exception e) {
 				logger.error(AttributeNames.ERROR + e);
+				target=ViewsPaths.SERVLET;
+				request.setAttribute(AttributeNames.ERROR,AttributeNames.CHECKOUT_ERROR);
+				request.getRequestDispatcher(target).forward(request, response);
 			}
 		}
 	 

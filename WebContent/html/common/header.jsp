@@ -4,8 +4,10 @@
 
 <%@page import="com.gzone.ecommerce.model.*, com.gzone.ecommerce.web.model.*, com.gzone.ecommerce.web.util.*, com.gzone.ecommerce.web.controller.*,java.util.List " %>
 
-
 <c:set var="user" value='${sessionScope["user"]}' scope="session"/>
+<c:set var="carrito" value='${sessionScope["shopping-cart"]}' scope="session"/>
+<c:set var="cookie" value='${requestScope.cookie}'/>
+
 
 <html lang="es">
 <head>
@@ -37,10 +39,7 @@
 	
 </head>
 <body>
-	<%	
-		ShoppingCart carrito = (ShoppingCart) SessionManager.get(request, SessionAttributeNames.SHOPPING_CART);
-		Cookie cookie = (Cookie) request.getAttribute(ParameterNames.COOKIE);
-	%>	
+
 	<div class="maximo">
 		<nav id="barra_principal" class="navbar navbar-default navbar-fixed-top">
 			<div class="container-fluid">
@@ -76,7 +75,6 @@
 								</li>  
 						    </c:when>  
 							<c:otherwise>  
-									%>
 									<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
 										<ul id="cuadro-login" class="dropdown-menu">
 											<li>
@@ -103,7 +101,7 @@
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<form id="busquedaBanner" action="/GZoneWeb/SearchServlet?action=<%=Actions.SIMPLE%>" method="post">
+							<form id="busquedaBanner" action="/GZoneWeb/SearchServlet?action=${Actions.SIMPLE}" method="post">
 								<input type="search" placeholder="Buscar" NAME="product">
 							</form>
 						</li>
@@ -112,17 +110,14 @@
 								<button class="cart cd-cart" id="carrito">
 									<i class="cart__icon fa fa-shopping-cart"></i>
 									<span class="text-hidden">Shopping cart</span>
-									<%
-										if (carrito==null || carrito.numeroLineas()==0){
-									%>
-										<span class="cart__count">0</span>
-									<%
-										} else {
-									%>
-										<span class="cart__count"><%=carrito.numeroLineas()%></span>
-									<%
-										}
-									%>
+									<c:choose>
+										<c:when test="${carrito==null || carrito.numeroLineas()==0}">
+											<span class="cart__count">0</span>
+										</c:when>
+										<c:otherwise>
+											<span class="cart__count">${carrito.numeroLineas()}</span>									
+										</c:otherwise>
+									</c:choose>
 								</button>
 							</a>
 						</li>
@@ -141,45 +136,32 @@
 						<a href=""><img src="/GZoneWeb/images/logo.png" alt="Logo GZone" width=40px></a>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
-					<%
-						String value = "";
-						if (cookie!=null) {
-							value = cookie.getValue();
-						}
-					%>
 					<!-- Body -->
 					<div class="modal-body">
 						<form action="/GZoneWeb/SignInServlet" method="post">
 							<div class="form-group">
-								<label for="usuario">Nombre de usuario:</label> <input type="text" class="form-control" name="user" value="<%=value%>" placeholder="Introduce tu usuario" required>
+								<label for="usuario">Nombre de usuario:</label> <input type="text" class="form-control" name="user" value="${requestScope.cookie.getValue()}" placeholder="Introduce tu usuario" required>
 							</div>
 							<div class="form-group">
 								<label for="pwd">Contraseña:</label> <input type="password" class="form-control" id="pwd" name="password" placeholder="Introduce tu contraseña" required>
 							</div>
-							<%
-								String errorSignIn = (String) request.getAttribute("El usuario no existe");
-								String errorDoNotExist = (String) request.getAttribute("Contraseña incorrecta");
-								String signInFirst = (String) request.getAttribute("signInFirst");
-								if (errorSignIn!=null || errorDoNotExist!=null || signInFirst!=null) {
-									%>
+							<c:if test="${requestScope.sign_in_error!=null }">	
 									<script type="text/javascript">
 									    $(window).on('load',function(){
 									        $('#iniciar').modal('show');
 									    });
 									</script>
 									<div class="alert alert-danger" role="alert">
-									  	<strong>Ups!</strong> <%=errorSignIn%>
+										<strong>Ups!</strong> ${requestScope.sign_in_error}								
 									</div>
-									<%
-								}
-							%>
+							</c:if>
 					
 							<div class="checkbox">
 								<label><input type="checkbox" name="checked" value="ON"> Recuerdame</label>
 							</div>
 							<div class="modal-footer">
 								<button type="submit" value="Submit" class="btn registro">Iniciar sesion</button>
-								<input type="hidden" name="action" value="<%=Actions.SIGN_IN%>"/>							
+								<input type="hidden" name="action" value="${Actions.SIGN_IN}"/>							
 							</div>
 						</form>
 					</div>
@@ -212,25 +194,21 @@
 							<div class="form-group">
 								<label for="pwd">Contraseña:</label> <input type="password" class="form-control" id="pwd" name="password" placeholder="Introduce tu contraseña" required>
 							</div>
-							<%
-								String errorCreating =(String) request.getAttribute("Ese nombre de usuario ya esta cogido.");
-								if (errorCreating!=null) {
-									%>							
-            						<script type="text/javascript">
-									    $(window).on('load',function(){
-									        $('#registro').modal('show');
-									    });
-									</script>	
-									<div class="alert alert-danger" role="alert">
-									  	<strong>Ups!</strong> <%=errorCreating%>
-									</div>
-									<%
-									
-								}
-							%>
+	
+							<c:if test="${requestScope.sign_up_error!=null }">						
+           						<script type="text/javascript">
+								    $(window).on('load',function(){
+								        $('#registro').modal('show');
+								    });
+								</script>	
+								<div class="alert alert-danger" role="alert">
+									<strong>Ups!</strong> ${requestScope.sign_up_error}						
+								</div>
+							</c:if>	
+
 							<div class="modal-footer">
 								<button type="submit" value="submit" class="btn registro">Registrarse</button>
-								<input type="hidden" name="action" value="<%=Actions.SIGN_UP%>"/>
+								<input type="hidden" name="action" value="${Actions.SIGN_UP}"/>
 							</div>
 						</form>
 					</div>
@@ -242,63 +220,48 @@
 		<div id="carrito" >
 			<div class="shopping-cart cd-cart-container empty">
 				<div class="shopping-cart-header">
-					<i class="fa fa-shopping-cart cart-icon"></i><%
-										if (carrito==null || carrito.numeroLineas()==0){
-									%>
-										<span class="badge">0</span>
-									<%
-										} else {
-									%>
-										<span class="badge"><%=carrito.numeroLineas()%></span>
-									<%
-										}
-									%>
-					<div class="shopping-cart-total">
-						<%
-							if (carrito==null || carrito.numeroLineas()==0){
-						%>
-							<span class="lighter-text">Total:</span> <span class="main-color-text">0€</span>
-						<%
-							} else {
-						%>
-							<span class="lighter-text">Total:</span> <span class="main-color-text"><%= carrito.getTicketTotal() %>€</span>						
-						<%
-							}
-						%>					
+					<i class="fa fa-shopping-cart cart-icon"></i>
+						<c:choose>
+							<c:when test="${carrito==null || carrito.numeroLineas()==0}">
+								<span class="badge">0</span>										
+							</c:when>
+							<c:otherwise>
+								<span class="badge">${carrito.numeroLineas()}</span>
+							</c:otherwise>
+						</c:choose>
+					<div class="shopping-cart-total">	
+						<c:choose>
+							<c:when test="${carrito==null || carrito.numeroLineas()==0}">
+								<span class="lighter-text">Total:</span> <span class="main-color-text">0€</span>										
+							</c:when>
+							<c:otherwise>
+								<span class="lighter-text">Total:</span> <span class="main-color-text">${carrito.getTicketTotal()}€</span>	
+							</c:otherwise>
+						</c:choose>				
 					</div>
 				</div>
 				<!--end shopping-cart-header -->
 
 				<ul class="pre-scrollable shopping-cart-items" >
-				<% 	
-					if (carrito!=null)
-					{
-						if (carrito.numeroLineas()!=0)
-						{
-							for (ShoppingCartLine lineas: carrito.getLines()) {
-							%>
-								<li class="clearfix"><img src="/GZoneWeb/CMS/producto_<%=lineas.getProduct().getIdProducto()%>/preview<%=lineas.getProduct().getIdProducto()%>.jpg" alt="<%=lineas.getProduct().getNombre()%>" width="120" height="60">
-									<span class="item-price"><%= lineas.getProduct().getNombre() %></span>
-									<span class="item-price"><%= lineas.getProduct().getPrecio() %>€</span>
+				<c:choose>
+					<c:when test="${carrito!=null && carrito.numeroLineas()!=0}">
+						<c:forEach items="${carrito.getLines()}" var="lineas">
+								<li class="clearfix"><img src="/GZoneWeb/CMS/producto_${lineas.getProduct().getIdProducto()}/preview${lineas.getProduct().getIdProducto()}.jpg" alt="{lineas.getProduct().getNombre()}" width="120" height="60">
+									<span class="item-price">${lineas.getProduct().getNombre()}</span>
+									<span class="item-price">${lineas.getProduct().getPrecio()}€</span>
 									<form name="informacionProducto" method="POST" action="/GZoneWeb/ShoppingCartServlet" name="shopping-cart">
 										<span><button type="submit" class="fa fa-close " name="shopping-cart" value="eliminar" style="color:red;background-color:transparent"></button></span>
-										<input type="hidden" name="idProducto" value="<%= lineas.getProduct().getIdProducto() %>"  />
+										<input type="hidden" name="idProducto" value="${lineas.getProduct().getIdProducto()}"  />
 									</form>
 								</li>
-							
-					<% 
-							}
-					%>
-								<li><a href="/GZoneWeb/html/shopping/shopping.jsp"><button type="button" id="cerrado" class="btn btn-lg btn-primary">Checkout</button></a></li>		
-					<%			
-						}else {
-					%>
+						</c:forEach>
+						<li><a href="/GZoneWeb/html/shopping/shopping.jsp"><button type="button" id="cerrado" class="btn btn-lg btn-primary">Checkout</button></a></li>										
+					</c:when>
+					<c:otherwise>
 						<li class="clearfix caritacentrada"><i class="fa fa-frown-o" aria-hidden="true" style="font-size:56px;padding-left: 115px;"></i><p>Tu carrito está vacio </p></li>
 						<li><button type="button" id="cerrado" class="btn btn-lg btn-primary" disabled>Checkout</button></li>		
-				<%
-						}
-					}
-				%>
+					</c:otherwise>
+				</c:choose>	
 						
 				</ul>
 			</div>

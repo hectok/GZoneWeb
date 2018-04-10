@@ -9,8 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.gzone.ecommerce.config.ConfigurationManager;
 import com.gzone.ecommerce.web.config.ConfigurationParameterNames;
-
-
+import com.gzone.ecommerce.web.util.LocaleManager;
 
 public class LocaleManager {
 	
@@ -19,13 +18,11 @@ public class LocaleManager {
 	// Locales soportados por esta web. 
 	private static List<Locale> supportedLocales = null;
 	static {
+
 		// Cargamos los Locale configurados
 		supportedLocales = new ArrayList<Locale>();
-		
 		String[] supportedLocaleNames= 
-				ConfigurationManager.getInstance().
-					getParameter(ConfigurationParameterNames.SUPPORTED_LOCALES)
-					.split(",");
+				ConfigurationManager.getInstance().getParameter(ConfigurationParameterNames.SUPPORTED_LOCALES).split(",");
 
 		// Lista de locales admitidos
         Locale locale = null;

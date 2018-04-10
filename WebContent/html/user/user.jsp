@@ -37,7 +37,7 @@
 					      <img src="/GZoneWeb/CMS/producto_${item.getIdProducto()}/preview${item.getIdProducto()}.jpg" alt="${item.getNombre()}" />
 					      <figcaption>
 					        <a href="/GZoneWeb/IndexServlet">Descargar</a>
-					        <a href="/GZoneWeb/ProductServlet?product=${item.getIdProducto()}" title="${item.getNombre()}">Ver producto</a>
+					        <a href="/GZoneWeb/SearchServlet?action=${Actions.UNIQUE}&product=${item.getIdProducto()}" title="${item.getNombre()}">Ver producto</a>
 					      </figcaption>
 					    </figure>
 					</div>

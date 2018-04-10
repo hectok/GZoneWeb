@@ -32,5 +32,7 @@ public interface ParameterNames {
 	public static final String CART_DUPLICATED = "duplicatedCart";
 	
 	public static final String SALES_LIST = "salesList";
+	
+	public static final String LOCALE = "locale";
 
 }

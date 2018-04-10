@@ -61,11 +61,11 @@ public class SignInServlet extends HttpServlet {
 			try {
 				Usuario user = userService.findByNombre(userName);	
 				if (user==null) {
-					request.setAttribute(AttributeNames.USER_NOT_FOUND_ERROR, AttributeNames.USER_NOT_FOUND_ERROR);
+					request.setAttribute(AttributeNames.SIGN_IN_ERROR, AttributeNames.USER_NOT_FOUND_ERROR);
 					target = ViewsPaths.INDEX_SERVLET;
 				} else {				
 					if (!PasswordEncryptionUtil.checkPassword(password,user.getContrasena())) {
-						request.setAttribute(AttributeNames.WRONG_PASSWORD_ERROR, AttributeNames.WRONG_PASSWORD_ERROR);			
+						request.setAttribute(AttributeNames.SIGN_IN_ERROR, AttributeNames.WRONG_PASSWORD_ERROR);			
 						target = ViewsPaths.INDEX_SERVLET;
 					} else {
 						SessionManager.set(request, SessionAttributeNames.USER, user);
@@ -115,7 +115,7 @@ public class SignInServlet extends HttpServlet {
     			
     			Usuario user = userService.create(creation);
     			if (user==null) {
-    				request.setAttribute(AttributeNames.ERROR, AttributeNames.DUPLICATED_USER);
+    				request.setAttribute(AttributeNames.SIGN_UP_ERROR, AttributeNames.DUPLICATED_USER);
     				target = ViewsPaths.INDEX_SERVLET;
     			} else {	
     				mailService.sendMail(Email.SUBJECT, Email.BODY, email);
@@ -132,19 +132,19 @@ public class SignInServlet extends HttpServlet {
     			
     		} catch (DuplicateInstanceException e) {
     			logger.error(e);
-    			request.setAttribute(AttributeNames.ERROR, AttributeNames.DUPLICATED_USER);
+    			request.setAttribute(AttributeNames.SIGN_UP_ERROR, AttributeNames.DUPLICATED_USER);
     			target = ViewsPaths.INDEX_SERVLET;
     			request.getRequestDispatcher(target).forward(request,response);
     		}
     		catch (DataException o)
     		{
     			logger.error(o);
-    			request.setAttribute(AttributeNames.DUPLICATED_USER, AttributeNames.DUPLICATED_USER);
+    			request.setAttribute(AttributeNames.SIGN_UP_ERROR, AttributeNames.DUPLICATED_USER);
     			target = ViewsPaths.INDEX_SERVLET;
     			request.getRequestDispatcher(target).forward(request,response);
 
     		} catch (MailException e) {
-    			logger.error(e);
+    			logger.error("Error al mandar el correo" + e);
     		}
     		
     	}

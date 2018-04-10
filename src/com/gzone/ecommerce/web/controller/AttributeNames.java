@@ -5,6 +5,9 @@ public interface AttributeNames {
 	public static final String ERROR = "error";
 	public static final String USER = "user";
 	
+	public static final String SIGN_IN_ERROR = "sign_in_error";
+	public static final String SIGN_UP_ERROR = "sign_up_error";
+
 	// Codigos de error
 	public static final String GENERIC_ERROR = "generic.error";
 	public static final String MISSING_PARAMETER_ERROR = "missing.error";
@@ -29,7 +32,6 @@ public interface AttributeNames {
 	
 	public static final String HOTUSA = "hotusa";
 	
-	public static final String SIGN_IN_FIRST = "signInFirst";
-
+	public static final String CHECKOUT_ERROR = "Ha ocurrido un error para realizar la compra";
 
 }
