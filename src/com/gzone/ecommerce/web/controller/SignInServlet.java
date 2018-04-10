@@ -71,7 +71,7 @@ public class SignInServlet extends HttpServlet {
 						target = ViewsPaths.INDEX_SERVLET;
 					} else {
 						SessionManager.set(request, SessionAttributeNames.USER, user);
-						target = ViewsPaths.INDEX_SERVLET;
+						target = request.getHeader(ViewsPaths.REFERER);
 						redirect = true;
 						try {
 							if (remember.equals("ON")) {
@@ -123,7 +123,7 @@ public class SignInServlet extends HttpServlet {
     				mailService.sendMail(Email.SUBJECT, Email.BODY, email);
 
     				SessionManager.set(request, SessionAttributeNames.USER, user);
-    				target = ViewsPaths.INDEX_SERVLET;
+    				target = request.getHeader(ViewsPaths.REFERER);
     				redirect = true;			
     			}
     			if (redirect) {
@@ -167,8 +167,7 @@ public class SignInServlet extends HttpServlet {
 				logger.debug("Locale changed to "+newLocale);
 			}
 			
-			target = request.getHeader("referer");
-			System.out.println(target);
+			target = request.getHeader(ViewsPaths.REFERER);
 			redirect = true;
 			response.sendRedirect(target);
     	}

@@ -32,7 +32,7 @@ public class ShoppingCartServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String strAction = request.getParameter(SessionAttributeNames.SHOPPING_CART);
-
+		String target = request.getHeader(ViewsPaths.REFERER);
 		if (strAction != null && !strAction.equals("")) {
 			if (strAction.equals(SessionAttributeNames.ANADIR)) {
 				addToCart(request);
@@ -40,7 +40,7 @@ public class ShoppingCartServlet extends HttpServlet {
 				deleteCart(request);
 			}
 		}	
-		response.sendRedirect(ViewsPaths.INDEX_SERVLET);
+		response.sendRedirect(target);
 	}
 
 	protected void deleteCart(HttpServletRequest request) {
