@@ -8,6 +8,8 @@ import java.util.Properties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.gzone.ecommerce.web.config.ConfigurationManager;
+
 /**
  * En lugar de como clase utilidad, se ha implementado como Singleton 
  * por si es preciso en el futuro para diversas estrategias de 

@@ -4,6 +4,8 @@
 package com.gzone.ecommerce.web.controller;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,10 +26,10 @@ import com.gzone.ecommerce.service.impl.MailServiceImpl;
 import com.gzone.ecommerce.service.impl.UsuarioServiceImpl;
 import com.gzone.ecommerce.util.PasswordEncryptionUtil;
 import com.gzone.ecommerce.web.util.CookieManager;
+import com.gzone.ecommerce.web.util.LocaleManager;
 import com.gzone.ecommerce.web.util.SessionManager;
 import com.gzone.ecommerce.web.util.TrimmerUtil;
-import com.gzone.ecommerce.web.controller.Actions;
-import com.gzone.ecommerce.web.controller.ParameterNames;
+import com.gzone.ecommerce.web.util.WebConstants;
 
 /**
  * @author hector.ledo.doval
@@ -147,6 +149,27 @@ public class SignInServlet extends HttpServlet {
     			logger.error("Error al mandar el correo" + e);
     		}
     		
+    	}else if (Actions.CHANGE_LOCALE.equalsIgnoreCase(action)) {
+    		String localeName = request.getParameter(ParameterNames.LOCALE);
+    		List<Locale> results = LocaleManager.getMatchedLocales(localeName);
+    		Locale newLocale = null;
+    		if (results.size()>0) {
+    			newLocale = results.get(0);
+    		} else {
+    			logger.warn("Request locale not supported: "+localeName);
+    			newLocale = LocaleManager.getDefault();
+    		}
+    		
+			SessionManager.set(request, WebConstants.USER_LOCALE, newLocale);			
+			CookieManager.addCookie(response, WebConstants.USER_LOCALE, newLocale.toString(), "/", 365*24*60*60);
+			
+			if (logger.isDebugEnabled()) {
+				logger.debug("Locale changed to "+newLocale);
+			}
+			
+			target = request.getContextPath(); 	
+			redirect = true;
+			response.sendRedirect(target);
     	}
 	}
 

@@ -35,7 +35,9 @@ import com.gzone.ecommerce.service.impl.OfertaServiceImpl;
 import com.gzone.ecommerce.service.impl.ProductoServiceImpl;
 import com.gzone.ecommerce.service.impl.XMLServiceImpl;
 import com.gzone.ecommerce.web.util.ArrayUtils;
+import com.gzone.ecommerce.web.util.SessionManager;
 import com.gzone.ecommerce.web.util.TrimmerUtil;
+import com.gzone.ecommerce.web.util.WebConstants;
 
 /**
  * @author hector.ledo.doval
@@ -66,7 +68,7 @@ public class SearchServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		String target = null;
-		String idioma = SessionAttributeNames.ES;
+		String idioma = SessionManager.get(request,WebConstants.USER_LOCALE).toString().substring(0,2).toUpperCase();
 		String action = request.getParameter(ParameterNames.ACTION);
 
 		
@@ -85,7 +87,7 @@ public class SearchServlet extends HttpServlet {
 				List<Hotel> xml_request = xmlservice.XMLRequest();
 				request.setAttribute(AttributeNames.HOTUSA, xml_request);
 			}
-			productoDetail = productoService.findById(idProducto, SessionAttributeNames.ES);	
+			productoDetail = productoService.findById(idProducto, idioma);	
 			if (productoDetail==null ) {
 				request.setAttribute(AttributeNames.ERROR, AttributeNames.NOT_FOUND);
 				target = ViewsPaths.INDEX_SERVLET;
@@ -139,7 +141,7 @@ public class SearchServlet extends HttpServlet {
 
 			try {
 
-				List<Categoria> todasCategorias = categoriaService.findAll(1, 30, SessionAttributeNames.ES);
+				List<Categoria> todasCategorias = categoriaService.findAll(1, 30, idioma);
 				List<NJugadores> todosJugadores = njugadoresService.findAll(1, 10);
 				List<Idioma> todosIdiomas = idiomaService.findAll(1, 10);
 				List<Producto> productos = productoService.findByCriteria(criteria, 1, 10, idioma);

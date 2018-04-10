@@ -6,7 +6,7 @@
 <c:set var="explore" value="${requestScope.explore}" />
 
 	<header class="bp-header">
-		<h1>En Oferta</h1>		
+		<h1><fmt:message key="index.oferta" bundle="${messages}"/></h1>		
 		<hr>
 	</header>
 	
@@ -37,7 +37,7 @@
 										</c:forEach>									
 									</div>
 									<button type="submit" class="anadir" name="shopping-cart" value="anadir">
-										<em>Añadir</em>
+										<em><fmt:message key="cart.anadir_carrito" bundle="${messages}"/></em>
 										<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
 											<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
 										</svg>
@@ -59,7 +59,7 @@
 <div class="view">
 	<!-- Blueprint header -->
 	<header class="bp-header">
-		<h1>Explorar</h1>
+		<h1><fmt:message key="index.explorar" bundle="${messages}"/></h1>
 		<hr>
 	</header>
 	<!-- Bottom bar with filter and cart info -->
@@ -110,7 +110,7 @@
 										</div> <!-- informacion_articulo -->
 					
 										<button class="anadir action action--button action--buy" name="shopping-cart" value="anadir">
-											<em>Añadir</em>
+											<em><fmt:message key="cart.anadir_carrito" bundle="${messages}"/></em>
 											<svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
 												<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
 											</svg>

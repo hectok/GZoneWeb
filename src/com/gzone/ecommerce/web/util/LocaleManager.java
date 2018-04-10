@@ -7,7 +7,7 @@ import java.util.Locale;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.gzone.ecommerce.config.ConfigurationManager;
+import com.gzone.ecommerce.web.config.ConfigurationManager;
 import com.gzone.ecommerce.web.config.ConfigurationParameterNames;
 import com.gzone.ecommerce.web.util.LocaleManager;
 

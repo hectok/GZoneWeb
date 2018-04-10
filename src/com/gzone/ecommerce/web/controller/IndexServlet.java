@@ -25,6 +25,8 @@ import com.gzone.ecommerce.service.ProductoService;
 import com.gzone.ecommerce.service.impl.OfertaServiceImpl;
 import com.gzone.ecommerce.service.impl.ProductoServiceImpl;
 import com.gzone.ecommerce.web.util.CookieManager;
+import com.gzone.ecommerce.web.util.SessionManager;
+import com.gzone.ecommerce.web.util.WebConstants;
 
 
 /**
@@ -48,7 +50,7 @@ public class IndexServlet extends HttpServlet{
 	 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
 			String target = null;
-			String idioma = SessionAttributeNames.ES;
+			String idioma = SessionManager.get(request,WebConstants.USER_LOCALE).toString().substring(0,2).toUpperCase();
 			ProductoCriteria ofertas = null;
 			
 			try {
