@@ -32,6 +32,7 @@ public interface AttributeNames {
 	
 	public static final String HOTUSA = "hotusa";
 	
-	public static final String CHECKOUT_ERROR = "Ha ocurrido un error para realizar la compra";
+	public static final String CHECKOUT_ERROR = "Por favor, rellene todos los campos.";
+	public static final String ERROR_TARJETA = "Error validando su tarjeta de crédito";
 
 }

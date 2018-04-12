@@ -29,6 +29,7 @@ import com.gzone.ecommerce.service.UsuarioService;
 import com.gzone.ecommerce.service.impl.ProductoServiceImpl;
 import com.gzone.ecommerce.service.impl.TicketServiceImpl;
 import com.gzone.ecommerce.service.impl.UsuarioServiceImpl;
+import com.gzone.exceptions.MyCompanyException;
 
 /**
  * @author hector.ledo.doval
@@ -141,6 +142,9 @@ public class UserServlet extends HttpServlet{
 			} catch (DataException e) {
 				// TODO Auto-generated catch block
 				logger.error("Data excepcion "+e);
+			} catch (MyCompanyException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			
 		}

@@ -1,6 +1,6 @@
 <%@include file="/html/common/header.jsp"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmc" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <c:set var="explore" value="${requestScope.explore}" />
@@ -26,7 +26,7 @@
 										<b><a href="/GZoneWeb/SearchServlet?action=<%=Actions.UNIQUE%>&product=${oferta.getIdProducto()}">${oferta.getNombre()} </a></b>
 										<input type="hidden" name="nombreProducto" value="${oferta.getNombre()}" >										
 										<input type="hidden" name="idProducto" value="${oferta.getIdProducto()}">
-										<em id="ofertaTachada"> ${oferta.getPrecio()}€</em>
+										<em id="ofertaTachada"> <fmt:formatNumber type="number" maxFractionDigits="3" value="${oferta.getPrecio()}" />€</em>
 										<c:forEach items="${requestScope.salesList}" var="salesList">
 										<c:choose>
 	  										<c:when test="${salesList.getIdOferta()==oferta.getOferta()}">

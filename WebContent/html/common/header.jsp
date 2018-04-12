@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <fmt:setLocale value='${sessionScope["user-locale"]}' scope="session"/>
 <fmt:setBundle basename = "resources.Messages" var = "messages" scope="session"/>
 
@@ -171,8 +172,6 @@
 				</div>
 			</div>
 		</div>
-
-		</script>
 		<!-- Modal registro -->
 		<div class="modal fade bd-example-modal-sm" id="registro">
 			<div class="modal-dialog modal-sm modal-dialog-centered">

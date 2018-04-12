@@ -76,19 +76,19 @@
                                       <form action="#" method="post" action="/GZoneWeb/SearchServlet" >
                                           <fieldset>
                                               <label for="card-name"><fmt:message key="checkout.tarjeta_titular" bundle="${messages}"/></label><br>
-                                              <i class="fa fa-user-o" aria-hidden="true"></i><input type='text' id='card-name' name="titular" placeholder='Hector Ledo' title='Titular'>
+                                              <i class="fa fa-user-o" aria-hidden="true"></i><input type='text' id='titular' name="titular" placeholder='Hector Ledo' title='Titular'>
                                           </fieldset>
                                           <fieldset>
                                               <label for="card-number"><fmt:message key="checkout.tarjeta_numero" bundle="${messages}"/></label><br>
-                                              <i class="fa fa-credit-card" aria-hidden="true"></i><input type='text' id='card-number' name="tarjeta" placeholder='1234 5678 9123 4567' title='Numero de tarjeta'>
+                                              <i class="fa fa-credit-card" aria-hidden="true"></i><input type='text' id='numero_tarjeta' name="numero_tarjeta" placeholder='1234 5678 9123 4567' title='Numero de tarjeta'>
                                           </fieldset>
                                           <fieldset>
                                               <label for="card-expiration"><fmt:message key="checkout.tarjeta_fecha" bundle="${messages}"/></label><br>
-                                              <i class="fa fa-calendar" aria-hidden="true"></i><input type='text' id='card-expiration' name="caducidad" placeholder='AA/MM' title='Caducidad' class="card-expiration">
+                                              <i class="fa fa-calendar" aria-hidden="true"></i><input type='text' id='caducidad' name="caducidad" placeholder='AA/MM' title='Caducidad' class="card-expiration">
                                           </fieldset>
                                           <fieldset>
-                                              <label for="card-ccv"><fmt:message key="checkout.ccv" bundle="${messages}"/></label>&nbsp;<i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="El CCV es el número de 3 cifras que aparece por la parte posterior de tu tarjeta de crédito."></i><br>
-                                              <i class="fa fa-lock" aria-hidden="true"></i><input type='text' id='card-ccv' name="ccv" placeholder='123' title='CVC/CCV'>
+                                              <label for="card-ccv"><fmt:message key="checkout.tarjeta_ccv" bundle="${messages}"/></label>&nbsp;<i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="El CCV es el número de 3 cifras que aparece por la parte posterior de tu tarjeta de crédito."></i><br>
+                                              <i class="fa fa-lock" aria-hidden="true"></i><input type='text' id='ccv' name="ccv" placeholder='123' title='CVC/CCV'>
                                           </fieldset>
                                       </form>
                                   </div>

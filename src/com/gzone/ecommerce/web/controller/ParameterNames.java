@@ -34,5 +34,12 @@ public interface ParameterNames {
 	public static final String SALES_LIST = "salesList";
 	
 	public static final String LOCALE = "locale";
+	
+	//Parametros de la tarjeta de crédito
+	public static final String NUMERO_TARJETA = "numero_tarjeta";
+	public static final String TITULAR = "titular";
+	public static final String CADUCIDAD = "caducidad";
+	public static final String CCV = "ccv";
+
 
 }
