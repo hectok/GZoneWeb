@@ -52,7 +52,6 @@ public class CheckoutServlet extends HttpServlet {
 
 		String target = null;
 		String checkout = request.getParameter(SessionAttributeNames.CHECKOUT);
-		System.out.println(checkout);
 
 		ShoppingCart carrito = null;
 		Usuario usuario = null;
