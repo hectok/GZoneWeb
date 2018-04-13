@@ -73,33 +73,35 @@
                                       </div>
                                   </div>
                                   <div class="col-12 panel-body creditcard-body">
-                                      <form action="#" method="post" action="/GZoneWeb/SearchServlet" >
+                                      <form method="post" action="/GZoneWeb/CheckoutServlet" >
                                           <fieldset>
                                               <label for="card-name"><fmt:message key="checkout.tarjeta_titular" bundle="${messages}"/></label><br>
-                                              <i class="fa fa-user-o" aria-hidden="true"></i><input type='text' id='titular' name="titular" placeholder='Hector Ledo' title='Titular'>
+                                              <i class="fa fa-user-o" aria-hidden="true"></i><input type='text' id='titular' name="titular" placeholder='Hector Ledo' title='Titular' required>
                                           </fieldset>
                                           <fieldset>
                                               <label for="card-number"><fmt:message key="checkout.tarjeta_numero" bundle="${messages}"/></label><br>
-                                              <i class="fa fa-credit-card" aria-hidden="true"></i><input type='text' id='numero_tarjeta' name="numero_tarjeta" placeholder='1234 5678 9123 4567' title='Numero de tarjeta'>
+                                              <i class="fa fa-credit-card" aria-hidden="true"></i><input type='text' id='numero_tarjeta' name="numero_tarjeta" placeholder='1234 5678 9123 4567' title='Numero de tarjeta' required >
                                           </fieldset>
                                           <fieldset>
                                               <label for="card-expiration"><fmt:message key="checkout.tarjeta_fecha" bundle="${messages}"/></label><br>
-                                              <i class="fa fa-calendar" aria-hidden="true"></i><input type='text' id='caducidad' name="caducidad" placeholder='AA/MM' title='Caducidad' class="card-expiration">
+                                              <i class="fa fa-calendar" aria-hidden="true"></i><input type='text' id='caducidad' name="caducidad" placeholder='AA/MM' title='Caducidad' class="card-expiration" required>
                                           </fieldset>
                                           <fieldset>
                                               <label for="card-ccv"><fmt:message key="checkout.tarjeta_ccv" bundle="${messages}"/></label>&nbsp;<i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="El CCV es el número de 3 cifras que aparece por la parte posterior de tu tarjeta de crédito."></i><br>
-                                              <i class="fa fa-lock" aria-hidden="true"></i><input type='text' id='ccv' name="ccv" placeholder='123' title='CVC/CCV'>
+                                              <i class="fa fa-lock" aria-hidden="true"></i><input type='text' id='ccv' name="ccv" placeholder='123' title='CVC/CCV' required>
                                           </fieldset>
-                                      </form>
-                                  </div>
-                                  <div class="col-12 panel-footer creditcard-footer">
-                                      <div class="row">
-                                      	<div class="col-12 align-right">
-                                          <a href="/GZoneWeb/CheckoutServlet?checkout=cancel"><button class="cancel" name="checkout" value="cancelar"><fmt:message key="checkout.tarjeta_cancelar" bundle="${messages}"/></button></a>
-                                          &nbsp;
-                                          <a href="/GZoneWeb/CheckoutServlet?checkout=confirm"><button class="confirm" name="checkout" value="pagar"><fmt:message key="checkout.tarjeta_confirmar" bundle="${messages}"/></button></a>
-                                      	</div>
-                                      </div>
+                                          
+                                      <div class="col-12 panel-footer creditcard-footer">
+	                                      <div class="row">
+	                                      	<div class="col-12 align-right">
+	                                          <a href="/GZoneWeb/CheckoutServlet?checkout=cancel"><button class="cancel" name="checkout" value="cancelar"><fmt:message key="checkout.tarjeta_cancelar" bundle="${messages}"/></button></a>
+	                                          &nbsp;
+	                                         <button class="confirm" type="submit" value="Submit"><fmt:message key="checkout.tarjeta_confirmar" bundle="${messages}"/></button>
+	                                      	 <input type="hidden" name="checkout" value="confirm"/>	
+	                                      	</div>
+	                                      </div>
+		                             </div>
+		                              </form>	                                  
                                   </div>
                               </div>
                           </div>

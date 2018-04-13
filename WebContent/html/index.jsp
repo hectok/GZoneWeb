@@ -49,7 +49,7 @@
 					</c:forEach>
 	  			</c:when>
 	  			<c:otherwise>
-	  				<li>Ahora mismo no hay ninguna oferta para ofrecerte.Lo sentimos. </li>
+	  				<li><fmt:message key="${requestScope.NOT_FOUND}" bundle="${messages}"/></li>
 	  			</c:otherwise>
   			</c:choose>
 		</ul> <!-- ofertas -->

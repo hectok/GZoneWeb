@@ -78,8 +78,8 @@ public class SignInServlet extends HttpServlet {
 								CookieManager.addCookie(response, ParameterNames.LOGIN, user.getUsuario(), "/",7*60*60);
 							}
 							
-						}catch(NullPointerException unchecked) {
-							logger.error("Null pointer excepcion on cookie" + unchecked);
+						}catch(NullPointerException cookienull) {
+							logger.info("El usuario no ha marcado la opción de recordar " + cookienull);
 						}
 					}
 				}
@@ -89,8 +89,11 @@ public class SignInServlet extends HttpServlet {
 					request.getRequestDispatcher(target).forward(request, response);
 				}
 				
-			} catch (Exception e) {
+			} catch (DataException e) {
 				logger.error(e);
+				request.setAttribute(AttributeNames.SIGN_UP_ERROR, AttributeNames.GENERIC_ERROR);
+				target = ViewsPaths.INDEX_SERVLET;
+				request.getRequestDispatcher(target).forward(request,response);
 			}
 		//Cerrar sesión
 		}else if (Actions.SIGN_OUT.equalsIgnoreCase(action)) {
@@ -167,7 +170,7 @@ public class SignInServlet extends HttpServlet {
 				logger.debug("Locale changed to "+newLocale);
 			}
 			
-			target = request.getHeader(ViewsPaths.REFERER);
+			target = ViewsPaths.INDEX_SERVLET;
 			redirect = true;
 			response.sendRedirect(target);
     	}

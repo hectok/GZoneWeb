@@ -11,7 +11,6 @@
 <c:set var="carrito" value='${sessionScope["shopping-cart"]}' scope="session"/>
 <c:set var="cookie" value='${requestScope.cookie}'/>
 
-
 <html lang="es">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -156,7 +155,7 @@
 									    });
 									</script>
 									<div class="alert alert-danger" role="alert">
-										<strong>Ups!</strong> ${requestScope.sign_in_error}								
+										<strong>Ups!</strong> <fmt:message key="${requestScope.sign_in_error}" bundle="${messages}"/>							
 									</div>
 							</c:if>
 					
@@ -204,7 +203,7 @@
 								    });
 								</script>	
 								<div class="alert alert-danger" role="alert">
-									<strong>Ups!</strong> ${requestScope.sign_up_error}						
+									<strong>Ups!</strong> <fmt:message key="${requestScope.sign_up_error}" bundle="${messages}"/>					
 								</div>
 							</c:if>	
 

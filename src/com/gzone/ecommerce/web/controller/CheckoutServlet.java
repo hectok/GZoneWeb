@@ -52,6 +52,7 @@ public class CheckoutServlet extends HttpServlet {
 
 		String target = null;
 		String checkout = request.getParameter(SessionAttributeNames.CHECKOUT);
+		System.out.println(checkout);
 
 		ShoppingCart carrito = null;
 		Usuario usuario = null;
@@ -75,13 +76,9 @@ public class CheckoutServlet extends HttpServlet {
 				String caducidad = request.getParameter(ParameterNames.CADUCIDAD);
 				String ccv = request.getParameter(ParameterNames.CCV);
 				String titular = request.getParameter(ParameterNames.TITULAR);
-
+				
 				if (numeroTarjeta == null || caducidad == null || ccv == null || titular == null) {
-					System.out.println(target);
-
-					target = ViewsPaths.CHECKOUT;
-					System.out.println(target);
-
+					target = ViewsPaths.INDEX_SERVLET;
 					request.setAttribute(AttributeNames.ERROR, AttributeNames.CHECKOUT_ERROR);
 					request.getRequestDispatcher(target).forward(request, response);
 				} else {
@@ -91,11 +88,10 @@ public class CheckoutServlet extends HttpServlet {
 					tarjeta.setNumero(numeroTarjeta);
 					tarjeta.setTitular(titular);
 					tarjeta.setCaducidad(caducidad);
-
+					
 					if (!bankService.checkCard(tarjeta)) {
 						request.setAttribute(AttributeNames.ERROR, AttributeNames.ERROR_TARJETA);
 						target = request.getHeader(ViewsPaths.REFERER);
-
 						request.getRequestDispatcher(target).forward(request, response);
 					} else {
 						// Creamos el ticket
@@ -115,7 +111,7 @@ public class CheckoutServlet extends HttpServlet {
 				response.sendRedirect(target);
 			}
 		} catch (Exception e) {
-			logger.error(AttributeNames.ERROR + e);
+			logger.error(AttributeNames.ERROR_TARJETA + e);
 			target = ViewsPaths.SERVLET;
 			request.setAttribute(AttributeNames.ERROR, AttributeNames.CHECKOUT_ERROR);
 			request.getRequestDispatcher(target).forward(request, response);
