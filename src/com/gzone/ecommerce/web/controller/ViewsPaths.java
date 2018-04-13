@@ -12,6 +12,7 @@ public interface ViewsPaths {
 	public static final String SUPPORT = "html/support/support.jsp";
 	public static final String REDIRIGIR = "/IndexServlet";
 	public static final String ERROR500 = "html/error/500.jsp";
+	public static final String ERROR400 = "html/error/400.jsp";
 	public static final String REFERER = "referer";
 
 }

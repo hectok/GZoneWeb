@@ -80,6 +80,7 @@ public class SignInServlet extends HttpServlet {
 							
 						}catch(NullPointerException cookienull) {
 							logger.info("El usuario no ha marcado la opción de recordar " + cookienull);
+
 						}
 					}
 				}
