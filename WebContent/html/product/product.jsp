@@ -80,15 +80,25 @@
 			              <p>${producto.getDetalles_corto()}</p>
 			            </div>
 			            <div class="elegir">
-			              <em class="ofertaTachada"> ${producto.getPrecio()}€</em>
-			              <c:forEach items="${requestScope.salesList}" var="salesList">
-							<c:choose>
-								<c:when test="${salesList.getIdOferta()==producto.getOferta()}">
-									<em class="ofertaNueva"><fmt:formatNumber type="number" maxFractionDigits="2" value="${producto.getPrecio()-producto.getPrecio()*salesList.getPrecio()}" />€</em>
-									<input  type="hidden" name="precioProducto" value="${producto.getPrecio()-producto.getPrecio()*salesList.getPrecio()}">
-								</c:when>
-							</c:choose>
-						</c:forEach>
+			            	<c:choose>
+			            		<c:when test="${producto.getOferta()!=0}">            			
+			            			  <em class="ofertaTachada"> ${producto.getPrecio()}€</em>
+						              <c:forEach items="${requestScope.salesList}" var="salesList">
+										<c:choose>
+											<c:when test="${salesList.getIdOferta()==producto.getOferta() && producto.getOferta()!=0}">
+												<em class="ofertaNueva"><fmt:formatNumber type="number" maxFractionDigits="2" value="${producto.getPrecio()-producto.getPrecio()*salesList.getPrecio()}" />€</em>
+												<input  type="hidden" name="precioProducto" value="${producto.getPrecio()-producto.getPrecio()*salesList.getPrecio()}">
+											</c:when>
+										</c:choose>
+									</c:forEach>
+			            		</c:when>	            	
+			            	<c:otherwise>
+			            		<em class="ofertaNueva"> ${producto.getPrecio()}€</em>
+			            		<input  type="hidden" name="precioProducto" value="${producto.getPrecio()}">
+			            	</c:otherwise>	
+			            	</c:choose>
+
+
 			              <button class="btn btn-primary" name="shopping-cart" value="anadir"><i class="fa fa-shopping-cart  "></i><fmt:message key="cart.anadir_carrito" bundle="${messages}"/></button>
 			            </div>
 			      </form>
