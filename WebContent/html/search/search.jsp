@@ -158,7 +158,7 @@
 		  				<ul class="meta-search">
 		  					<li><i class="fa fa-users"></i> <span>Multijugador</span></li>
 		  					<li><i class="fa fa-credit-card"></i><span>${producto.getPrecio()}</span></li>
-		  					<li><i class="fa fa-gamepad"></i><span>Accion</span></li>
+		  					<li><i class="fa fa-gamepad"></i><span>${producto.getAnio()}</span></li>
 		  				</ul>
 		  			</div>
 		  			<div class="col-xs-12 col-sm-12 col-md-7 excerpet">
