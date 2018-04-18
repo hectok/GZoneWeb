@@ -124,8 +124,6 @@ public class SignInServlet extends HttpServlet {
     				request.setAttribute(AttributeNames.SIGN_UP_ERROR, AttributeNames.DUPLICATED_USER);
     				target = ViewsPaths.INDEX_SERVLET;
     			} else {	
-    				mailService.sendMail(Email.SUBJECT, Email.BODY, email);
-
     				SessionManager.set(request, SessionAttributeNames.USER, user);
     				target = ViewsPaths.INDEX_SERVLET;
     				redirect = true;			
