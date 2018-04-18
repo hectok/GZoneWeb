@@ -12,7 +12,10 @@
   color:white;
   display: inline-flex;
 }
-
+#texto .img {
+	width : 100% !important;
+	heigh : 100% !important;
+}
 #centro {
   padding-top: 30px;
   padding-bottom: 30px;

@@ -9,7 +9,7 @@
           <p><fmt:message key="acerca.descripcion" bundle="${messages}"/></p>
 
         </div>
-        <img class="img-responsive" src="/GZoneWeb/images/acerca/cabecera.png" alt="Muestra juegos" ></img>
+        <img src="/GZoneWeb/images/acerca/cabecera.png" alt="Muestra juegos" ></img>
       </div>
     </div>
     <div id="cuerpo" class="row">

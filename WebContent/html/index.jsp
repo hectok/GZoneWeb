@@ -27,11 +27,11 @@
 										<b><a href="/GZoneWeb/SearchServlet?action=<%=Actions.UNIQUE%>&product=${oferta.getIdProducto()}">${oferta.getNombre()} </a></b>
 										<input type="hidden" name="nombreProducto" value="${oferta.getNombre()}" >										
 										<input type="hidden" name="idProducto" value="${oferta.getIdProducto()}">
-										<em id="ofertaTachada"> <fmt:formatNumber type="number" maxFractionDigits="2" value="${oferta.getPrecio()}"/> €</em>
+										<em id="ofertaTachada"> <fmc:formatNumber type="number" maxFractionDigits="2" value="${oferta.getPrecio()}"/> €</em>
 										<c:forEach items="${requestScope.salesList}" var="salesList">
 										<c:choose>
 	  										<c:when test="${salesList.getIdOferta()==oferta.getOferta()}">
-	  											<em id="ofertaNueva"> <fmt:formatNumber type="number" maxFractionDigits="2" value="${oferta.getPrecio()-oferta.getPrecio()*salesList.getPrecio()}"/>€</em>
+	  											<em id="ofertaNueva"> <fmc:formatNumber type="number" maxFractionDigits="2" value="${oferta.getPrecio()-oferta.getPrecio()*salesList.getPrecio()}"/>€</em>
 	  											<input  type="hidden" name="precioProducto" value="${oferta.getPrecio()-oferta.getPrecio()*salesList.getPrecio()}">
 	  										</c:when>
 	  									</c:choose>
