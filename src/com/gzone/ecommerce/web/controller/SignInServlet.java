@@ -136,7 +136,7 @@ public class SignInServlet extends HttpServlet {
     			
     		} catch (DuplicateInstanceException e) {
     			logger.error(e);
-    			request.setAttribute(AttributeNames.SIGN_UP_ERROR, AttributeNames.DUPLICATED_USER);
+    			request.setAttribute(AttributeNames.SIGN_UP_ERROR, AttributeNames.DUPLICATED_EMAIL);
     			target = ViewsPaths.INDEX_SERVLET;
     			request.getRequestDispatcher(target).forward(request,response);
     		}

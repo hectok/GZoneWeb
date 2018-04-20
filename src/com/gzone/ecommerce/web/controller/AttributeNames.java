@@ -15,7 +15,7 @@ public interface AttributeNames {
 	public static final String USER_NOT_FOUND_ERROR = "error.usuario_inexistente";
 	public static final String WRONG_PASSWORD_ERROR = "error.contrasena_incorrecta";
 	//Error de creacion
-	public static final String DUPLICATED_USER = "error.contrasena_incorrecta";
+	public static final String DUPLICATED_USER = "error.usuario_duplicado";
 	public static final String DUPLICATED_EMAIL = "error.mail_duplicado";
 	//Error de busqueda
 	public static final String NOT_FOUND = "error.busqueda";
