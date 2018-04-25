@@ -114,16 +114,19 @@ public class SearchServlet extends HttpServlet {
 			ProductoCriteria criteria = null;
 			ArrayUtils arrayUtil = null;
 			
+			//Busqueda simple por el nombre
 			if (Actions.SIMPLE.equalsIgnoreCase(action)) {
 				criteria = new ProductoCriteria();
 				criteria.setNombre(search);
 			} else {
+				//Busqueda detalla por varios parámetros
 				if (Actions.DETAILED.equalsIgnoreCase(action)) {
+					//Creamos nuestro objecto criteria en el que encapsularemos todos los parámetros de búsqueda
 					criteria = new ProductoCriteria();
 					arrayUtil = new ArrayUtils();
-
+					//Introducimos el string de búsqueda pasado previamente por un trimmer
 					criteria.setNombre(search);
-
+					//En caso de que algunos de los parámetros no sea nulo lo introducimos dentro del objecto de búsqueda, pasandolo previamente por el arrayUtil
 					if (categorias != null) {
 						criteria.setCategorias(arrayUtil.arrayToCategoria(categorias));
 					}
@@ -146,6 +149,7 @@ public class SearchServlet extends HttpServlet {
 				List<Categoria> todasCategorias = categoriaService.findAll(1, 30, idioma);
 				List<NJugadores> todosJugadores = njugadoresService.findAll(1, 10);
 				List<Idioma> todosIdiomas = idiomaService.findAll(1, 10);
+				//Llamamos a la capa de negocio pasándole el objecto criteria ya con los parámetros introducidos y el resultado lo guardamos en una lista de productos.
 				List<Producto> productos = productoService.findByCriteria(criteria, 1, 10, idioma);
 
 				request.setAttribute(SessionAttributeNames.CATEGORY, todasCategorias);
