@@ -49,6 +49,7 @@ public class SearchServlet extends HttpServlet {
 
 	private static Logger logger = LogManager.getLogger(SignInServlet.class.getName());
 
+	//Definimos nuestros objectos de negocio
 	private ProductoService productoService = null;
 	private CategoriaService categoriaService = null;
 	private NJugadoresService njugadoresService = null;
@@ -70,6 +71,7 @@ public class SearchServlet extends HttpServlet {
 		
 		String target = null;
 		String idioma = SessionManager.get(request,WebConstants.USER_LOCALE).toString().substring(0,2).toUpperCase();
+		//Recibimos la accion a realizar
 		String action = request.getParameter(ParameterNames.ACTION);
 
 		
