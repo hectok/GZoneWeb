@@ -10,7 +10,7 @@
 <c:set var="anio" value="${requestScope.anio}" />
 
 <div id="todo">
-     <div id="panel" class="panel-group">
+     <div id="panel" class="panel-group col-xs-2">
       <form  id="busqueda_detallada" role="form" action="/GZoneWeb/SearchServlet?action=${Actions.DETAILED}" method="post">
 	      <button type="submit" name="submit" class="btn btn-primary buscar-central"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 	      <input type="text" id="cuadro" class="form-control" name="product" placeholder="<fmt:message key="search.nueva_busqueda" bundle="${messages}"/>" />
@@ -139,14 +139,13 @@
 		</div>
 	</form>
     </div>
-     <div class="container">
-    
+     <div class="container">  
     <hgroup>
   		<h1><fmt:message key="search.resultados_busqueda" bundle="${messages}"/></h1>
   		<h2 class="lead"><strong class="text-danger"><c:out value="${productos.size()}" default="0"/></strong> <fmt:message key="search.resultados_busqueda_cumplen" bundle="${messages}"/><strong class="text-danger">${resultado}</strong></h2>
   	</hgroup>
                       
-      <section class="col-xs-12 col-sm-6 col-md-12">
+      <section class="col-xs-10 col-sm-6 col-md-12">
 		<c:choose>
 			<c:when test="${!productos.isEmpty() || productos!=null}">
 				<c:forEach items="${productos}" var="producto">
@@ -174,19 +173,7 @@
 			</c:otherwise>
 		</c:choose>	
   	 </section>
-  	 
- 	<nav aria-label="..." id="pagination">
-	  <ul class="pagination">
-	    <li class="page-item active">
-	    	<a class="page-link" href="/GZoneWeb/SearchServlet?page=1">1</a>
-	    </li>
-	    <li class="page-item">
-	    	<a class="page-link" href="/GZoneWeb/SearchServlet?page=2">2</a>
-	    </li>
-	    <li class="page-item"><a class="page-link" href="/GZoneWeb/SearchServlet?page=3">3</a></li>
 
-	  </ul>
-	</nav>
   </div>
  </div>
 <c:import url="/html/common/footer.jsp"></c:import>

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.gzone.ecommerce.exceptions.DataException;
 import com.gzone.ecommerce.model.Categoria;
 import com.gzone.ecommerce.model.Hotel;
 import com.gzone.ecommerce.model.Idioma;
@@ -97,8 +98,9 @@ public class SearchServlet extends HttpServlet {
 				request.setAttribute(ParameterNames.SALES_LIST, ofertasService);
 			}
 				request.getRequestDispatcher(target).forward(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (DataException e) {
+				request.setAttribute(AttributeNames.ERROR, AttributeNames.NOT_FOUND);
+				target = ViewsPaths.INDEX_SERVLET;
 			}
 		} else {
 
@@ -159,8 +161,10 @@ public class SearchServlet extends HttpServlet {
 
 				}
 				request.getRequestDispatcher(target).forward(request, response);
-			} catch (Exception e) {
-				logger.error(AttributeNames.ERROR);
+			} catch (DataException e) {
+				logger.info(AttributeNames.NOT_FOUND + e.getMessage());
+				request.setAttribute(AttributeNames.ERROR, AttributeNames.NOT_FOUND);
+				target = ViewsPaths.INDEX_SERVLET;
 			}
 		}
 	}

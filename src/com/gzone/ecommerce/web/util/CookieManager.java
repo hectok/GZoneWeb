@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Utilidades para el manejo de cookies (documentación mejorable).
  * 
- * @author https://www.linkedin.com/in/joseantoniolopezperez
+hector.ledo.doval
  * @version 0.2
  */
 public class CookieManager {

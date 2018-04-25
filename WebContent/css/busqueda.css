@@ -1,7 +1,8 @@
 
 .container {
   padding-top: 30px;
-  width: 100%;
+  width: 80%;
+  order: 1;
 }
 
 hgroup {
@@ -89,7 +90,7 @@ hgroup .text-danger {
 }
 
 .search-result span.plus a i {
-color: white; !important;
+color: white !important;
 }
 
 .search-result span.border {
@@ -99,8 +100,9 @@ color: white; !important;
 }
 
 #todo{
-	padding-top:50px;
-	min-height: 1000px;
+  padding-top:50px;
+  min-height: 1000px;
+  display: flex;
 }
 
 #todo h3{
@@ -108,8 +110,9 @@ color: white; !important;
 }
 
 #panel{
-float:right;
-padding: 90px 100px 0 0;
+
+  padding: 90px 100px 0 0;
+  order: 2;
 }
 
 #panel .panel-default{

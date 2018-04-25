@@ -315,6 +315,12 @@ background-color:rgba(41, 41, 41, 0.8);
   }
 }
 
+@media all and (max-width: 1401px){
+  .articulo{
+    width: 70%;
+  }
+}
+
 @media all and (max-width: 800px) {
   .articulo {
   	width: 100%;
