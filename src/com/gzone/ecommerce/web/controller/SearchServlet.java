@@ -49,7 +49,7 @@ public class SearchServlet extends HttpServlet {
 
 	private static Logger logger = LogManager.getLogger(SignInServlet.class.getName());
 
-	//Definimos nuestros objectos de negocio
+	//Definimos nuestros servicios de negocio
 	private ProductoService productoService = null;
 	private CategoriaService categoriaService = null;
 	private NJugadoresService njugadoresService = null;
@@ -114,7 +114,6 @@ public class SearchServlet extends HttpServlet {
 			String[] idiomas = request.getParameterValues(SessionAttributeNames.LANGUAGE);
 
 			ProductoCriteria criteria = null;
-			ArrayUtils arrayUtil = null;
 			
 			//Busqueda simple por el nombre
 			if (Actions.SIMPLE.equalsIgnoreCase(action)) {
@@ -125,15 +124,14 @@ public class SearchServlet extends HttpServlet {
 				if (Actions.DETAILED.equalsIgnoreCase(action)) {
 					//Creamos nuestro objecto criteria en el que encapsularemos todos los parámetros de búsqueda
 					criteria = new ProductoCriteria();
-					arrayUtil = new ArrayUtils();
 					//Introducimos el string de búsqueda pasado previamente por un trimmer
 					criteria.setNombre(search);
 					//En caso de que algunos de los parámetros no sea nulo lo introducimos dentro del objecto de búsqueda, pasandolo previamente por el arrayUtil
 					if (categorias != null) {
-						criteria.setCategorias(arrayUtil.arrayToCategoria(categorias));
+						criteria.setCategorias(ArrayUtils.arrayToCategoria(categorias));
 					}
 					if (jugadores != null) {
-						criteria.setNjugadores(arrayUtil.arrayToNJugadores(jugadores));
+						criteria.setNjugadores(ArrayUtils.arrayToNJugadores(jugadores));
 
 					}
 					if (anio != null) {
@@ -141,7 +139,7 @@ public class SearchServlet extends HttpServlet {
 
 					}
 					if (idiomas != null) {
-						criteria.setIdioma(arrayUtil.arrayToIdioma(idiomas));
+						criteria.setIdioma(ArrayUtils.arrayToIdioma(idiomas));
 					}
 				}
 			}

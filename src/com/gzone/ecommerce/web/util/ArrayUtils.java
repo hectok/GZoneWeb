@@ -17,9 +17,9 @@ import com.gzone.ecommerce.web.model.ShoppingCartLine;
  * @author usuario
  *
  */
-public class ArrayUtils {
+public  class ArrayUtils {
 
-	public List<Categoria> arrayToCategoria(String [] arrayParameter){
+	public static List<Categoria> arrayToCategoria(String [] arrayParameter){
 		
 		String[] categoria = arrayParameter;	
 		Categoria iterator = new Categoria ();
@@ -31,7 +31,7 @@ public class ArrayUtils {
 		return categorias;
 	}
 	
-	public List<Idioma> arrayToIdioma(String [] arrayParameter){
+	public static List<Idioma> arrayToIdioma(String [] arrayParameter){
 			
 			String[] idioma = arrayParameter;	
 			Idioma iterator = new Idioma ();
@@ -43,7 +43,7 @@ public class ArrayUtils {
 			return listaIdiomas;
 		}
 	
-	public List<NJugadores> arrayToNJugadores(String [] arrayParameter){
+	public static List<NJugadores> arrayToNJugadores(String [] arrayParameter){
 		
 		String[] njugadores = arrayParameter;	
 		NJugadores iterator = new NJugadores ();
