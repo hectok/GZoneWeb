@@ -11,7 +11,7 @@
 
 <div id="todo">
      <div id="panel" class="panel-group col-xs-2">
-      <form  id="busqueda_detallada" role="form" action="/SearchServlet?action=${Actions.DETAILED}" method="post">
+      <form  id="busqueda_detallada" role="form" action="GZoneWeb/SearchServlet?action=${Actions.DETAILED}" method="post">
 	      <button type="submit" name="submit" class="btn btn-primary buscar-central"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 	      <input type="text" id="cuadro" class="form-control" name="product" placeholder="<fmt:message key="search.nueva_busqueda" bundle="${messages}"/>" />
 
